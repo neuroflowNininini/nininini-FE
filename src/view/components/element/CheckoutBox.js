@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import theme from "../../../shared/theme";
+import styled from 'styled-components';
+import theme from '~/shared/theme';
 
 export default function CheckoutBox({ cost, discount }) {
-
   function formatNumberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   return (
     <ContWrap>
@@ -25,36 +24,36 @@ export default function CheckoutBox({ cost, discount }) {
         <Cost2>{formatNumberWithCommas(cost - discount)}원</Cost2>
       </Hang>
     </ContWrap>
-  )
+  );
 }
 const ContWrap = styled.div`
-margin-top:20px;
+  margin-top: 20px;
 `;
 const Hang = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-justify-content: space-between;
-padding: 4px 0px;
-`
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0px;
+`;
 const Tag = styled.div`
-display: flex;
-font-weight:500;
+  display: flex;
+  font-weight: 500;
 `;
 const Cost = styled.div`
-display: flex;
-padding: 5px 0px;
-font-weight:500;
+  display: flex;
+  padding: 5px 0px;
+  font-weight: 500;
 `;
 const Cost1 = styled.div`
-display: flex;
-color : skyblue;
-padding: 5px 0px;
-font-weight:500;
+  display: flex;
+  color: skyblue;
+  padding: 5px 0px;
+  font-weight: 500;
 `;
 const Cost2 = styled.div`
-display: flex;
-color : red;
-padding: 5px 0px;
-font-weight:500;
+  display: flex;
+  color: red;
+  padding: 5px 0px;
+  font-weight: 500;
 `;

@@ -22,9 +22,5 @@ export function UserProvider({ children }) {
     localStorage.removeItem('user');
   };
 
-  return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ user, login, logout }}>{children}</UserContext.Provider>;
 }

@@ -1,13 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-export default function Modal({
-  children,
-  setCheckOpenModal,
-  _width,
-  _height,
-}) {
-
+export default function Modal({ children, setCheckOpenModal, _width, _height }) {
   const modalRef = useRef();
 
   const clickModalOutside = (e) => {
@@ -21,11 +15,11 @@ export default function Modal({
 
     return () => {
       document.removeEventListener('touchend', clickModalOutside);
-    }
+    };
   }, []);
 
   return (
-    <ModalWrap >
+    <ModalWrap>
       <ModalContWrap
         ref={modalRef}
         _width={_width}
@@ -35,8 +29,7 @@ export default function Modal({
       </ModalContWrap>
     </ModalWrap>
   );
-};
-
+}
 
 const ModalWrap = styled.div`
   position: fixed;
@@ -53,8 +46,8 @@ const ModalContWrap = styled.div`
   top: 50%;
   left: 50%;
   padding: 20px;
-  width: ${props => props._width ? props._width : "100px"};
-  height: ${props => props._height ? props._height : "100px"};;
+  width: ${(props) => (props._width ? props._width : '100px')};
+  height: ${(props) => (props._height ? props._height : '100px')};
   background-color: #fff;
   border-radius: 8px;
   transform: translate(-50%, -50%);

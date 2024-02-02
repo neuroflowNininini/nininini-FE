@@ -13,8 +13,8 @@ root.render(
     <Router>
       {/* <RefreshToTop /> */}
       <App />
-    </Router >
-  </React.StrictMode>
+    </Router>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -9,17 +9,17 @@ export default function Loading() {
       <Img src={Spinner} />
     </Background>
   );
-};
+}
 
 const Img = styled.img`
-width : 60px;
-margin:auto;
+  width: 60px;
+  margin: auto;
 `;
 const Background = styled.div`
-position: absolute;
-display:flex;
-left: 0;
-width: calc(100vw - 40px);
-top: 24vh;
-padding:auto;
+  position: absolute;
+  display: flex;
+  left: 0;
+  width: calc(100vw - 40px);
+  top: 24vh;
+  padding: auto;
 `;

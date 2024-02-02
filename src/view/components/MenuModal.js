@@ -7,29 +7,38 @@ import theme from '../../shared/theme';
 import LoginBox from './LoginBox';
 
 export default function MenuModal({ username, closeModal }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(CheckLogin())
+  const [isLoggedIn, setIsLoggedIn] = useState(CheckLogin());
 
   useEffect(() => {
-    setIsLoggedIn(CheckLogin())
-  }, [])
-  const navigate = useNavigate()
+    setIsLoggedIn(CheckLogin());
+  }, []);
+  const navigate = useNavigate();
   function handleLogout() {
-    GoLogOut()
-    setIsLoggedIn(CheckLogin())
+    GoLogOut();
+    setIsLoggedIn(CheckLogin());
   }
-
 
   return (
     <Background>
       <InnerMenu>
         <MyPageWrap>
-          <BiArrowBack onClick={closeModal} size="28" color="black" />
+          <BiArrowBack
+            onClick={closeModal}
+            size="28"
+            color="black"
+          />
         </MyPageWrap>
         <MyPageWrap>
-          {isLoggedIn === "true" ? (
+          {isLoggedIn === 'true' ? (
             <>
               <Nickname>{username}</Nickname>
-              <Button onClick={() => { handleLogout("logout") }}>로그아웃</Button>
+              <Button
+                onClick={() => {
+                  handleLogout('logout');
+                }}
+              >
+                로그아웃
+              </Button>
             </>
           ) : (
             <>
@@ -38,31 +47,55 @@ export default function MenuModal({ username, closeModal }) {
           )}
         </MyPageWrap>
         <div>
-          <Link to="/category/new" onClick={closeModal} style={{ textDecoration: "none", color: "black" }} >
+          <Link
+            to="/category/new"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             <Title>NEW</Title>
           </Link>
           <Bar />
-          <Link to="/category/best" onClick={closeModal} style={{ textDecoration: "none", color: "black" }}>
+          <Link
+            to="/category/best"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             <Title>BEST</Title>
           </Link>
           <Bar />
-          <Link to="/category/sale" onClick={closeModal} style={{ textDecoration: "none", color: "black" }}>
+          <Link
+            to="/category/sale"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             <Title>SALE</Title>
           </Link>
           <Bar />
-          <Link to="/category/nail" onClick={closeModal} style={{ textDecoration: "none", color: "black" }}>
-            <Title >NAIL</Title>
+          <Link
+            to="/category/nail"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
+            <Title>NAIL</Title>
             <Item>- PULL COLOR</Item>
             <Item>- SEASON</Item>
           </Link>
           <Bar />
-          <Link to="/category/pedi" onClick={closeModal} style={{ textDecoration: "none", color: "black" }}>
+          <Link
+            to="/category/pedi"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             <Title>PEDI</Title>
           </Link>
           <Item>- PULL COLOR</Item>
           <Item>- SEASON</Item>
           <Bar />
-          <Link to="/category/etc" onClick={closeModal} style={{ textDecoration: "none", color: "black" }}>
+          <Link
+            to="/category/etc"
+            onClick={closeModal}
+            style={{ textDecoration: 'none', color: 'black' }}
+          >
             <Title>ETC</Title>
           </Link>
           <Bar />
@@ -75,7 +108,7 @@ export default function MenuModal({ username, closeModal }) {
         </div>
       </InnerMenu>
     </Background>
-  )
+  );
 }
 
 const rollUpAnimation = keyframes`
@@ -90,41 +123,40 @@ const rollUpAnimation = keyframes`
 `;
 
 const Button = styled.div`
-border: solid 1px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-justify-content: center;
-font-weight: 600;
-align-items: center;
-height: 32px;
-width : 80px;
-border-radius : 5px;
-margin-left: 10px;
+  border: solid 1px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  align-items: center;
+  height: 32px;
+  width: 80px;
+  border-radius: 5px;
+  margin-left: 10px;
 `;
 
 const Background = styled.div`
-position: fixed; /* 화면 상에 고정 위치 */
-top: 0;
-left: 0;
-width: 100%;
-background-color: rgba(0,0,0,0.8);
-display: flex;
-height: 100%;
-z-index: 1000; /* 다른 컴포넌트 위로 표시하기 위한 z-index */
+  position: fixed; /* 화면 상에 고정 위치 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  height: 100%;
+  z-index: 1000; /* 다른 컴포넌트 위로 표시하기 위한 z-index */
   padding-top: 60px; /* 상단 여백 추가 */
 `;
 
 const InnerMenu = styled.div`
-position:fixed;
-top: 0;
+  position: fixed;
+  top: 0;
   overflow: auto;
-height:100%;
-width : 80%;
-padding : 10px 10px 10px 0px;
-background:white;
-animation: ${rollUpAnimation} 0.5s ease-out forwards; /* 애니메이션 적용 */
-
+  height: 100%;
+  width: 80%;
+  padding: 10px 10px 10px 0px;
+  background: white;
+  animation: ${rollUpAnimation} 0.5s ease-out forwards; /* 애니메이션 적용 */
 `;
 
 const Bar = styled.div`
@@ -132,44 +164,44 @@ const Bar = styled.div`
 `;
 
 const MyPageWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display : flex;
-align-items : center;
-padding-left : 15px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
 `;
 
 const Nickname = styled.p`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-margin-left : 10px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  margin-left: 10px;
 `;
 const Title = styled.p`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-padding-left : 20px;
-text-decoration: none;
-display:flex;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  padding-left: 20px;
+  text-decoration: none;
+  display: flex;
 `;
 const Item = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-padding-left : 20px;
-margin : 15px;
-display:flex;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  padding-left: 20px;
+  margin: 15px;
+  display: flex;
 `;
 const BottomBox = styled.div`
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-template-rows: repeat(2, 1fr);
-gap: 10px; /* 아이템 간의 간격 설정 */
-padding : 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px; /* 아이템 간의 간격 설정 */
+  padding: 20px;
 `;
 
 const GridItem = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-margin : 20px;
-display: flex;
-justify-content:center;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  margin: 20px;
+  display: flex;
+  justify-content: center;
 `;

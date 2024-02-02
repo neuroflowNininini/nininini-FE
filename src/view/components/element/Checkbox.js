@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import theme from "../../../shared/theme";
+import styled from 'styled-components';
+import theme from '../../../shared/theme';
 export default function Checkbox({ children, disabled, checked, onChange }) {
   return (
     <Wrapper>
@@ -15,9 +15,9 @@ export default function Checkbox({ children, disabled, checked, onChange }) {
 }
 
 const Wrapper = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-align-items: center;
-gap : 5px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;

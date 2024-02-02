@@ -4,7 +4,6 @@ import CheckoutBox from '../components/element/CheckoutBox';
 import theme from '../../shared/theme';
 
 export default function CartOrder({ cartProdsId, totalCartProds, setCartProdsId }) {
-
   const [totalPrice, setTotalPrice] = useState(0);
 
   const clickBuyCartProd = () => {
@@ -38,7 +37,7 @@ export default function CartOrder({ cartProdsId, totalCartProds, setCartProdsId 
     // dispatch<any>(orderActions.buyAllProductDB(2, _count, _id));
 
     // window.alert('주문이 완료되었습니다.');
-  }
+  };
 
   useEffect(() => {
     let _totalPrice = 0;
@@ -48,45 +47,46 @@ export default function CartOrder({ cartProdsId, totalCartProds, setCartProdsId 
 
     for (let i = 0; i < totalCartProds?.length; i++) {
       if (cartProdsId.includes(totalCartProds[i].id)) {
-        _totalPrice += totalCartProds[i].quantity * 12900
+        _totalPrice += totalCartProds[i].quantity * 12900;
       }
     }
 
-    setTotalPrice(_totalPrice)
-  }, [totalCartProds, cartProdsId])
+    setTotalPrice(_totalPrice);
+  }, [totalCartProds, cartProdsId]);
 
   return (
-    <CartOrderWrap >
-      <CheckoutBox cost={totalPrice} discount={0} />
+    <CartOrderWrap>
+      <CheckoutBox
+        cost={totalPrice}
+        discount={0}
+      />
       <Button onClick={clickBuyCartProd}>구매하기</Button>
     </CartOrderWrap>
-  )
+  );
 }
 const Button = styled.div`
-position: fixed;
-left:0;
-bottom:50px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-justify-content : center;
-align-items : center;
-width: 100%;
-height:54px;
-background-color: black;
-color : white;
-font-weight:700;
-margin:auto;
+  position: fixed;
+  left: 0;
+  bottom: 50px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 54px;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+  margin: auto;
 `;
 
-
-
 const CartOrderWrap = styled.div`
-margin: auto;
+  margin: auto;
   padding: 12px 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
-width : calc(100vw - 60px);
+  width: calc(100vw - 60px);
 `;
 
 const CartOrderTitle = styled.h2`
@@ -109,4 +109,3 @@ const CartOrderTotlaPrice = styled.p`
   font-size: var(--font-large);
   font-weight: 800;
 `;
-

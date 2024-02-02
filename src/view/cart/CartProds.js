@@ -7,10 +7,9 @@ import { totalDummy } from '../../shared/dummy';
 export default function CartProds({ cartProdsId, setCartProdsId, setTotalCartProds }) {
   const [checkedInputs, setCheckedInputs] = useState([...cartProdsId]);
   const [openDelete, setOpenDelete] = useState(false);
-  const [cartList, setCartList] = useState([])
+  const [cartList, setCartList] = useState([]);
 
   const changeHandler = (checked) => {
-
     if (checked) {
       let _storage = JSON.parse(localStorage.getItem('cartProds'));
       let updatedCheckedInputs = cartProdsId.slice(); // 기존 cartProdsId 값으로 시작
@@ -31,42 +30,41 @@ export default function CartProds({ cartProdsId, setCartProdsId, setTotalCartPro
 
     if (_storage !== null) {
       _storage = _storage.filter((data) => {
-        return !checkedInputs.includes(data.id)
-      })
+        return !checkedInputs.includes(data.id);
+      });
     }
 
     let _cartPordsId = cartProdsId.filter((data) => {
-      return !checkedInputs.includes(data)
-    })
+      return !checkedInputs.includes(data);
+    });
     setCartProdsId(_cartPordsId);
 
     localStorage.setItem('cartProds', JSON.stringify(_storage));
-    const newCartList = totalDummy.filter(item => _cartPordsId.includes(item.id));
-    setCartList([...newCartList])
-  }
+    const newCartList = totalDummy.filter((item) => _cartPordsId.includes(item.id));
+    setCartList([...newCartList]);
+  };
   useEffect(() => {
     if (checkedInputs.length === 0) {
-      return
+      return;
     }
-  }, [checkedInputs])
+  }, [checkedInputs]);
 
   useEffect(() => {
     if (cartProdsId.length === 0) {
-      return
+      return;
     }
     setCheckedInputs([...cartProdsId]);
-    const newCartList = totalDummy.filter(item => cartProdsId.includes(item.id));
-    setCartList([...newCartList])
-  }, [cartProdsId])
+    const newCartList = totalDummy.filter((item) => cartProdsId.includes(item.id));
+    setCartList([...newCartList]);
+  }, [cartProdsId]);
 
   return (
-    <CartProdsWrap
-      data-testid='cartProds'>
+    <CartProdsWrap data-testid="cartProds">
       <CartAllSelectWrap>
         <CartAllSelectCheckBox
           type="checkbox"
           onChange={(e) => {
-            changeHandler(e.currentTarget.checked)
+            changeHandler(e.currentTarget.checked);
           }}
           checked={checkedInputs.length === cartProdsId.length}
         />
@@ -74,8 +72,7 @@ export default function CartProds({ cartProdsId, setCartProdsId, setTotalCartPro
           전체선택 ({checkedInputs.length}/{cartProdsId.length})
         </CartAllSelectText>
         <DeleteSelectedWrap>
-          {
-            openDelete &&
+          {openDelete && (
             <CartSelectDeleteModal
               testId="deleteModal"
               modalTitle="선택한 상품을 삭제하시겠습니까?"
@@ -83,19 +80,19 @@ export default function CartProds({ cartProdsId, setCartProdsId, setTotalCartPro
               setOpenModal={setOpenDelete}
               clickButton={clickDeleteCart}
             />
-          }
-          <DeleteSelected onClick={() => {
-            if (checkedInputs.length !== 0) {
-              setOpenDelete(true)
-            }
-          }
-          }>
+          )}
+          <DeleteSelected
+            onClick={() => {
+              if (checkedInputs.length !== 0) {
+                setOpenDelete(true);
+              }
+            }}
+          >
             선택삭제
           </DeleteSelected>
         </DeleteSelectedWrap>
       </CartAllSelectWrap>
-      {
-        cartList &&
+      {cartList &&
         cartList.map((prod, i) => {
           return (
             <CartProdCard
@@ -107,19 +104,14 @@ export default function CartProds({ cartProdsId, setCartProdsId, setTotalCartPro
               setCartProdsId={setCartProdsId}
               setTotalCartProds={setTotalCartProds}
             />
-          )
-        })
-      }
+          );
+        })}
     </CartProdsWrap>
-
-  )
+  );
 }
-const CartProdsWrap = styled.div`
-  
-`;
+const CartProdsWrap = styled.div``;
 
-const DeleteSelectedWrap = styled.div`
-`;
+const DeleteSelectedWrap = styled.div``;
 const DeleteSelected = styled.p`
   margin-left: 30px;
   display: flex;
@@ -133,21 +125,21 @@ const CartAllSelectWrap = styled.div`
 `;
 
 const CartAllSelectCheckBox = styled.input`
-appearance: none;
-margin-right:10px;
-border: 1.5px solid gainsboro;
-border-radius: 0.25rem;
-width: 18px;
-height: 18px;
-&:checked {
-  border-color: transparent;
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-  background-size: 100% 100%;
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-color: black;
-}
-`
+  appearance: none;
+  margin-right: 10px;
+  border: 1.5px solid gainsboro;
+  border-radius: 0.25rem;
+  width: 18px;
+  height: 18px;
+  &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: black;
+  }
+`;
 
 const CartAllSelectText = styled.p`
   font-weight: 500;

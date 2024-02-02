@@ -9,21 +9,24 @@ export default function CartSelectDeleteModal({
   clickButton,
 }) {
   return (
-    <Modal _width="200px" _height="150px" setCheckOpenModal={setOpenModal}>
+    <Modal
+      _width="200px"
+      _height="150px"
+      setCheckOpenModal={setOpenModal}
+    >
       <ModalTitle>{modalTitle}</ModalTitle>
       <ButtonWrap>
         <Button
           onClick={() => {
-            setOpenModal(false)
-          }
-          }
+            setOpenModal(false);
+          }}
         >
           취소하기
         </Button>
         <Button
           onClick={() => {
-            setOpenModal(false)
-            clickButton()
+            setOpenModal(false);
+            clickButton();
           }}
         >
           {buttonText}
@@ -31,21 +34,20 @@ export default function CartSelectDeleteModal({
       </ButtonWrap>
     </Modal>
   );
-};
+}
 
 const ModalTitle = styled.h3`
-    color : #666;
-    font-size: var(--font-lg-small);
-    font-weight: 500;
-    margin : 30px 0px 20px 0px;
-    padding : 5px;
-    text-align : center;
+  color: #666;
+  font-size: var(--font-lg-small);
+  font-weight: 500;
+  margin: 30px 0px 20px 0px;
+  padding: 5px;
+  text-align: center;
 `;
-const Button = styled.div`
-`;
+const Button = styled.div``;
 
 const ButtonWrap = styled.div`
   display: flex;
-  padding : 15px;
+  padding: 15px;
   justify-content: space-between;
 `;

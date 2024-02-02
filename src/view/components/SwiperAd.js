@@ -2,25 +2,25 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Pagination, Navigation, Autoplay } from "swiper";
+import { Autoplay } from 'swiper';
 import styled from 'styled-components';
-import ad1 from "../../shared/pics/AD/ad1.png"
-import ad2 from "../../shared/pics/AD/ad2.png"
-import ad3 from "../../shared/pics/AD/ad3.png"
-import { useLocation, useNavigate } from "react-router-dom";
+import ad1 from '../../shared/pics/AD/ad1.png';
+import ad2 from '../../shared/pics/AD/ad2.png';
+import ad3 from '../../shared/pics/AD/ad3.png';
+import { useNavigate } from 'react-router-dom';
 import theme from '../../shared/theme';
 
 export default function SwiperAd() {
   const navigate = useNavigate();
   const handleToADPage = (idx) => {
-    var imgSrc = ad1
+    var imgSrc = ad1;
     if (idx === 2) {
-      imgSrc = ad2
+      imgSrc = ad2;
     }
     if (idx === 3) {
-      imgSrc = ad3
+      imgSrc = ad3;
     }
-    navigate("/adpage", { state: { imgSrc: imgSrc } });
+    navigate('/adpage', { state: { imgSrc: imgSrc } });
   };
   return (
     <>
@@ -46,41 +46,40 @@ export default function SwiperAd() {
         </SwiperSlide>
       </Swiper>
     </>
-
-  )
+  );
 }
 const Heading = styled.div`
-font-size: 17px;
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-font-weight:500;
-justify-content:center;
-align-items:center;
+  font-size: 17px;
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  background-color: #B2D7FC;
+  background-color: #b2d7fc;
   height: 40px;
 `;
 const Heading2 = styled.div`
-font-size: 17px;
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-font-weight:500;
-display:flex;
-justify-content:center;
-align-items:center;
+  font-size: 17px;
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  background-color: #FFC0CB;
+  background-color: #ffc0cb;
   // color:white;
   height: 40px;
 `;
 const Heading3 = styled.div`
-font-size: 17px;
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-font-weight:500;
-justify-content:center;
-align-items:center;
+  font-size: 17px;
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  color:white;
-  background-color: #0F4B43;
+  color: white;
+  background-color: #0f4b43;
   height: 40px;
 `;

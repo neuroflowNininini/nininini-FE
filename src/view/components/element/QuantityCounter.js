@@ -30,26 +30,25 @@ const QuantityCounter = ({ initialQuantity, onQuantityChange }) => {
   );
 };
 const TopWrap = styled.div`
-display:flex;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-
+  display: flex;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
 `;
 const ButtonWrap = styled.div`
-width : 26px;
-height : 26px;
-display: flex;
-justify-content:center;
-align-items:center;
-border: solid 1px lightgray;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px lightgray;
 `;
 const NumWrap = styled.div`
-width : 50px;
-height : 26px;
-display: flex;
-justify-content:center;
-align-items:center;
-border: solid 1px lightgray;
-font-weight:600;
+  width: 50px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px lightgray;
+  font-weight: 600;
 `;
 export default QuantityCounter;
