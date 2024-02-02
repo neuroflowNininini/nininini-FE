@@ -1,32 +1,37 @@
 {
   "root": true,
   "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:prettier/recommended"
-  ], 
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": { "project": ["./tsconfig.json"] },
-  "plugins": [
-      "prettier", "@typescript-eslint"
-  ],
+  "plugins": ["prettier", "@typescript-eslint", "import"],
   "rules": {
-      "@typescript-eslint/strict-boolean-expressions": [
-          2,
-          {
-              "allowString" : false,
-              "allowNumber" : false
-          }
-      ],
-      "import/order": [
-        "warn",
-        {
-          "groups": [["builtin", "external"], "internal", ["parent", "sibling", "index"]],
-          "pathGroupsExcludedImportTypes": ["builtin"],
-          "alphabetize": { "order": "asc", "caseInsensitive": true },
-        },
-      ],
+    "@typescript-eslint/strict-boolean-expressions": [
+      2,
+      {
+        "allowString": false,
+        "allowNumber": false
+      }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "index", "parent", "sibling"],
+        "pathGroups": [
+          { "pattern": "react", "group": "external", "position": "before" },
+          { "pattern": "react-dom", "group": "external", "position": "before" },
+          { "pattern": "react-router-dom", "group": "external", "position": "before" }
+        ],
+        "pathGroupsExcludedImportTypes": [],
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
+      }
+    ]
   },
   "ignorePatterns": ["src/**/*.test.ts", "src/**/*.js", "build"]
 }

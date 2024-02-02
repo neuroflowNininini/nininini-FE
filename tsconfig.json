@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": "src/",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"],
+    },
     "outDir": "./build/", // path to output directory
     "sourceMap": true, // allow sourcemap support
     "strictNullChecks": true, // enable strict null checks as a best practice
@@ -9,5 +12,5 @@
     "target": "es5", // specify ECMAScript target version
     "allowJs": true, // allow a partial TypeScript and JavaScript codebase
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.js"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.js", "src/**/*.jsx"],
 }
