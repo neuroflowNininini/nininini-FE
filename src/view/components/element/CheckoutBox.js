@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from '~/shared/theme';
+import theme from '../../../shared/theme';
 
 export default function CheckoutBox({ cost, discount }) {
   function formatNumberWithCommas(number) {
