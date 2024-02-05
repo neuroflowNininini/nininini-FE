@@ -79,6 +79,6 @@ const TitleWrap = styled.div`
   margin: 20px 0px 0px 10px;
   font-weight: bolder;
   padding-top: 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
 `;

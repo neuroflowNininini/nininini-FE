@@ -30,7 +30,7 @@ const Mini = styled.div`
   padding-left: 10px;
 `;
 const Title = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
   padding-bottom: 10px;

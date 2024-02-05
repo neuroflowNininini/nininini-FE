@@ -41,7 +41,7 @@ const CostWrap = styled.div`
 const Cost = styled.div`
   display: flex;
   margin-left: 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-weight: 700;
 `;
 const Cost1 = styled.div`

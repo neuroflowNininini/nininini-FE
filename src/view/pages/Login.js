@@ -110,7 +110,7 @@ const Space = styled.div`
   height: 58px;
 `;
 const Desc = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 20px;
   margin-bottom: 30px;

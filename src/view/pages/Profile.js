@@ -171,7 +171,7 @@ const InnerMenu = styled.div`
   background: white;
 `;
 const TopWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   align-items: center;

@@ -1,4 +1,6 @@
-const theme = {
+import { DefaultTheme } from 'styled-components';
+
+const theme: DefaultTheme = {
   fontSize: {
     xsmall: '0.75rem',
     small: '0.82rem',
