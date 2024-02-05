@@ -25,137 +25,111 @@ import ADPage from './view/components/ADPage';
 import HeaderNavMenu from './view/HeaderNavMenu';
 import styled from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
+import SwiperAd from './view/components/SwiperAd';
+import Headerbar from './view/components/Headerbar';
 
 function App() {
-  const [onTop, setOnTop] = useState('40');
-  const [trans, setTrans] = useState(1);
-
-  const { pathname } = useLocation();
-  useEffect(() => {
-    scrollToTop();
-  }, [pathname]);
-
-  const scrollRef = useRef(null);
-
   const scrollToTop = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-      setOnTop('40');
-      setTrans(0);
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div
-      className="App"
-      ref={scrollRef}
-      style={{ overFlowY: 'scroll', height: 'calc(100vh - 50px)' }}
-    >
-      <BrowserView>데스크톱 브라우저</BrowserView>
-      <MobileView>
-        <HeaderNavMenu
-          onTop={onTop}
-          setOnTop={setOnTop}
-          trans={trans}
-          setTrans={setTrans}
+    <div id="App">
+      <SwiperAd />
+      <HeaderNavMenu />
+      <Routes>
+        <Route
+          path="/login"
+          element={<Login />}
         />
-        {/* <Overflow id="scrollbar"> */}
-        <Routes>
+        <Route
+          path="/signup"
+          element={<SignUp />}
+        />
+        <Route
+          path="/"
+          element={<Home />}
+        />
+        <Route
+          path="/mypage"
+          element={<Mypage />}
+        />
+        <Route
+          path="/cart"
+          element={<CartPage />}
+        />
+        <Route
+          path="/category/new"
+          element={<NewPage />}
+        />
+        <Route
+          path="/category/best"
+          element={<BestPage />}
+        />
+        <Route
+          path="/category/sale"
+          element={<SalePage />}
+        />
+        <Route
+          path="/category/nail"
+          element={<NailPage />}
+        />
+        <Route
+          path="/category/pedi"
+          element={<PediPage />}
+        />
+        <Route
+          path="/category/etc"
+          element={<EtcPage />}
+        />
+        <Route
+          path="/product/:id"
+          element={<ProdDetail />}
+        />
+        <Route
+          path="/checkout"
+          element={<ProdBuy />}
+        />
+        <Route
+          path="/orderdone"
+          element={<OrderEnd />}
+        />
+        <Route
+          path="/likedesign"
+          element={<LikeDesign />}
+        />
+        <Route
+          path="/nailmeasure"
+          element={<NailMeasure />}
+        />
+        <Route
+          path="/signupdone"
+          element={<SignUpDone />}
+        />
+        <Route
+          path="/notice"
+          element={<Notice />}
+        />
+        <Route
+          path="/search"
+          element={<SearchResult />}
+        />
+        <Route
+          path="/adpage"
+          element={<ADPage />}
+        />
+        {
           <Route
-            path="/login"
-            element={<Login />}
+            path="*"
+            element={<div>Not Found</div>}
           />
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/mypage"
-            element={<Mypage />}
-          />
-          <Route
-            path="/cart"
-            element={<CartPage />}
-          />
-          <Route
-            path="/category/new"
-            element={<NewPage />}
-          />
-          <Route
-            path="/category/best"
-            element={<BestPage />}
-          />
-          <Route
-            path="/category/sale"
-            element={<SalePage />}
-          />
-          <Route
-            path="/category/nail"
-            element={<NailPage />}
-          />
-          <Route
-            path="/category/pedi"
-            element={<PediPage />}
-          />
-          <Route
-            path="/category/etc"
-            element={<EtcPage />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProdDetail />}
-          />
-          <Route
-            path="/checkout"
-            element={<ProdBuy />}
-          />
-          <Route
-            path="/orderdone"
-            element={<OrderEnd />}
-          />
-          <Route
-            path="/likedesign"
-            element={<LikeDesign />}
-          />
-          <Route
-            path="/nailmeasure"
-            element={<NailMeasure />}
-          />
-          <Route
-            path="/signupdone"
-            element={<SignUpDone />}
-          />
-          <Route
-            path="/notice"
-            element={<Notice />}
-          />
-          <Route
-            path="/search"
-            element={<SearchResult />}
-          />
-          <Route
-            path="/adpage"
-            element={<ADPage />}
-          />
-          {
-            <Route
-              path="*"
-              element={<div>Not Found</div>}
-            />
-          }
-        </Routes>
-        <GoTop onClick={scrollToTop}>
-          <div>
-            <IoIosArrowUp size={22} />
-            {/* <div style={{ fontSize: "13px" }}>top</div> */}
-          </div>
-        </GoTop>
-        {/* </Overflow> */}
-      </MobileView>
+        }
+      </Routes>
+      <GoTop onClick={scrollToTop}>
+        <div>
+          <IoIosArrowUp size={22} />
+        </div>
+      </GoTop>
     </div>
   );
 }
