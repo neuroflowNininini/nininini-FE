@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import type { CSSProp } from 'styled-components';
+import type { CSSObject } from 'styled-components';
 
 interface Size {
   xs: string;
@@ -10,7 +10,7 @@ interface Size {
   xxl: string;
 }
 
-const deviceSizes: Size = {
+export const deviceSizes: Size = {
   xs: '400px', // for small screen mobile
   sm: '600px', // for mobile screen
   md: '900px', // for tablets
@@ -26,14 +26,13 @@ const deviceSizes: Size = {
  *  // css 속성들을 이곳에 작성합니다.
  * `}
  */
-export const media = Object.keys(deviceSizes).reduce(
-  (acc, size) => {
-    acc[size] = (literals: TemplateStringsArray, ...placeholders: any[]) => css`
-      @media only screen and (max-width: ${deviceSizes[size]}px) {
-        ${css(literals, ...placeholders)};
+export const media = Object.entries(deviceSizes).reduce((acc, [key, value]) => {
+  return {
+    ...acc,
+    [key]: (first: CSSObject | TemplateStringsArray, ...interpolations: any[]) => css`
+      @media (max-width: ${value}) {
+        ${css(first, ...interpolations)}
       }
-    `;
-    return acc;
-  },
-  {} as Record<keyof typeof deviceSizes, (l: TemplateStringsArray, ...p: any[]) => CSSProp>,
-);
+    `,
+  };
+}, {}) as Record<keyof typeof deviceSizes, any>;
