@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './view/pages/Home';
 import Mypage from './view/pages/Mypage';
 import NewPage from './view/pages/category/NewPage';
@@ -15,17 +15,17 @@ import Login from './view/pages/Login';
 import SignUp from './view/signup/SignUp';
 import LikeDesign from './view/signup/LikeDesign';
 import NailMeasure from './view/signup/NailMeasure';
-import SignUpDone from '~/view/signup/SignUpDone';
-import Notice from '~/view/pages/Notice';
-import SearchResult from '~/view/pages/SearchResult';
-import CartPage from '~/view/pages/CartPage';
-import ADPage from '~/view/components/ADPage';
-import HeaderNavMenu from '~/view/HeaderNavMenu';
+import SignUpDone from './view/signup/SignUpDone';
+import Notice from './view/pages/Notice';
+import SearchResult from './view/pages/SearchResult';
+import CartPage from './view/pages/CartPage';
+import ADPage from './view/components/ADPage';
+import HeaderNavMenu from './view/HeaderNavMenu';
 import styled, { ThemeProvider } from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
-import SwiperAd from '~/view/components/SwiperAd';
-import GlobalStyle from '~/styles/global';
-import theme from '~/styles/theme';
+import SwiperAd from './view/components/SwiperAd';
+import GlobalStyle from './styles/global';
+import theme from './styles/theme';
 
 function App() {
   const scrollToTop = () => {
@@ -33,11 +33,11 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <div id="App">
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
         <SwiperAd />
         <HeaderNavMenu />
+        <GlobalStyle />
         <Routes>
           <Route
             path="/login"
@@ -119,20 +119,18 @@ function App() {
             path="/adpage"
             element={<ADPage />}
           />
-          {
-            <Route
-              path="*"
-              element={<div>Not Found</div>}
-            />
-          }
+          <Route
+            path="*"
+            element={<div>Not Found</div>}
+          />
         </Routes>
         <GoTop onClick={scrollToTop}>
           <div>
             <IoIosArrowUp size={22} />
           </div>
         </GoTop>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
