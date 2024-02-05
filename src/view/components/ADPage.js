@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import theme from '../../shared/theme';
-import SwiperAd from '../components/SwiperAd';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function ADPage() {
@@ -9,7 +8,6 @@ export default function ADPage() {
   const imgSrc = state.imgSrc;
   return (
     <Container>
-      <SwiperAd />
       <Space />
       <TopWrap id="hometop">
         <div style={{ paddingTop: '20px', paddingBottom: '100px' }}>

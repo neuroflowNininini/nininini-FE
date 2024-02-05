@@ -1,15 +1,14 @@
-import styled from "styled-components"
-import theme from "../../shared/theme";
-import { useEffect } from "react";
+import styled from 'styled-components';
+import theme from '../../shared/theme';
+import { useEffect } from 'react';
 import React from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import SwiperAd from "../components/SwiperAd";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function OrderEnd() {
   const navigate = useNavigate();
   const handleContinue = () => {
     // 특정 링크로 이동
-    navigate("/");
+    navigate('/');
   };
   // Use the useLocation hook to access the state passed during navigation
   const location = useLocation();
@@ -22,21 +21,21 @@ export default function OrderEnd() {
 
   return (
     <>
-      <SwiperAd />
       <Space />
       <TopWrap id="hometop">
         <Bar />
         <ContWrap>
           <Title>주문이 완료되었습니다.</Title>
-          <Cont>
-            주문번호 20231109439
-          </Cont>
+          <Cont>주문번호 20231109439</Cont>
         </ContWrap>
         <CardWrap>
           <ImageBox src={orderInfo.product.pics[0]} />
           <ContentWrap>
             <NameQ>
-              <Link to={`/product/${orderInfo.product.id}`} style={{ textDecoration: "none", color: "black" }}>
+              <Link
+                to={`/product/${orderInfo.product.id}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
                 <NameWrap>{orderInfo.product.name}</NameWrap>
               </Link>
               <QWrap>({orderInfo.quantity}개)</QWrap>
@@ -83,150 +82,146 @@ export default function OrderEnd() {
         <Button2 onClick={handleContinue}>쇼핑 계속하기</Button2>
       </ButtonWrap>
     </>
-
-  )
+  );
 }
 const BlockWrap = styled.div`
-padding-bottom: 20px;
+  padding-bottom: 20px;
 `;
 const Hang = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: grid;
-grid-template-columns: 1fr 2fr;
-padding: 5px 20px;
-align-items: center;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: 5px 20px;
+  align-items: center;
 `;
 const Tag = styled.div`
-text-align: left;
+  text-align: left;
 `;
 const TagCont = styled.div`
-text-align: right;
+  text-align: right;
 `;
 
 const Bar = styled.div`
-display: flex;
-width: 100%;
-height:10px;
-background-color : rgb(243,243,243);
+  display: flex;
+  width: 100%;
+  height: 10px;
+  background-color: rgb(243, 243, 243);
 `;
 const Cont = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
 `;
 
 const Space = styled.div`
-height:58px;
+  height: 58px;
 `;
 const TopWrap = styled.div`
-position:relative;
-bottom:49px;
-padding-top: 60px;
-padding-bottom : 80px;
+  position: relative;
+  bottom: 49px;
+  padding-top: 60px;
+  padding-bottom: 80px;
 `;
 const CardWrap = styled.div`
-display:flex;
-padding: 20px;
-margin-bottom:10px;
+  display: flex;
+  padding: 20px;
+  margin-bottom: 10px;
 `;
 const ContentWrap = styled.div`
-display:block;
-margin-left: 20px;
+  display: block;
+  margin-left: 20px;
 `;
 
 const ImageBox = styled.img`
-width: 100px;
-height: 80px;
-object-fit:cover;
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
 `;
 
 const Title = styled.div`
-padding: 10px 20px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-font-weight: 700;
+  padding: 10px 20px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  font-weight: 700;
   flex: 1; /* 남은 공간을 차지하도록 설정 */
 `;
 
 const Title1 = styled.div`
-display:flex;
-margin-top:10px;
-padding: 10px 20px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-font-weight: 700;
-align-items: center;
+  display: flex;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  font-weight: 700;
+  align-items: center;
 `;
 const ContWrap = styled.div`
-padding: 20px 10px 0px 10px;
-margin-bottom:10px;
+  padding: 20px 10px 0px 10px;
+  margin-bottom: 10px;
 `;
 
 const NameQ = styled.div`
-display: flex;
-align-items: center;
-margin-bottom:5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 `;
 const QWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-margin-left: 5px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  margin-left: 5px;
 `;
 
 const Extra = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-margin-top : 5px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  margin-top: 5px;
 `;
 
 const NameWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-font-weight:500;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  font-weight: 500;
 `;
 const CostWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-color:deeppink;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  color: deeppink;
 `;
 const ButtonWrap = styled.div`
-display: flex;
-justify-content : center;
-padding-top : 20px;
-gap : 5px;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  gap: 5px;
 `;
 const Button = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-position: fixed;
-left: 0;
-bottom: 49px;
-display:flex;
-justify-content : center;
-align-items : center;
-width: 50%;
-height:50px;
-border-top: solid 1px black;
-background-color: white;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  position: fixed;
+  left: 0;
+  bottom: 49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50px;
+  border-top: solid 1px black;
+  background-color: white;
 `;
 const Button2 = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-position: fixed;
-right: 0;
-bottom: 50px;
-display:flex;
-justify-content : center;
-align-items : center;
-width: 50%;
-height:50px;
-background-color: black;
-color : white;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  position: fixed;
+  right: 0;
+  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50px;
+  background-color: black;
+  color: white;
 `;
-
-

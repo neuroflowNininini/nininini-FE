@@ -1,9 +1,8 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 import theme from '../../shared/theme';
-import SwiperAd from '../components/SwiperAd';
-import { useState, useEffect } from "react";
-import CartOrder from "../cart/CartOrder";
-import CartProds from "../cart/CartProds";
+import { useState, useEffect } from 'react';
+import CartOrder from '../cart/CartOrder';
+import CartProds from '../cart/CartProds';
 
 export default function CartPage() {
   const [cartProdsId, setCartProdsId] = useState([]);
@@ -18,31 +17,40 @@ export default function CartPage() {
         updatedCheckedInputs.push(_storage[i].id); // 중복 아이템은 추가하지 않음
       }
     }
-    setCartProdsId(updatedCheckedInputs)
-  }, [localStorage])
+    setCartProdsId(updatedCheckedInputs);
+  }, [localStorage]);
 
-  return (<TopWrap>
-    <SwiperAd />
-    <Space />
-    <TitleWrap id="hometop">장바구니</TitleWrap>
-    <CartProds cartProdsId={cartProdsId} setCartProdsId={setCartProdsId} setTotalCartProds={setTotalCartProds} />
-    <CartOrder cartProdsId={cartProdsId} setCartProdsId={setCartProdsId} totalCartProds={totalCartProds} />
-  </TopWrap>)
+  return (
+    <TopWrap>
+      <Space />
+      <TitleWrap id="hometop">장바구니</TitleWrap>
+      <CartProds
+        cartProdsId={cartProdsId}
+        setCartProdsId={setCartProdsId}
+        setTotalCartProds={setTotalCartProds}
+      />
+      <CartOrder
+        cartProdsId={cartProdsId}
+        setCartProdsId={setCartProdsId}
+        totalCartProds={totalCartProds}
+      />
+    </TopWrap>
+  );
 }
 
 const TopWrap = styled.div`
-padding-bottom : 120px;
+  padding-bottom: 120px;
 `;
 
 const TitleWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-height : 40px;
-justify-content:center;
-align-items: center;
-font-weight: 600;
-padding : 20px 0px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding: 20px 0px;
 `;
 
 const Space = styled.div`

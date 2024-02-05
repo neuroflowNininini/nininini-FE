@@ -10,7 +10,6 @@ import { bestDummy, newDummy } from '../../shared/dummy';
 import RowProductList from '../product/RowProductList';
 import HomeMenu from '../components/HomeMenu';
 import theme from '../../shared/theme';
-import SwiperAd from '../components/SwiperAd';
 
 export default function Home() {
   return (

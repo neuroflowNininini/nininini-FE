@@ -13,7 +13,6 @@ import TotalPrice from '../components/TotalPrice';
 import Review from '../review/Review';
 import { BsShare } from 'react-icons/bs';
 import theme from '../../shared/theme';
-import SwiperAd from '../components/SwiperAd';
 import howto from '../../shared/pics/how to.png';
 import { clickAddCart } from '../cart/CartFunc';
 import { useRef } from 'react';
@@ -51,7 +50,6 @@ export default function ProdDetail() {
   };
   return (
     <TopWrap>
-      {/* <SwiperAd /> */}
       <Space />
       <Swiper
         id="hometop"
@@ -160,12 +158,12 @@ const TabDiv = styled.div`
   padding: 16px 10px;
 `;
 const GrayWrap = styled.div`
-      margin-top : 30px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      width : 100%
-      height: 40px;
-      `;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 40px;
+`;
 const LeftDiv = styled.div`
   display: flex;
   justify-content: space-between;

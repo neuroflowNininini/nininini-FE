@@ -1,18 +1,16 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 import { totalDummy } from '../../shared/dummy';
-import { useEffect, useState } from "react";
-import OrderSize from "../components/OrderSize";
-import BuyType from "../components/element/BuyType";
-import CheckoutBox from "../components/element/CheckoutBox";
-import theme from "../../shared/theme";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import ProdBuyAddress from "../components/ProdBuyAddress";
-import SwiperAd from "../components/SwiperAd";
+import { useEffect, useState } from 'react';
+import OrderSize from '../components/OrderSize';
+import BuyType from '../components/element/BuyType';
+import CheckoutBox from '../components/element/CheckoutBox';
+import theme from '../../shared/theme';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import ProdBuyAddress from '../components/ProdBuyAddress';
 
 export default function ProdBuy() {
-
   function formatNumberWithCommas(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
   const [name, setName] = useState('김니니'); // 초기값은 빈 문자열
   const [num, setNum] = useState('010-1234-5678');
@@ -32,7 +30,7 @@ export default function ProdBuy() {
         if (!response.ok) {
           throw new Error('textfile response was not ok');
         }
-        const text = await response.text("utf-16");
+        const text = await response.text('utf-16');
         setTextData(text);
       } catch (error) {
         console.error('Error fetching the text file:', error);
@@ -45,13 +43,13 @@ export default function ProdBuy() {
   // const productQuantities = [];
   // for (const [key, value] of searchParams) {
   // if (key.startsWith('id') && searchParams.has(`qty${key.substr(8)}`)) {
-  const id = searchParams.get("id");
+  const id = searchParams.get('id');
   const quantity = searchParams.get(`qty`);
   // productQuantities.push({ productId, quantity });
   // }
   // }
   const product = totalDummy.find((item) => item.id === id);
-  const total = formatNumberWithCommas(12900 * Number(quantity))
+  const total = formatNumberWithCommas(12900 * Number(quantity));
   // const [orderInfo, setOrderInfo] = useState({});
   // const props = {
   //   name, setName,
@@ -78,8 +76,8 @@ export default function ProdBuy() {
       detailAddress: detailAddress,
       deliveryMessage: deliveryMessage,
       code: code,
-    }
-    navigate("/orderdone", { state: { orderInfo: orderInfo } })
+    };
+    navigate('/orderdone', { state: { orderInfo: orderInfo } });
   };
   // useEffect(() => {
   //   // 페이지가 로드될 때 스크롤을 맨 위로 이동
@@ -88,7 +86,6 @@ export default function ProdBuy() {
 
   return (
     <>
-      <SwiperAd />
       <Space />
       <TopWrap id="hometop">
         <Title>결제하기</Title>
@@ -98,7 +95,10 @@ export default function ProdBuy() {
           <ImageBox src={product.pics[0]} />
           <ContentWrap>
             <NameQ>
-              <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "black" }}>
+              <Link
+                to={`/product/${product.id}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
                 <NameWrap>{product.name}</NameWrap>
               </Link>
               <QWrap>({quantity}개)</QWrap>
@@ -121,7 +121,8 @@ export default function ProdBuy() {
           deliveryMessage={deliveryMessage}
           setDeliveryMessage={setDeliveryMessage}
           code={code}
-          setCode={setCode} />
+          setCode={setCode}
+        />
         <Bar />
         <Title1>주문사이즈</Title1>
         <ContWrap>
@@ -136,118 +137,120 @@ export default function ProdBuy() {
         <Title1>상품결제약관</Title1>
         <ContWrap>
           <Yakgwan>{textData}</Yakgwan>
-          <CheckoutBox cost={12900 * quantity} discount={5000} />
+          <CheckoutBox
+            cost={12900 * quantity}
+            discount={5000}
+          />
         </ContWrap>
         <BuyButton onClick={handleOrderConfirm}>결제하기</BuyButton>
       </TopWrap>
     </>
-  )
+  );
 }
 const Yakgwan = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-display: flex;
-padding: 5px;
-border: solid 1px #808080;
-height: 100px;
-overflow-y:scroll;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  display: flex;
+  padding: 5px;
+  border: solid 1px #808080;
+  height: 100px;
+  overflow-y: scroll;
 `;
 const Bar = styled.div`
-display: flex;
-width: 100%;
-height:10px;
-background-color : rgb(243,243,243);
+  display: flex;
+  width: 100%;
+  height: 10px;
+  background-color: rgb(243, 243, 243);
 `;
 
 const BuyButton = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-width:100%;
-font-weight: 500;
-background-color:black;
-color:white;
-position: fixed;
-left: 0;
-bottom: 49px;
-display:flex;
-justify-content : center;
-align-items : center;
-height:50px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  width: 100%;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  position: fixed;
+  left: 0;
+  bottom: 49px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 `;
 const Space = styled.div`
-height:58px;
+  height: 58px;
 `;
 const TopWrap = styled.div`
-position:relative;
-bottom:49px;
-padding-top: 60px;
+  position: relative;
+  bottom: 49px;
+  padding-top: 60px;
 `;
 const CardWrap = styled.div`
-display:flex;
-padding: 20px;
-margin-bottom:20px;
+  display: flex;
+  padding: 20px;
+  margin-bottom: 20px;
 `;
 const ContentWrap = styled.div`
-display:block;
-margin-left: 20px;
+  display: block;
+  margin-left: 20px;
 `;
 
 const ImageBox = styled.img`
-width: 100px;
-height: 80px;
-object-fit:cover;
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
 `;
 
 const Title = styled.div`
-display: flex;
-padding: 10px 20px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-font-weight: 700;
+  display: flex;
+  padding: 10px 20px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  font-weight: 700;
   flex: 1; /* 남은 공간을 차지하도록 설정 */
 `;
 
 const Title1 = styled.div`
-display:flex;
-margin-top:10px;
-padding: 10px 20px;
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-font-weight: 700;
-align-items: center;
+  display: flex;
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  font-weight: 700;
+  align-items: center;
 `;
 const ContWrap = styled.div`
-padding: 10px 20px;
-margin-bottom:50px;
+  padding: 10px 20px;
+  margin-bottom: 50px;
 `;
 const NameQ = styled.div`
-display: flex;
-align-items: center;
-margin-bottom:5px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 `;
 const QWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-margin-left: 5px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  margin-left: 5px;
 `;
 
 const Extra = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-margin-top : 5px;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  margin-top: 5px;
 `;
 
 const NameWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display:flex;
-font-weight:500;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  font-weight: 500;
 `;
 const CostWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-display: flex;
-color:deeppink;
+  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
+  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
+  display: flex;
+  color: deeppink;
 `;
-
