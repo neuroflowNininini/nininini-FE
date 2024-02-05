@@ -1,7 +1,5 @@
 import './App.css';
-import React, { useRef, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { BrowserView, MobileView } from 'react-device-detect';
+import { BrowserRouter as Route, Routes } from 'react-router-dom';
 import Home from './view/pages/Home';
 import Mypage from './view/pages/Mypage';
 import NewPage from './view/pages/category/NewPage';
@@ -17,16 +15,17 @@ import Login from './view/pages/Login';
 import SignUp from './view/signup/SignUp';
 import LikeDesign from './view/signup/LikeDesign';
 import NailMeasure from './view/signup/NailMeasure';
-import SignUpDone from './view/signup/SignUpDone';
-import Notice from './view/pages/Notice';
-import SearchResult from './view/pages/SearchResult';
-import CartPage from './view/pages/CartPage';
-import ADPage from './view/components/ADPage';
-import HeaderNavMenu from './view/HeaderNavMenu';
-import styled from 'styled-components';
+import SignUpDone from '~/view/signup/SignUpDone';
+import Notice from '~/view/pages/Notice';
+import SearchResult from '~/view/pages/SearchResult';
+import CartPage from '~/view/pages/CartPage';
+import ADPage from '~/view/components/ADPage';
+import HeaderNavMenu from '~/view/HeaderNavMenu';
+import styled, { ThemeProvider } from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
-import SwiperAd from './view/components/SwiperAd';
-import Headerbar from './view/components/Headerbar';
+import SwiperAd from '~/view/components/SwiperAd';
+import GlobalStyle from '~/styles/global';
+import theme from '~/styles/theme';
 
 function App() {
   const scrollToTop = () => {
@@ -34,103 +33,106 @@ function App() {
   };
 
   return (
-    <div id="App">
-      <SwiperAd />
-      <HeaderNavMenu />
-      <Routes>
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-        <Route
-          path="/signup"
-          element={<SignUp />}
-        />
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/mypage"
-          element={<Mypage />}
-        />
-        <Route
-          path="/cart"
-          element={<CartPage />}
-        />
-        <Route
-          path="/category/new"
-          element={<NewPage />}
-        />
-        <Route
-          path="/category/best"
-          element={<BestPage />}
-        />
-        <Route
-          path="/category/sale"
-          element={<SalePage />}
-        />
-        <Route
-          path="/category/nail"
-          element={<NailPage />}
-        />
-        <Route
-          path="/category/pedi"
-          element={<PediPage />}
-        />
-        <Route
-          path="/category/etc"
-          element={<EtcPage />}
-        />
-        <Route
-          path="/product/:id"
-          element={<ProdDetail />}
-        />
-        <Route
-          path="/checkout"
-          element={<ProdBuy />}
-        />
-        <Route
-          path="/orderdone"
-          element={<OrderEnd />}
-        />
-        <Route
-          path="/likedesign"
-          element={<LikeDesign />}
-        />
-        <Route
-          path="/nailmeasure"
-          element={<NailMeasure />}
-        />
-        <Route
-          path="/signupdone"
-          element={<SignUpDone />}
-        />
-        <Route
-          path="/notice"
-          element={<Notice />}
-        />
-        <Route
-          path="/search"
-          element={<SearchResult />}
-        />
-        <Route
-          path="/adpage"
-          element={<ADPage />}
-        />
-        {
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <div id="App">
+        <SwiperAd />
+        <HeaderNavMenu />
+        <Routes>
           <Route
-            path="*"
-            element={<div>Not Found</div>}
+            path="/login"
+            element={<Login />}
           />
-        }
-      </Routes>
-      <GoTop onClick={scrollToTop}>
-        <div>
-          <IoIosArrowUp size={22} />
-        </div>
-      </GoTop>
-    </div>
+          <Route
+            path="/signup"
+            element={<SignUp />}
+          />
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/mypage"
+            element={<Mypage />}
+          />
+          <Route
+            path="/cart"
+            element={<CartPage />}
+          />
+          <Route
+            path="/category/new"
+            element={<NewPage />}
+          />
+          <Route
+            path="/category/best"
+            element={<BestPage />}
+          />
+          <Route
+            path="/category/sale"
+            element={<SalePage />}
+          />
+          <Route
+            path="/category/nail"
+            element={<NailPage />}
+          />
+          <Route
+            path="/category/pedi"
+            element={<PediPage />}
+          />
+          <Route
+            path="/category/etc"
+            element={<EtcPage />}
+          />
+          <Route
+            path="/product/:id"
+            element={<ProdDetail />}
+          />
+          <Route
+            path="/checkout"
+            element={<ProdBuy />}
+          />
+          <Route
+            path="/orderdone"
+            element={<OrderEnd />}
+          />
+          <Route
+            path="/likedesign"
+            element={<LikeDesign />}
+          />
+          <Route
+            path="/nailmeasure"
+            element={<NailMeasure />}
+          />
+          <Route
+            path="/signupdone"
+            element={<SignUpDone />}
+          />
+          <Route
+            path="/notice"
+            element={<Notice />}
+          />
+          <Route
+            path="/search"
+            element={<SearchResult />}
+          />
+          <Route
+            path="/adpage"
+            element={<ADPage />}
+          />
+          {
+            <Route
+              path="*"
+              element={<div>Not Found</div>}
+            />
+          }
+        </Routes>
+        <GoTop onClick={scrollToTop}>
+          <div>
+            <IoIosArrowUp size={22} />
+          </div>
+        </GoTop>
+      </div>
+    </ThemeProvider>
   );
 }
 

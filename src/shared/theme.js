@@ -8,9 +8,6 @@ const theme = {
     large: '1.5rem',
     xlarge: '1.625rem',
   },
-  fontFamily: {
-    default: 'Noto Sans KR, sans-serif',
-  },
   colors: {
     theme: '#FF1057',
     gray: {
