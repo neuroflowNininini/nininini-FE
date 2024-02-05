@@ -40,7 +40,7 @@ export default function Headerbar({ openModal, openSearch }) {
 }
 
 const Logo = styled.div`
-  display: flex;
+  /* display: flex; */
   font-size: 24px;
   font-weight: 600;
   font-family: 'Noto Sans KR';
@@ -58,12 +58,12 @@ const Header = styled.header`
 `;
 
 const Element = styled.div`
-  width: 10%;
+  width: 20%;
   display: flex;
 `;
 
 const Element2 = styled.div`
-  width: 10%;
+  width: 20%;
   display: flex;
   gap: 5px;
   justify-content: flex-end;
