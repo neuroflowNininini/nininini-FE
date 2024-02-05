@@ -1,12 +1,12 @@
 const theme = {
   fontSize: {
-    xsmall: '0.75rem',
-    small: '0.82rem',
-    smallmedium: '0.93rem',
-    medium: '1.125rem',
-    largemedium: '1.25rem',
-    large: '1.5rem',
-    xlarge: '1.625rem',
+    xsmall: '1.2rem',
+    small: '1.3rem',
+    smallmedium: '1.4rem',
+    medium: '1rem',
+    largemedium: '1.8rem',
+    large: '2rem',
+    xlarge: '2.4rem',
   },
   colors: {
     theme: '#FF1057',
