@@ -24,14 +24,11 @@ export default function Notice() {
   );
 }
 const Mini = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
   padding-bottom: 10px;
   display: flex;
   padding-left: 10px;
 `;
 const Title = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
   padding-bottom: 10px;
 `;

@@ -119,8 +119,6 @@ export default function CartProdCard({
   );
 }
 const NameWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 500;
 `;
@@ -147,7 +145,6 @@ const NameQ = styled.div`
 `;
 const QWrap = styled.div`
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   margin-left: 5px;
 `;
@@ -197,7 +194,6 @@ const CardContWrap = styled.div`
 
 const ProdTitle = styled.h2`
   margin-bottom: 4px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
   font-weight: 600;
   cursor: pointer;
 `;
@@ -220,8 +216,6 @@ const DeleteWrap = styled.div`
   cursor: pointer;
 `;
 const CostWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   color: red;
   margin-bottom: 10px;

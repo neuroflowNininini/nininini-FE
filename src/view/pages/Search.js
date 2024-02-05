@@ -64,8 +64,6 @@ const Hang1 = styled.div`
   gap: 6px;
 `;
 const Label = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 600;
   border: solid 1.5px black;
   border-radius: 20px;
@@ -85,8 +83,6 @@ const Input = styled.input`
     color: #353535; /* 원하는 색상 코드로 변경하세요 */
     font-weight: 400;
   }
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 600;
   height: 43px;
   width: 75vw;

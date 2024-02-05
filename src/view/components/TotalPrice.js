@@ -27,13 +27,9 @@ const TotalWrap = styled.div`
 `;
 const TitleWrap = styled.div`
   display: flex;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
 `;
 const CostWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   align-items: center;
 `;
@@ -41,7 +37,6 @@ const CostWrap = styled.div`
 const Cost = styled.div`
   display: flex;
   margin-left: 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
   font-weight: 700;
 `;
 const Cost1 = styled.div`

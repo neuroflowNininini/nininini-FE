@@ -17,13 +17,9 @@ export default function OrderSize() {
 }
 
 const BlockWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
 `;
 const Block1 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,8 +31,6 @@ const Block1 = styled.div`
 `;
 
 const Block2 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,8 +44,6 @@ const ContWrap = styled.div`
 `;
 
 const Cont = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 8px;
   display: flex;
 `;

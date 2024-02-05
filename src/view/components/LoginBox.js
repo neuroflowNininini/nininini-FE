@@ -30,8 +30,6 @@ const TopWrap = styled.div`
   margin-bottom: 20px;
 `;
 const Desc = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding: 20px 1px;
 `;
 const ButtonWrap = styled.div`
@@ -41,8 +39,6 @@ const ButtonWrap = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 const Button = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   font-weight: 600;

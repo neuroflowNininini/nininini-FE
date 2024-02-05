@@ -148,7 +148,6 @@ export default function ProdBuy() {
   );
 }
 const Yakgwan = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
   display: flex;
   padding: 5px;
   border: solid 1px #808080;
@@ -163,8 +162,6 @@ const Bar = styled.div`
 `;
 
 const BuyButton = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   width: 100%;
   font-weight: 500;
   background-color: black;
@@ -204,8 +201,6 @@ const ImageBox = styled.img`
 const Title = styled.div`
   display: flex;
   padding: 10px 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 700;
   flex: 1; /* 남은 공간을 차지하도록 설정 */
 `;
@@ -214,8 +209,6 @@ const Title1 = styled.div`
   display: flex;
   margin-top: 10px;
   padding: 10px 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 700;
   align-items: center;
 `;
@@ -229,28 +222,20 @@ const NameQ = styled.div`
   margin-bottom: 5px;
 `;
 const QWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   margin-left: 5px;
 `;
 
 const Extra = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   margin-top: 5px;
 `;
 
 const NameWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 500;
 `;
 const CostWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   color: deeppink;
 `;

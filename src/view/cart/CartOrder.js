@@ -68,8 +68,6 @@ const Button = styled.div`
   position: fixed;
   left: 0;
   bottom: 50px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;

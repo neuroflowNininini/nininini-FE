@@ -43,8 +43,6 @@ const TopWrap = styled.div`
 `;
 
 const TitleWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   height: 40px;
   justify-content: center;

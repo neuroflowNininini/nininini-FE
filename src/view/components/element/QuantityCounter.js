@@ -31,8 +31,6 @@ const QuantityCounter = ({ initialQuantity, onQuantityChange }) => {
 };
 const TopWrap = styled.div`
   display: flex;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
 `;
 const ButtonWrap = styled.div`
   width: 26px;

@@ -57,8 +57,6 @@ const Menu = styled.div`
   margin: 30px 10px 30px 10px;
 `;
 const Item = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin: auto;
   font-weight: 600;
 `;

@@ -76,8 +76,6 @@ export default function Mypage() {
   );
 }
 const Mini = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding-right: 15px;
 `;
 const Desc = styled.div`
@@ -87,7 +85,6 @@ const Desc = styled.div`
 
 const Num = styled.div`
   font-size: 28px;
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -97,16 +94,12 @@ const Container = styled.div`
   padding: 10px;
 `;
 const Top = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
   padding: 30px 0px 10px 0px;
   background-color: lightgray;
   height: 18vh;
 `;
 const TitleWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.largemedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   height: 40px;
   justify-content: center;
@@ -132,8 +125,6 @@ const BoxWrap = styled.div`
   padding: 20px 0px;
 `;
 const Box = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   border: solid 1px;
   width: 22vw;
   height: 10vh;
@@ -151,8 +142,6 @@ const HangWrap = styled.div`
   margin-top: 30px;
 `;
 const Hang = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding: 5px 10px;
   display: flex;
   justify-content: space-between;
