@@ -148,7 +148,6 @@ const InputWrap = styled.div`
 `;
 const Wrap1 = styled.div`
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-left: 3px;
   margin-right: 6px;
 `;
@@ -160,7 +159,6 @@ const Pick = styled.div`
 const InputSex = styled.input``;
 const InputY = styled.input`
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   width: 70px;
   border: solid 1px rgb(218, 218, 218);
   height: 30px;
@@ -168,7 +166,6 @@ const InputY = styled.input`
 `;
 const InputMD = styled.input`
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   width: 30px;
   border: solid 1px rgb(218, 218, 218);
   height: 30px;
@@ -177,7 +174,6 @@ const InputMD = styled.input`
 
 const Button = styled.div`
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -189,8 +185,6 @@ const Button = styled.div`
 `;
 
 const Desc = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 20px;
   margin-bottom: 30px;
 `;
@@ -212,7 +206,6 @@ const Hang = styled.div`
 const Tag = styled.div`
   display: flex;
   font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   text-align: left;
   font-weight: 700;
   width: 60px;
@@ -222,8 +215,6 @@ const InputBtnWrap = styled.div`
   width: calc(100vw - 90px);
 `;
 const Input = styled.input`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   height: 30px;
   padding: 0px 10px;
   border: solid 1px rgb(218, 218, 218);
@@ -231,8 +222,6 @@ const Input = styled.input`
   margin: 0;
 `;
 const Input1 = styled.input`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   height: 30px;
   padding: 0px 10px;
   border: solid 1px rgb(218, 218, 218);
@@ -240,8 +229,6 @@ const Input1 = styled.input`
   margin: 0;
 `;
 const Button2 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;

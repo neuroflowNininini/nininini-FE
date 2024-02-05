@@ -1,12 +1,11 @@
-import styled from "styled-components";
-import StarRate from "./StarRate";
-import { useState } from "react";
-import ReviewDetail from "./ReviewDetail";
-import theme from "../../shared/theme";
+import styled from 'styled-components';
+import StarRate from './StarRate';
+import { useState } from 'react';
+import ReviewDetail from './ReviewDetail';
+import theme from '../../shared/theme';
 
 export default function ReviwCard({ review }) {
-
-  const [activeModal, setActiveModal] = useState(false)
+  const [activeModal, setActiveModal] = useState(false);
   const openModal = () => {
     setActiveModal(true);
   };
@@ -15,22 +14,30 @@ export default function ReviwCard({ review }) {
   };
   const maxContLen = 50;
   // 리뷰 내용을 말 줄임
-  const shortenedContent = review.content.length > maxContLen
-    ? review.content.substring(0, maxContLen) + '...'
-    : review.content;
+  const shortenedContent =
+    review.content.length > maxContLen
+      ? review.content.substring(0, maxContLen) + '...'
+      : review.content;
 
   return (
     <>
-      {
-        activeModal && <ReviewDetail review={review} closeModal={closeModal} />
-      }
-      <CardWrap onClick={openModal} >
+      {activeModal && (
+        <ReviewDetail
+          review={review}
+          closeModal={closeModal}
+        />
+      )}
+      <CardWrap onClick={openModal}>
         <ContentWrap>
           <NickStar>
             <NameRate>
               <NameWrap>{review.nickname}</NameWrap>
               <RateWrap>
-                <StarRate AVR_RATE={review.rate} width={15} height={15} />
+                <StarRate
+                  AVR_RATE={review.rate}
+                  width={15}
+                  height={15}
+                />
               </RateWrap>
             </NameRate>
             <DateWrap>{review.date}</DateWrap>
@@ -42,36 +49,33 @@ export default function ReviwCard({ review }) {
         </ContentWrap>
       </CardWrap>
     </>
-  )
+  );
 }
 const ImageCont = styled.div`
-display: grid;
-grid-template-columns: 1fr 2fr;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 `;
 const ContentWrap = styled.div`
-font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: block;
   padding: 5px;
 `;
 const NameRate = styled.div`
-display: grid; 
-align-items: center; 
-grid-template-columns: 1fr 1fr;
-gap : 20px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 `;
 const NameWrap = styled.div`
-font-weight:600;
+  font-weight: 600;
 `;
 const RateWrap = styled.div`
-display:flex;
-padding-bottom:2px;
-width: 20px;
-
+  display: flex;
+  padding-bottom: 2px;
+  width: 20px;
 `;
 const DateWrap = styled.div`
-display: flex;
-color : gray;
+  display: flex;
+  color: gray;
 `;
 const CardWrap = styled.div`
   display: flex;
@@ -80,20 +84,19 @@ const CardWrap = styled.div`
   margin-top: 10px;
 `;
 const NickStar = styled.div`
-display: flex;
-gap: 20px;
-justify-content : space-between;
-margin-bottom : 10px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 const Title = styled.div`
-display:flex;
-text-align:left;
-margin-left:8px;
-font-size: 14px;
+  display: flex;
+  text-align: left;
+  margin-left: 8px;
+  font-size: 14px;
 `;
 const ImageBox = styled.img`
-width: 30vw;
-height: 12vh;
-object-fit:cover;
+  width: 30vw;
+  height: 12vh;
+  object-fit: cover;
 `;
-

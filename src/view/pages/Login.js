@@ -81,8 +81,6 @@ export default function Login() {
   );
 }
 const BottomText = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   justify-content: center;
   padding: 10px;
 `;
@@ -110,21 +108,15 @@ const Space = styled.div`
   height: 58px;
 `;
 const Desc = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 20px;
   margin-bottom: 30px;
 `;
 const Hang = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding: 5px 0px;
   align-items: center;
 `;
 
 const LoginButton = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,8 +131,6 @@ const LoginButton = styled.div`
 `;
 
 const SignUpButton = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -154,8 +144,6 @@ const SignUpButton = styled.div`
 `;
 
 const KakaoButton = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 700;
   align-items: center;
@@ -167,8 +155,6 @@ const KakaoButton = styled.div`
   padding-left: 10px;
 `;
 const AppleButton = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   border: solid 1px #e2e2e2;
   border-radius: 4px;
   display: flex;
@@ -180,8 +166,6 @@ const AppleButton = styled.div`
 `;
 
 const Input = styled.input`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   height: 43px;
   width: 85vw;
   padding: 0px 10px;

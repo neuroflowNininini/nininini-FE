@@ -124,8 +124,6 @@ const rollUpAnimation = keyframes`
 
 const Button = styled.div`
   border: solid 1px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   font-weight: 600;
@@ -164,28 +162,20 @@ const Bar = styled.div`
 `;
 
 const MyPageWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   align-items: center;
   padding-left: 15px;
 `;
 
 const Nickname = styled.p`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-left: 10px;
 `;
 const Title = styled.p`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding-left: 20px;
   text-decoration: none;
   display: flex;
 `;
 const Item = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding-left: 20px;
   margin: 15px;
   display: flex;
@@ -199,8 +189,6 @@ const BottomBox = styled.div`
 `;
 
 const GridItem = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin: 20px;
   display: flex;
   justify-content: center;

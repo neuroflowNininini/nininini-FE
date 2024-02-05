@@ -168,7 +168,6 @@ const LeftDiv = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 20px 10px 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
 `;
 const TopWrap = styled.div`
   // overflow : hidden;
@@ -189,13 +188,9 @@ const TitleWrap = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 700;
 `;
 const CostWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   padding-top: 20px;
   font-weight: 700;
@@ -206,8 +201,6 @@ const DeliveryWrap = styled.div`
   margin: 20px 0px;
 `;
 const TextWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 600;
   width: 20%;
@@ -217,8 +210,6 @@ const Conts = styled.div`
   width: 80%;
 `;
 const ContWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
 `;
 const ButtonWrap = styled.div`
@@ -228,8 +219,6 @@ const ButtonWrap = styled.div`
   gap: 5px;
 `;
 const Button = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   position: fixed;
   left: 0;
   bottom: 49px;
@@ -242,8 +231,6 @@ const Button = styled.div`
   background-color: white;
 `;
 const Button2 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   position: fixed;
   right: 0;
   bottom: 50px;

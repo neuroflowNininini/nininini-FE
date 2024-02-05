@@ -88,8 +88,6 @@ const BlockWrap = styled.div`
   padding-bottom: 20px;
 `;
 const Hang = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding: 5px 20px;
@@ -108,10 +106,7 @@ const Bar = styled.div`
   height: 10px;
   background-color: rgb(243, 243, 243);
 `;
-const Cont = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-`;
+const Cont = styled.div``;
 
 const Space = styled.div`
   height: 58px;
@@ -140,8 +135,6 @@ const ImageBox = styled.img`
 
 const Title = styled.div`
   padding: 10px 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 700;
   flex: 1; /* 남은 공간을 차지하도록 설정 */
 `;
@@ -150,8 +143,6 @@ const Title1 = styled.div`
   display: flex;
   margin-top: 10px;
   padding: 10px 20px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 700;
   align-items: center;
 `;
@@ -166,28 +157,20 @@ const NameQ = styled.div`
   margin-bottom: 5px;
 `;
 const QWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   margin-left: 5px;
 `;
 
 const Extra = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   margin-top: 5px;
 `;
 
 const NameWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 500;
 `;
 const CostWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   color: deeppink;
 `;
@@ -198,8 +181,6 @@ const ButtonWrap = styled.div`
   gap: 5px;
 `;
 const Button = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   position: fixed;
   left: 0;
   bottom: 49px;
@@ -212,8 +193,6 @@ const Button = styled.div`
   background-color: white;
 `;
 const Button2 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   position: fixed;
   right: 0;
   bottom: 50px;

@@ -90,21 +90,15 @@ export default function LikeDesign() {
 
 const Skip = styled.div`
   padding: 10px 0px;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
 `;
 
 const Container = styled.div`
   padding-bottom: 80px;
 `;
 const Desc = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   text-align: left;
 `;
 const DescWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 20px;
   margin-bottom: 30px;
   text-align: left;
@@ -123,8 +117,6 @@ const CheckBoxWrap = styled.div`
   gap: 10px;
 `;
 const Button2 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: center;
   align-items: center;

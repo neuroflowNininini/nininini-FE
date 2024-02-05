@@ -101,8 +101,6 @@ const ContWrap = styled.div`
   padding: 10px 20px;
 `;
 const Hang = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: grid;
   grid-template-columns: 1fr 2fr;
   padding: 5px 0px;
@@ -111,8 +109,6 @@ const Hang = styled.div`
 const Hang1 = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   padding: 5px 0px;
   align-items: center;
 `;

@@ -86,8 +86,6 @@ export default function Profile({ closeModal }) {
   );
 }
 const Cont = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-top: 4px;
   display: flex;
 `;
@@ -96,8 +94,6 @@ const DesignWrap = styled.div`
   gap: 5px;
 `;
 const Design = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   border: solid 1px #757575;
   border-radius: 8px;
   padding: 10px 10px;
@@ -117,15 +113,11 @@ const Hang = styled.div`
   margin-bottom: 10px;
 `;
 const Wrap1 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   margin-left: 3px;
   margin-right: 6px;
 `;
 const InputSex = styled.input``;
 const Name = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   border: solid 1px #505050;
   color: #505050;
@@ -134,8 +126,6 @@ const Name = styled.div`
 `;
 
 const Tag = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.medium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   padding: 12px 0px;
   margin-top: 10px;
@@ -160,8 +150,6 @@ const ImgBox = styled.div`
 const InnerMenu = styled.div`
   position: fixed;
   z-index: 999;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   left: 0;
   top: 0;
   height: 100%;
@@ -171,8 +159,6 @@ const InnerMenu = styled.div`
   background: white;
 `;
 const TopWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.large};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -182,7 +168,6 @@ const TopWrap = styled.div`
 `;
 
 const BlockWrap = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.small};
   margin: 15px 0px 0px 0px;
   padding: 0px 10px 0px 10px;
   display: block;

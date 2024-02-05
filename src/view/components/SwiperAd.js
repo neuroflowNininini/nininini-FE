@@ -50,7 +50,6 @@ export default function SwiperAd() {
 }
 const Heading = styled.div`
   font-size: 17px;
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 500;
   justify-content: center;
@@ -61,7 +60,6 @@ const Heading = styled.div`
 `;
 const Heading2 = styled.div`
   font-size: 17px;
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   font-weight: 500;
   display: flex;
   justify-content: center;
@@ -73,7 +71,6 @@ const Heading2 = styled.div`
 `;
 const Heading3 = styled.div`
   font-size: 17px;
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   font-weight: 500;
   justify-content: center;

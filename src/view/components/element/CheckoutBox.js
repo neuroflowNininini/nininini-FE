@@ -30,8 +30,6 @@ const ContWrap = styled.div`
   margin-top: 20px;
 `;
 const Hang = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.smallmedium};
-  font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
   display: flex;
   justify-content: space-between;
   padding: 4px 0px;
