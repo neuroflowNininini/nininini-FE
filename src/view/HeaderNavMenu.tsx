@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Header from '~/components/common/Header';
+import Search from '~/components/common/Search';
 import MenuModal from './components/MenuModal';
-import Search from './pages/Search';
 
 export default function HeaderNavMenu() {
   const [showModal, setShowModal] = useState(false);

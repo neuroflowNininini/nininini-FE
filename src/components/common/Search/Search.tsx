@@ -1,12 +1,11 @@
-import styled from 'styled-components';
-import theme from '../../shared/theme';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 import { VscChromeClose } from 'react-icons/vsc';
-import e1 from '../../shared/pics/nail/E/E1.jpg';
-import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import e1 from '~/shared/pics/nail/E/E1.jpg';
 
-export default function Search({ closeModal }) {
+export default function Search({ closeModal }: { closeModal: () => void }) {
   const [keyword, setKeyword] = useState('');
   const navigate = useNavigate();
 
@@ -79,7 +78,6 @@ const IconWrap = styled.div`
 `;
 const Input = styled.input`
   &::placeholder {
-    font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
     color: #353535; /* 원하는 색상 코드로 변경하세요 */
     font-weight: 400;
   }
