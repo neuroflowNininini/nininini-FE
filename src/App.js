@@ -20,12 +20,12 @@ import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
 import CartPage from './view/pages/CartPage';
 import ADPage from './view/components/ADPage';
-import HeaderNavMenu from './view/HeaderNavMenu';
 import styled, { ThemeProvider } from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
 import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
+import Header from './components/common/Header';
 
 function App() {
   const scrollToTop = () => {
@@ -36,7 +36,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <SwiperAd />
-        <HeaderNavMenu />
+        <Header />
         <GlobalStyle />
         <Routes>
           <Route
@@ -136,9 +136,6 @@ function App() {
 
 export default App;
 
-const Overflow = styled.div`
-  overflow-y: auto;
-`;
 const GoTop = styled.div`
   position: fixed;
   z-index: 999;

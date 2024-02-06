@@ -27,7 +27,6 @@ export default function Search({ closeModal }: { closeModal: () => void }) {
         <VscChromeClose
           onClick={closeModal}
           size="30"
-          color="black"
         />
       </IconWrap>
       <TopWrap id="hometop">
@@ -53,6 +52,7 @@ export default function Search({ closeModal }: { closeModal: () => void }) {
     </Background>
   );
 }
+
 const Hang1 = styled.div`
   padding: 5px 0px;
   align-items: center;
@@ -62,6 +62,7 @@ const Hang1 = styled.div`
   justify-content: center;
   gap: 6px;
 `;
+
 const Label = styled.div`
   font-weight: 600;
   border: solid 1.5px black;
@@ -73,9 +74,9 @@ const Label = styled.div`
 const IconWrap = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  margin-top: 15px;
-  margin-right: 15px;
+  margin: 15px;
 `;
+
 const Input = styled.input`
   &::placeholder {
     color: #353535; /* 원하는 색상 코드로 변경하세요 */
@@ -99,6 +100,7 @@ const Hang = styled.div`
   margin: 0px 16px;
   justify-content: center;
 `;
+
 const TopWrap = styled.div`
   padding-top: 60px;
   padding-bottom: 80px;
@@ -111,11 +113,15 @@ const Space = styled.div`
 `;
 
 const Background = styled.div`
-  position: fixed; /* 화면 상에 고정 위치 */
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100vw;
+  height: 100vh;
   background-image: url(${e1});
+  background-size: cover;
+  /* opacity: 10%; */
   height: 100vh;
   // border: solid 0px pink;
   z-index: 9; /* 다른 컴포넌트 위로 표시하기 위한 z-index */
