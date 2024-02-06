@@ -1,9 +1,9 @@
 const theme = {
   fontSize: {
-    xsmall: '1.2rem',
-    small: '1.3rem',
+    xsmall: '1rem',
+    small: '1.2rem',
     smallmedium: '1.4rem',
-    medium: '1rem',
+    medium: '1.6rem',
     largemedium: '1.8rem',
     large: '2rem',
     xlarge: '2.4rem',

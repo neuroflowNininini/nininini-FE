@@ -76,8 +76,9 @@ const IconWrap = styled.div`
 
 const Input = styled.input`
   &::placeholder {
-    color: #353535; /* 원하는 색상 코드로 변경하세요 */
+    color: ${({ theme }) => theme.colors.gray[600]};
     font-weight: 400;
+    font-size: ${({ theme }) => theme.fontSize.medium};
   }
   font-weight: 600;
   height: 43px;
