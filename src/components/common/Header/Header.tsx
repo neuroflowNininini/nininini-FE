@@ -41,12 +41,6 @@ export default function Header({ openModal, openSearch }: HeaderProps) {
   );
 }
 
-const LogoBox = styled.div`
-  font-size: 24px;
-  font-weight: 600;
-  font-family: 'Noto Sans KR';
-`;
-
 const HeaderEl = styled.header`
   text-align: center;
   z-index: 100;
@@ -58,13 +52,15 @@ const HeaderEl = styled.header`
   align-items: center;
 `;
 
+const LogoBox = styled.div``;
+
 const Element = styled.div`
-  width: 20%;
+  flex: 1;
   display: flex;
 `;
 
 const Element2 = styled.div`
-  width: 20%;
+  flex: 1;
   display: flex;
   gap: 5px;
   justify-content: flex-end;
