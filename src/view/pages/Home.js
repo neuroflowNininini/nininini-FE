@@ -14,9 +14,7 @@ import theme from '../../shared/theme';
 export default function Home() {
   return (
     <Container>
-      {/* <SwiperAd /> */}
       <Swiper
-        id="hometop"
         pagination={true}
         modules={[Pagination, Autoplay]}
         spaceBetween={0}
@@ -48,21 +46,15 @@ export default function Home() {
   );
 }
 
-const Heading = styled.div`
-  width: 100%;
-  text-align: center;
-  background-color: pink;
-  height: 30px;
-`;
-
 const Container = styled.div`
   display: block;
   align-items: center;
-  // overflow: auto;
-  max-height: 90vh;
-  padding-top: 0px; /* 상단 여백 추가 */
+  width: 100%;
   margin-bottom: 10px;
+  position: absolute;
+  top: 0;
 `;
+
 const ImageBox = styled.img`
   width: 100vw;
   height: 64vh;

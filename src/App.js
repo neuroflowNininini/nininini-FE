@@ -20,12 +20,13 @@ import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
 import CartPage from './view/pages/CartPage';
 import ADPage from './view/components/ADPage';
-import HeaderNavMenu from './view/HeaderNavMenu';
 import styled, { ThemeProvider } from 'styled-components';
 import { IoIosArrowUp } from 'react-icons/io';
 import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
+import Header from './components/common/Header';
+import { paths } from './config/paths';
 
 function App() {
   const scrollToTop = () => {
@@ -35,100 +36,102 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <SwiperAd />
-        <HeaderNavMenu />
         <GlobalStyle />
-        <Routes>
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/mypage"
-            element={<Mypage />}
-          />
-          <Route
-            path="/cart"
-            element={<CartPage />}
-          />
-          <Route
-            path="/category/new"
-            element={<NewPage />}
-          />
-          <Route
-            path="/category/best"
-            element={<BestPage />}
-          />
-          <Route
-            path="/category/sale"
-            element={<SalePage />}
-          />
-          <Route
-            path="/category/nail"
-            element={<NailPage />}
-          />
-          <Route
-            path="/category/pedi"
-            element={<PediPage />}
-          />
-          <Route
-            path="/category/etc"
-            element={<EtcPage />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProdDetail />}
-          />
-          <Route
-            path="/checkout"
-            element={<ProdBuy />}
-          />
-          <Route
-            path="/orderdone"
-            element={<OrderEnd />}
-          />
-          <Route
-            path="/likedesign"
-            element={<LikeDesign />}
-          />
-          <Route
-            path="/nailmeasure"
-            element={<NailMeasure />}
-          />
-          <Route
-            path="/signupdone"
-            element={<SignUpDone />}
-          />
-          <Route
-            path="/notice"
-            element={<Notice />}
-          />
-          <Route
-            path="/search"
-            element={<SearchResult />}
-          />
-          <Route
-            path="/adpage"
-            element={<ADPage />}
-          />
-          <Route
-            path="*"
-            element={<div>Not Found</div>}
-          />
-        </Routes>
-        <GoTop onClick={scrollToTop}>
-          <div>
-            <IoIosArrowUp size={22} />
-          </div>
-        </GoTop>
+        <SwiperAd />
+        <div id="App">
+          <Header />
+          <Routes>
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<SignUp />}
+            />
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/mypage"
+              element={<Mypage />}
+            />
+            <Route
+              path="/cart"
+              element={<CartPage />}
+            />
+            <Route
+              path={paths.category('new')}
+              element={<NewPage />}
+            />
+            <Route
+              path={paths.category('best')}
+              element={<BestPage />}
+            />
+            <Route
+              path={paths.category('sale')}
+              element={<SalePage />}
+            />
+            <Route
+              path={paths.category('nail')}
+              element={<NailPage />}
+            />
+            <Route
+              path={paths.category('pedi')}
+              element={<PediPage />}
+            />
+            <Route
+              path={paths.category('etc')}
+              element={<EtcPage />}
+            />
+            <Route
+              path="/product/:id"
+              element={<ProdDetail />}
+            />
+            <Route
+              path="/checkout"
+              element={<ProdBuy />}
+            />
+            <Route
+              path="/orderdone"
+              element={<OrderEnd />}
+            />
+            <Route
+              path="/likedesign"
+              element={<LikeDesign />}
+            />
+            <Route
+              path="/nailmeasure"
+              element={<NailMeasure />}
+            />
+            <Route
+              path="/signupdone"
+              element={<SignUpDone />}
+            />
+            <Route
+              path={paths.notice()}
+              element={<Notice />}
+            />
+            <Route
+              path="/search"
+              element={<SearchResult />}
+            />
+            <Route
+              path="/adpage"
+              element={<ADPage />}
+            />
+            <Route
+              path="*"
+              element={<div>Not Found</div>}
+            />
+          </Routes>
+          <GoTop onClick={scrollToTop}>
+            <div>
+              <IoIosArrowUp size={22} />
+            </div>
+          </GoTop>
+        </div>
       </ThemeProvider>
     </BrowserRouter>
   );
@@ -136,9 +139,6 @@ function App() {
 
 export default App;
 
-const Overflow = styled.div`
-  overflow-y: auto;
-`;
 const GoTop = styled.div`
   position: fixed;
   z-index: 999;

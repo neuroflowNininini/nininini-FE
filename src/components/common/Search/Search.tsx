@@ -1,12 +1,11 @@
-import styled from 'styled-components';
-import theme from '../../shared/theme';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 import { VscChromeClose } from 'react-icons/vsc';
-import e1 from '../../shared/pics/nail/E/E1.jpg';
-import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import e1 from '~/shared/pics/nail/E/E1.jpg';
 
-export default function Search({ closeModal }) {
+export default function Search({ closeModal }: { closeModal: () => void }) {
   const [keyword, setKeyword] = useState('');
   const navigate = useNavigate();
 
@@ -28,32 +27,29 @@ export default function Search({ closeModal }) {
         <VscChromeClose
           onClick={closeModal}
           size="30"
-          color="black"
         />
       </IconWrap>
-      <TopWrap id="hometop">
-        <Space />
-        <Hang>
-          <Input
-            value={keyword} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            placeholder="  검색어를 입력하세요"
-            onChange={handleKeywordChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-          <PiMagnifyingGlass
-            onClick={handleSearch}
-            size="30"
-            color="black"
-          />
-        </Hang>
-        <Hang1>
-          <Label>#가을네일</Label>
-          <Label>#마블네일</Label>
-          <Label>#손톱측정</Label>
-        </Hang1>
-      </TopWrap>
+      <Hang>
+        <Input
+          value={keyword} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+          placeholder="  검색어를 입력하세요"
+          onChange={handleKeywordChange} // 입력 필드 값이 변경될 때 핸들러 호출
+        />
+        <PiMagnifyingGlass
+          onClick={handleSearch}
+          size="30"
+          color="black"
+        />
+      </Hang>
+      <Hang1>
+        <Label>#가을네일</Label>
+        <Label>#마블네일</Label>
+        <Label>#손톱측정</Label>
+      </Hang1>
     </Background>
   );
 }
+
 const Hang1 = styled.div`
   padding: 5px 0px;
   align-items: center;
@@ -63,6 +59,7 @@ const Hang1 = styled.div`
   justify-content: center;
   gap: 6px;
 `;
+
 const Label = styled.div`
   font-weight: 600;
   border: solid 1.5px black;
@@ -72,16 +69,16 @@ const Label = styled.div`
 `;
 
 const IconWrap = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  margin-top: 15px;
-  margin-right: 15px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
 `;
+
 const Input = styled.input`
   &::placeholder {
-    font-family: ${(props) => theme.fontFamily[props.font] || theme.fontFamily.default};
-    color: #353535; /* 원하는 색상 코드로 변경하세요 */
+    color: ${({ theme }) => theme.colors.gray[600]};
     font-weight: 400;
+    font-size: ${({ theme }) => theme.fontSize.medium};
   }
   font-weight: 600;
   height: 43px;
@@ -101,24 +98,26 @@ const Hang = styled.div`
   margin: 0px 16px;
   justify-content: center;
 `;
-const TopWrap = styled.div`
-  padding-top: 60px;
-  padding-bottom: 80px;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Space = styled.div`
-  height: 30vh;
-`;
 
 const Background = styled.div`
-  position: fixed; /* 화면 상에 고정 위치 */
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   width: 100vw;
-  background-image: url(${e1});
   height: 100vh;
-  // border: solid 0px pink;
-  z-index: 9; /* 다른 컴포넌트 위로 표시하기 위한 z-index */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url(${e1});
+  background-size: cover;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: white;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.7;
+  }
 `;
