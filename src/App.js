@@ -26,6 +26,7 @@ import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import Header from './components/common/Header';
+import { paths } from './config/paths';
 
 function App() {
   const scrollToTop = () => {
@@ -61,27 +62,27 @@ function App() {
               element={<CartPage />}
             />
             <Route
-              path="/category/new"
+              path={paths.category('new')}
               element={<NewPage />}
             />
             <Route
-              path="/category/best"
+              path={paths.category('best')}
               element={<BestPage />}
             />
             <Route
-              path="/category/sale"
+              path={paths.category('sale')}
               element={<SalePage />}
             />
             <Route
-              path="/category/nail"
+              path={paths.category('nail')}
               element={<NailPage />}
             />
             <Route
-              path="/category/pedi"
+              path={paths.category('pedi')}
               element={<PediPage />}
             />
             <Route
-              path="/category/etc"
+              path={paths.category('etc')}
               element={<EtcPage />}
             />
             <Route
