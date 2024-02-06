@@ -35,100 +35,102 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <SwiperAd />
-        <Header />
         <GlobalStyle />
-        <Routes>
-          <Route
-            path="/login"
-            element={<Login />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUp />}
-          />
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/mypage"
-            element={<Mypage />}
-          />
-          <Route
-            path="/cart"
-            element={<CartPage />}
-          />
-          <Route
-            path="/category/new"
-            element={<NewPage />}
-          />
-          <Route
-            path="/category/best"
-            element={<BestPage />}
-          />
-          <Route
-            path="/category/sale"
-            element={<SalePage />}
-          />
-          <Route
-            path="/category/nail"
-            element={<NailPage />}
-          />
-          <Route
-            path="/category/pedi"
-            element={<PediPage />}
-          />
-          <Route
-            path="/category/etc"
-            element={<EtcPage />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProdDetail />}
-          />
-          <Route
-            path="/checkout"
-            element={<ProdBuy />}
-          />
-          <Route
-            path="/orderdone"
-            element={<OrderEnd />}
-          />
-          <Route
-            path="/likedesign"
-            element={<LikeDesign />}
-          />
-          <Route
-            path="/nailmeasure"
-            element={<NailMeasure />}
-          />
-          <Route
-            path="/signupdone"
-            element={<SignUpDone />}
-          />
-          <Route
-            path="/notice"
-            element={<Notice />}
-          />
-          <Route
-            path="/search"
-            element={<SearchResult />}
-          />
-          <Route
-            path="/adpage"
-            element={<ADPage />}
-          />
-          <Route
-            path="*"
-            element={<div>Not Found</div>}
-          />
-        </Routes>
-        <GoTop onClick={scrollToTop}>
-          <div>
-            <IoIosArrowUp size={22} />
-          </div>
-        </GoTop>
+        <SwiperAd />
+        <div id="App">
+          <Header />
+          <Routes>
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<SignUp />}
+            />
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/mypage"
+              element={<Mypage />}
+            />
+            <Route
+              path="/cart"
+              element={<CartPage />}
+            />
+            <Route
+              path="/category/new"
+              element={<NewPage />}
+            />
+            <Route
+              path="/category/best"
+              element={<BestPage />}
+            />
+            <Route
+              path="/category/sale"
+              element={<SalePage />}
+            />
+            <Route
+              path="/category/nail"
+              element={<NailPage />}
+            />
+            <Route
+              path="/category/pedi"
+              element={<PediPage />}
+            />
+            <Route
+              path="/category/etc"
+              element={<EtcPage />}
+            />
+            <Route
+              path="/product/:id"
+              element={<ProdDetail />}
+            />
+            <Route
+              path="/checkout"
+              element={<ProdBuy />}
+            />
+            <Route
+              path="/orderdone"
+              element={<OrderEnd />}
+            />
+            <Route
+              path="/likedesign"
+              element={<LikeDesign />}
+            />
+            <Route
+              path="/nailmeasure"
+              element={<NailMeasure />}
+            />
+            <Route
+              path="/signupdone"
+              element={<SignUpDone />}
+            />
+            <Route
+              path="/notice"
+              element={<Notice />}
+            />
+            <Route
+              path="/search"
+              element={<SearchResult />}
+            />
+            <Route
+              path="/adpage"
+              element={<ADPage />}
+            />
+            <Route
+              path="*"
+              element={<div>Not Found</div>}
+            />
+          </Routes>
+          <GoTop onClick={scrollToTop}>
+            <div>
+              <IoIosArrowUp size={22} />
+            </div>
+          </GoTop>
+        </div>
       </ThemeProvider>
     </BrowserRouter>
   );

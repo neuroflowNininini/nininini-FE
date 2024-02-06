@@ -10,6 +10,7 @@ import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 import MenuModal from '~/view/components/MenuModal.js';
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
@@ -30,8 +31,18 @@ export default function Header() {
     document.body.style.overflow = showSearch || showModal ? 'hidden' : 'unset';
   }, [showSearch, showModal]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <HeaderEl>
+    <HeaderEl isScrolled={isScrolled}>
       <Element onClick={openModal}>
         <RxHamburgerMenu
           size="24"
@@ -64,9 +75,9 @@ export default function Header() {
   );
 }
 
-const HeaderEl = styled.header`
+const HeaderEl = styled.header<{ isScrolled: boolean }>`
   height: 6rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: ${(props) => (props.isScrolled ? `rgba(255, 255, 255, 0.8)` : `transparent`)};
   padding: 8px;
   display: flex;
   justify-content: space-between;
