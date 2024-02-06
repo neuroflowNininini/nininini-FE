@@ -7,4 +7,6 @@ export const paths = {
   event: () => `/event`,
   review: () => `/review`,
   faq: () => `/faq`,
+  myPage: () => `/mypage`,
+  cart: () => `/cart`,
 };
