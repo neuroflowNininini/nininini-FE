@@ -6,7 +6,6 @@ import theme from '../../../shared/theme';
 export default function SalePage() {
   return (
     <>
-      <Space />
       <TitleWrap id="hometop">SALE</TitleWrap>
       <ProductListCate dummy={newDummy} />
     </>
@@ -19,8 +18,4 @@ const TitleWrap = styled.div`
   align-items: center;
   font-weight: 600;
   padding: 20px 0px;
-`;
-
-const Space = styled.div`
-  height: 42px;
 `;

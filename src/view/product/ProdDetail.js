@@ -49,8 +49,7 @@ export default function ProdDetail() {
     navigate(prodBuyLink);
   };
   return (
-    <TopWrap>
-      <Space />
+    <>
       <Swiper
         id="hometop"
         pagination={true}
@@ -149,7 +148,7 @@ export default function ProdDetail() {
         <Button onClick={() => clickAddCart(product.id, 1)}>장바구니</Button>
         <Button2 onClick={handleBuy}>바로구매</Button2>
       </ButtonWrap>
-    </TopWrap>
+    </>
   );
 }
 
@@ -169,17 +168,10 @@ const LeftDiv = styled.div`
   justify-content: space-between;
   padding: 10px 20px 10px 20px;
 `;
-const TopWrap = styled.div`
-  // overflow : hidden;
-  // overflow: auto;
-`;
 const ImageBox = styled.img`
   width: 100%;
   height: 50vh;
   object-fit: cover;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap1 = styled.div`
   margin: 0px 20px;

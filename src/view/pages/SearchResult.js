@@ -17,7 +17,6 @@ export default function SearchResult() {
 
   return (
     <>
-      <Space />
       <TitleWrap id="hometop">검색결과</TitleWrap>
       <ProductListCate dummy={filteredProds} />
     </>
@@ -29,8 +28,4 @@ const TitleWrap = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: 500;
-`;
-
-const Space = styled.div`
-  height: 42px;
 `;

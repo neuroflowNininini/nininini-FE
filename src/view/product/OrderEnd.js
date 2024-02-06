@@ -21,7 +21,6 @@ export default function OrderEnd() {
 
   return (
     <>
-      <Space />
       <TopWrap id="hometop">
         <Bar />
         <ContWrap>
@@ -108,9 +107,6 @@ const Bar = styled.div`
 `;
 const Cont = styled.div``;
 
-const Space = styled.div`
-  height: 58px;
-`;
 const TopWrap = styled.div`
   position: relative;
   bottom: 49px;

@@ -57,7 +57,6 @@ export default function SignUp() {
   const [startDate, setStartDate] = useState(new Date());
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <Desc>회원가입</Desc>
         <Hang>
@@ -187,9 +186,6 @@ const Button = styled.div`
 const Desc = styled.div`
   margin-top: 20px;
   margin-bottom: 30px;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap = styled.div`
   position: relative;

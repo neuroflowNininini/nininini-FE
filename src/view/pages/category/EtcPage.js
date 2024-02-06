@@ -5,7 +5,6 @@ import theme from '../../../shared/theme';
 export default function EtcPage() {
   return (
     <>
-      <Space />
       <TitleWrap id="hometop">ETC</TitleWrap>
       <ProductListCate dummy={etcDummy} />
     </>
@@ -18,8 +17,4 @@ const TitleWrap = styled.div`
   align-items: center;
   font-weight: 600;
   padding: 20px 0px;
-`;
-
-const Space = styled.div`
-  height: 42px;
 `;

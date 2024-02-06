@@ -20,7 +20,6 @@ export default function Mypage() {
 
   return (
     <>
-      <Space />
       <TitleWrap id="hometop">마이페이지</TitleWrap>
       <Top>
         {activeModal && <Profile closeModal={closeModal} />}
@@ -115,9 +114,6 @@ const Bar = styled.div`
   height: 1px;
 `;
 
-const Space = styled.div`
-  height: 42px;
-`;
 const BoxWrap = styled.div`
   display: flex;
   justify-content: center;

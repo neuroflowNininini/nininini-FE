@@ -22,7 +22,6 @@ export default function CartPage() {
 
   return (
     <TopWrap>
-      <Space />
       <TitleWrap id="hometop">장바구니</TitleWrap>
       <CartProds
         cartProdsId={cartProdsId}
@@ -49,8 +48,4 @@ const TitleWrap = styled.div`
   align-items: center;
   font-weight: 600;
   padding: 20px 0px;
-`;
-
-const Space = styled.div`
-  height: 42px;
 `;

@@ -10,7 +10,6 @@ export default function SignUpDone() {
   };
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <DescWrap>
           <Desc>회원가입이 완료되었습니다.</Desc>
@@ -27,9 +26,6 @@ const Image = styled.img`
   height: 30vh;
   object-fit: cover;
   object-position: bottom;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap = styled.div`
   position: relative;

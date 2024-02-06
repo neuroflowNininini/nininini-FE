@@ -36,7 +36,6 @@ export default function NailMeasure() {
   };
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <DescWrap>
           <Desc>지금 AI를 통해 손톱을 측정하세요.</Desc>
@@ -91,9 +90,6 @@ const AiBox = styled.div`
   padding: 20px 0px;
 `;
 
-const Space = styled.div`
-  height: 58px;
-`;
 const TopWrap = styled.div`
   position: relative;
   bottom: 49px;
