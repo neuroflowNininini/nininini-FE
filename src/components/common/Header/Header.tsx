@@ -1,56 +1,57 @@
-import { RxHamburgerMenu } from 'react-icons/rx';
-import { PiMagnifyingGlass } from 'react-icons/pi';
-import { GoBell } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import { HiOutlineShoppingBag } from 'react-icons/hi2';
+import { PiMagnifyingGlass } from 'react-icons/pi';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import styled from 'styled-components';
-import { ReactComponent as Svg } from '../../logo.svg';
+import { paths } from '~/config/paths';
+import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 
-export default function Headerbar({ openModal, openSearch }) {
+interface HeaderProps {
+  openModal: () => void;
+  openSearch: () => void;
+}
+
+export default function Header({ openModal, openSearch }: HeaderProps) {
   return (
-    <Header>
+    <HeaderEl>
       <Element onClick={openModal}>
         <RxHamburgerMenu
           size="24"
           color="black"
         />
       </Element>
-      <Logo>
+      <LogoBox>
         <Link
-          to="/"
+          to={paths.home()}
           style={{ textDecoration: 'none', color: 'black' }}
         >
-          <Svg width="25vw" />
+          <Logo width="25vw" />
         </Link>
-      </Logo>
+      </LogoBox>
       <Element2>
         <PiMagnifyingGlass
           size="26"
-          color="black"
           onClick={openSearch}
         />
         <Link to="/notice">
-          <GoBell
-            size="26"
-            color="black"
-          />
+          <HiOutlineShoppingBag size="26" />
         </Link>
       </Element2>
-    </Header>
+    </HeaderEl>
   );
 }
 
-const Logo = styled.div`
-  /* display: flex; */
+const LogoBox = styled.div`
   font-size: 24px;
   font-weight: 600;
   font-family: 'Noto Sans KR';
 `;
 
-const Header = styled.header`
+const HeaderEl = styled.header`
   text-align: center;
   z-index: 100;
   height: 42px;
-  background-color: rgba(255, 255, 255, ${(props) => props.trans});
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 8px;
   display: flex;
   justify-content: space-between;

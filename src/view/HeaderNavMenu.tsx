@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Headerbar from './components/Headerbar';
+import Header from '~/components/common/Header';
 import MenuModal from './components/MenuModal';
-// import Navbar from './components/Navbar';
 import Search from './pages/Search';
 
 export default function HeaderNavMenu() {
@@ -35,7 +34,7 @@ export default function HeaderNavMenu() {
       </SideBarWrap>
       {showSearch && <Search closeModal={closeSearch} />}
       <HeaderWrap>
-        <Headerbar
+        <Header
           openModal={openModal}
           openSearch={openSearch}
         />
