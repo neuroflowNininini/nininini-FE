@@ -110,7 +110,7 @@ function App() {
               element={<SignUpDone />}
             />
             <Route
-              path="/notice"
+              path={paths.notice()}
               element={<Notice />}
             />
             <Route

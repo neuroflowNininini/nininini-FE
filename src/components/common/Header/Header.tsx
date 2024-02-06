@@ -7,7 +7,9 @@ import styled from 'styled-components';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
+import { media } from '~/styles/breakpoints';
 import MenuModal from '~/view/components/MenuModal.js';
+import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,6 +63,9 @@ export default function Header() {
       >
         <Logo width="13rem" />
       </Link>
+      <DesktopMenu>
+        <HeaderMenu />
+      </DesktopMenu>
       <Element2>
         <PiMagnifyingGlass
           size="26"
@@ -89,8 +94,11 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
 `;
 
 const Element = styled.div`
-  flex: 1;
-  display: flex;
+  display: none;
+  ${media.md`
+    flex: 1;
+    display: flex;
+  `}
 `;
 
 const Element2 = styled.div`
@@ -99,4 +107,10 @@ const Element2 = styled.div`
   gap: 5px;
   justify-content: flex-end;
   align-items: center;
+`;
+
+const DesktopMenu = styled.div`
+  ${media.md`
+    display: none;
+  `}
 `;
