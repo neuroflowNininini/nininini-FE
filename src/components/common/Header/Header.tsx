@@ -48,7 +48,7 @@ export default function Header() {
         to={paths.home()}
         style={{ textDecoration: 'none', color: 'black' }}
       >
-        <Logo width="25vw" />
+        <Logo width="13rem" />
       </Link>
       <Element2>
         <PiMagnifyingGlass
@@ -65,7 +65,7 @@ export default function Header() {
 }
 
 const HeaderEl = styled.header`
-  height: 42px;
+  height: 6rem;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 8px;
   display: flex;

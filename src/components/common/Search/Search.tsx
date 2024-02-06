@@ -29,26 +29,23 @@ export default function Search({ closeModal }: { closeModal: () => void }) {
           size="30"
         />
       </IconWrap>
-      <TopWrap id="hometop">
-        <Space />
-        <Hang>
-          <Input
-            value={keyword} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            placeholder="  검색어를 입력하세요"
-            onChange={handleKeywordChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-          <PiMagnifyingGlass
-            onClick={handleSearch}
-            size="30"
-            color="black"
-          />
-        </Hang>
-        <Hang1>
-          <Label>#가을네일</Label>
-          <Label>#마블네일</Label>
-          <Label>#손톱측정</Label>
-        </Hang1>
-      </TopWrap>
+      <Hang>
+        <Input
+          value={keyword} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+          placeholder="  검색어를 입력하세요"
+          onChange={handleKeywordChange} // 입력 필드 값이 변경될 때 핸들러 호출
+        />
+        <PiMagnifyingGlass
+          onClick={handleSearch}
+          size="30"
+          color="black"
+        />
+      </Hang>
+      <Hang1>
+        <Label>#가을네일</Label>
+        <Label>#마블네일</Label>
+        <Label>#손톱측정</Label>
+      </Hang1>
     </Background>
   );
 }
@@ -72,9 +69,9 @@ const Label = styled.div`
 `;
 
 const IconWrap = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 15px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
 `;
 
 const Input = styled.input`
@@ -101,17 +98,6 @@ const Hang = styled.div`
   justify-content: center;
 `;
 
-const TopWrap = styled.div`
-  padding-top: 60px;
-  padding-bottom: 80px;
-  width: 100vw;
-  height: 100vh;
-`;
-
-const Space = styled.div`
-  height: 30vh;
-`;
-
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -119,10 +105,18 @@ const Background = styled.div`
   right: 0;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-image: url(${e1});
   background-size: cover;
-  /* opacity: 10%; */
-  height: 100vh;
-  // border: solid 0px pink;
-  z-index: 9; /* 다른 컴포넌트 위로 표시하기 위한 z-index */
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: white;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.7;
+  }
 `;
