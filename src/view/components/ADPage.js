@@ -8,7 +8,6 @@ export default function ADPage() {
   const imgSrc = state.imgSrc;
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <div style={{ paddingTop: '20px', paddingBottom: '100px' }}>
           <img
@@ -22,9 +21,6 @@ export default function ADPage() {
 }
 const Container = styled.div`
   padding-bottom: 80px;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap = styled.div`
   position: relative;

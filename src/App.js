@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './view/pages/Home';
+import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
 import NewPage from './view/pages/category/NewPage';
 import BestPage from './view/pages/category/BestPage';
@@ -25,8 +25,8 @@ import { IoIosArrowUp } from 'react-icons/io';
 import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
-import Header from './components/common/Header';
 import { paths } from './config/paths';
+import { DefaultLayout, HomeLayout } from './components/layouts';
 
 function App() {
   const scrollToTop = () => {
@@ -39,92 +39,95 @@ function App() {
         <GlobalStyle />
         <SwiperAd />
         <div id="App">
-          <Header />
           <Routes>
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              path="/signup"
-              element={<SignUp />}
-            />
-            <Route
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              path="/mypage"
-              element={<Mypage />}
-            />
-            <Route
-              path="/cart"
-              element={<CartPage />}
-            />
-            <Route
-              path={paths.category('new')}
-              element={<NewPage />}
-            />
-            <Route
-              path={paths.category('best')}
-              element={<BestPage />}
-            />
-            <Route
-              path={paths.category('sale')}
-              element={<SalePage />}
-            />
-            <Route
-              path={paths.category('nail')}
-              element={<NailPage />}
-            />
-            <Route
-              path={paths.category('pedi')}
-              element={<PediPage />}
-            />
-            <Route
-              path={paths.category('etc')}
-              element={<EtcPage />}
-            />
-            <Route
-              path="/product/:id"
-              element={<ProdDetail />}
-            />
-            <Route
-              path="/checkout"
-              element={<ProdBuy />}
-            />
-            <Route
-              path="/orderdone"
-              element={<OrderEnd />}
-            />
-            <Route
-              path="/likedesign"
-              element={<LikeDesign />}
-            />
-            <Route
-              path="/nailmeasure"
-              element={<NailMeasure />}
-            />
-            <Route
-              path="/signupdone"
-              element={<SignUpDone />}
-            />
-            <Route
-              path={paths.notice()}
-              element={<Notice />}
-            />
-            <Route
-              path="/search"
-              element={<SearchResult />}
-            />
-            <Route
-              path="/adpage"
-              element={<ADPage />}
-            />
-            <Route
-              path="*"
-              element={<div>Not Found</div>}
-            />
+            <Route element={<HomeLayout />}>
+              <Route
+                path="/"
+                element={<HomePage />}
+              />
+            </Route>
+            <Route element={<DefaultLayout />}>
+              <Route
+                path="/login"
+                element={<Login />}
+              />
+              <Route
+                path="/signup"
+                element={<SignUp />}
+              />
+              <Route
+                path="/mypage"
+                element={<Mypage />}
+              />
+              <Route
+                path="/cart"
+                element={<CartPage />}
+              />
+              <Route
+                path={paths.category('new')}
+                element={<NewPage />}
+              />
+              <Route
+                path={paths.category('best')}
+                element={<BestPage />}
+              />
+              <Route
+                path={paths.category('sale')}
+                element={<SalePage />}
+              />
+              <Route
+                path={paths.category('nail')}
+                element={<NailPage />}
+              />
+              <Route
+                path={paths.category('pedi')}
+                element={<PediPage />}
+              />
+              <Route
+                path={paths.category('etc')}
+                element={<EtcPage />}
+              />
+              <Route
+                path="/product/:id"
+                element={<ProdDetail />}
+              />
+              <Route
+                path="/checkout"
+                element={<ProdBuy />}
+              />
+              <Route
+                path="/orderdone"
+                element={<OrderEnd />}
+              />
+              <Route
+                path="/likedesign"
+                element={<LikeDesign />}
+              />
+              <Route
+                path="/nailmeasure"
+                element={<NailMeasure />}
+              />
+              <Route
+                path="/signupdone"
+                element={<SignUpDone />}
+              />
+              <Route
+                path={paths.notice()}
+                element={<Notice />}
+              />
+              <Route
+                path="/search"
+                element={<SearchResult />}
+              />
+              <Route
+                path="/adpage"
+                element={<ADPage />}
+              />
+              <Route
+                path="*"
+                element={<div>Not Found</div>}
+              />
+            </Route>
           </Routes>
           <GoTop onClick={scrollToTop}>
             <div>

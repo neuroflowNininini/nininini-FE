@@ -1,19 +1,19 @@
+import styled from 'styled-components';
+import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import e4 from '../../shared/pics/nail/E/E4.jpg';
-import f3 from '../../shared/pics/home_swiper/home3.png';
-import c2 from '../../shared/pics/home_swiper/home2.png';
-import { Pagination, Autoplay } from 'swiper';
-import styled from 'styled-components';
-import { bestDummy, newDummy } from '../../shared/dummy';
-import RowProductList from '../product/RowProductList';
-import HomeMenu from '../components/HomeMenu';
-import theme from '../../shared/theme';
+import { bestDummy, newDummy } from '~/shared/dummy.js';
+import c2 from '~/shared/pics/home_swiper/home2.png';
+import f3 from '~/shared/pics/home_swiper/home3.png';
+import e4 from '~/shared/pics/nail/E/E4.jpg';
+import { deviceSizes } from '~/styles/breakpoints';
+import HomeMenu from '~/view/components/HomeMenu.js';
+import RowProductList from '~/view/product/RowProductList.js';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <Container>
+    <>
       <Swiper
         pagination={true}
         modules={[Pagination, Autoplay]}
@@ -35,24 +35,22 @@ export default function Home() {
           <ImageBox src={c2} />
         </SwiperSlide>
       </Swiper>
-      <HomeMenu />
-      <Box>
-        <TitleWrap>이 달의 신상품</TitleWrap>
-        <RowProductList dummy={newDummy} />
-        <TitleWrap>주간 베스트</TitleWrap>
-        <RowProductList dummy={bestDummy} />
-      </Box>
-    </Container>
+      <Container>
+        <HomeMenu />
+        <Box>
+          <TitleWrap>이 달의 신상품</TitleWrap>
+          <RowProductList dummy={newDummy} />
+          <TitleWrap>주간 베스트</TitleWrap>
+          <RowProductList dummy={bestDummy} />
+        </Box>
+      </Container>
+    </>
   );
 }
 
 const Container = styled.div`
-  display: block;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 0;
+  max-width: ${deviceSizes.md};
+  margin: 0 auto;
 `;
 
 const ImageBox = styled.img`

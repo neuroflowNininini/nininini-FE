@@ -86,7 +86,6 @@ export default function ProdBuy() {
 
   return (
     <>
-      <Space />
       <TopWrap id="hometop">
         <Title>결제하기</Title>
         <Bar />
@@ -173,9 +172,6 @@ const BuyButton = styled.div`
   justify-content: center;
   align-items: center;
   height: 50px;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap = styled.div`
   position: relative;

@@ -37,7 +37,6 @@ export default function LikeDesign() {
 
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <DescWrap>
           <Desc>관심디자인을 선택해주세요.</Desc>
@@ -102,9 +101,6 @@ const DescWrap = styled.div`
   margin-top: 20px;
   margin-bottom: 30px;
   text-align: left;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const TopWrap = styled.div`
   position: relative;

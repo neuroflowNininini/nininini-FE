@@ -95,6 +95,7 @@ export default function Header() {
 const HEADER_BREAKPOINT = media.md;
 
 const HeaderEl = styled.header<{ isScrolled: boolean }>`
+  z-index: 9999;
   height: 6rem;
   background-color: ${(props) => (props.isScrolled ? `rgba(255, 255, 255, 0.8)` : `transparent`)};
   display: flex;
@@ -102,8 +103,6 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
   align-items: center;
   position: sticky;
   top: 0;
-  width: 100%;
-  z-index: 9999;
   padding-left: 3rem;
   ${HEADER_BREAKPOINT`
     padding: 0.8rem;

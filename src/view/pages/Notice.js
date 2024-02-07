@@ -4,7 +4,6 @@ import theme from '../../shared/theme';
 export default function Notice() {
   return (
     <Container>
-      <Space />
       <TopWrap id="hometop">
         <Title>알림</Title>
         <ContWrap>
@@ -43,9 +42,6 @@ const Cont = styled.div`
   height: 30px;
 `;
 
-const Space = styled.div`
-  height: 58px;
-`;
 const TopWrap = styled.div`
   position: relative;
   bottom: 49px;

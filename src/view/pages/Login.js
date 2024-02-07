@@ -32,7 +32,6 @@ export default function Login() {
 
   return (
     <>
-      <Space />
       <TopWrap id="hometop">
         <Desc>로그인</Desc>
         <CenterWrap>
@@ -103,9 +102,6 @@ const TopWrap = styled.div`
   bottom: 49px;
   padding-top: 60px;
   padding-bottom: 80px;
-`;
-const Space = styled.div`
-  height: 58px;
 `;
 const Desc = styled.div`
   margin-top: 20px;
