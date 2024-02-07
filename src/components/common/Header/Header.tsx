@@ -46,53 +46,63 @@ export default function Header() {
   }, []);
 
   return (
-    <HeaderEl isScrolled={isScrolled}>
-      <Element onClick={openModal}>
-        <RxHamburgerMenu
-          size="24"
-          color="black"
-        />
-      </Element>
-      {showModal && (
-        <MenuModal
-          username={'김니니 님'}
-          closeModal={closeModal}
-        />
-      )}
-      <Link to={paths.home()}>
-        <StyledLogo />
-      </Link>
-      <DesktopMenu>
-        <HeaderMenu />
-      </DesktopMenu>
-      <Element2>
-        <button>
-          <PiMagnifyingGlass
-            size="26"
-            onClick={openSearch}
+    <Container>
+      <HeaderEl isScrolled={isScrolled}>
+        <Element onClick={openModal}>
+          <RxHamburgerMenu
+            size="24"
+            color="black"
           />
-        </button>
-        <Link to={paths.cart()}>
-          <HiOutlineShoppingBag size="26" />
+        </Element>
+        {showModal && (
+          <MenuModal
+            username={'김니니 님'}
+            closeModal={closeModal}
+          />
+        )}
+        <Link to={paths.home()}>
+          <StyledLogo />
         </Link>
-        <TextMenuBox>
-          <Link to={paths.myPage()}>
-            <TextMenuItem>{'MY PAGE'}</TextMenuItem>
+        <DesktopMenu>
+          <HeaderMenu />
+        </DesktopMenu>
+        <Element2>
+          <button>
+            <PiMagnifyingGlass
+              size="26"
+              onClick={openSearch}
+            />
+          </button>
+          <Link to={paths.cart()}>
+            <HiOutlineShoppingBag size="26" />
           </Link>
-          <Divider
-            direction="vertical"
-            length="1.5rem"
-            style={{ backgroundColor: theme.colors.gray[800] }}
-          />
-          <TextMenuItem>{'LOGOUT'}</TextMenuItem>
-        </TextMenuBox>
-      </Element2>
-      {showSearch && <Search closeModal={closeSearch} />}
-    </HeaderEl>
+          <TextMenuBox>
+            <Link to={paths.myPage()}>
+              <TextMenuItem>{'MY PAGE'}</TextMenuItem>
+            </Link>
+            <Divider
+              direction="vertical"
+              length="1.5rem"
+              style={{ backgroundColor: theme.colors.gray[800] }}
+            />
+            <TextMenuItem>{'LOGOUT'}</TextMenuItem>
+          </TextMenuBox>
+        </Element2>
+        {showSearch && <Search closeModal={closeSearch} />}
+      </HeaderEl>
+    </Container>
   );
 }
 
 const HEADER_BREAKPOINT = media.md;
+
+const Container = styled.div`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+`;
 
 const HeaderEl = styled.header<{ isScrolled: boolean }>`
   height: 6rem;
@@ -102,8 +112,6 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
   align-items: center;
   position: sticky;
   top: 0;
-  width: 100%;
-  z-index: 9999;
   padding-left: 3rem;
   ${HEADER_BREAKPOINT`
     padding: 0.8rem;
