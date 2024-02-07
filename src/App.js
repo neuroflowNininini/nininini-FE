@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './view/pages/Home';
+import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
 import NewPage from './view/pages/category/NewPage';
 import BestPage from './view/pages/category/BestPage';
@@ -25,9 +25,8 @@ import { IoIosArrowUp } from 'react-icons/io';
 import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
-import Header from './components/common/Header';
 import { paths } from './config/paths';
-import { DefaultLayout } from './components/layouts';
+import { DefaultLayout, HomeLayout } from './components/layouts';
 
 function App() {
   const scrollToTop = () => {
@@ -40,8 +39,13 @@ function App() {
         <GlobalStyle />
         <SwiperAd />
         <div id="App">
-          <Header />
           <Routes>
+            <Route element={<HomeLayout />}>
+              <Route
+                path="/"
+                element={<HomePage />}
+              />
+            </Route>
             <Route element={<DefaultLayout />}>
               <Route
                 path="/login"
@@ -50,10 +54,6 @@ function App() {
               <Route
                 path="/signup"
                 element={<SignUp />}
-              />
-              <Route
-                path="/"
-                element={<Home />}
               />
               <Route
                 path="/mypage"
