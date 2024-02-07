@@ -13,7 +13,10 @@ import MenuModal from '~/view/components/MenuModal.js';
 import Divider from '../Divider';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
-export default function Header() {
+interface HeaderProps {
+  isFloat?: boolean;
+}
+export default function Header({ isFloat = false }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -46,7 +49,7 @@ export default function Header() {
   }, []);
 
   return (
-    <Container>
+    <Container isFloat={isFloat}>
       <HeaderEl isScrolled={isScrolled}>
         <Element onClick={openModal}>
           <RxHamburgerMenu
@@ -96,10 +99,15 @@ export default function Header() {
 
 const HEADER_BREAKPOINT = media.md;
 
-const Container = styled.div`
-  height: 100%;
-  position: absolute;
-  top: 0;
+const Container = styled.div<HeaderProps>`
+  ${({ isFloat }) =>
+    isFloat
+      ? `
+    height: 100%;
+    position: absolute;
+    top: 0;
+  `
+      : ''}
   width: 100%;
   z-index: 9999;
 `;

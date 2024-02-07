@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import Header from '../common/Header';
 
-export default function DefaultLayout() {
+export default function HomeLayout() {
   return (
     <>
-      <Header />
+      <Header isFloat={true} />
       <Layout>
         <Outlet />
       </Layout>
@@ -14,11 +14,4 @@ export default function DefaultLayout() {
   );
 }
 
-const Layout = styled.div`
-  ${media.md`
-  max-width: none;
-  `}
-  max-width: ${deviceSizes.md};
-  margin: 0 auto;
-  position: relative;
-`;
+const Layout = styled.div``;
