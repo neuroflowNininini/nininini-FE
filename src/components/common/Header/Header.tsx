@@ -13,10 +13,7 @@ import MenuModal from '~/view/components/MenuModal.js';
 import Divider from '../Divider';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
-interface HeaderProps {
-  isFloat?: boolean;
-}
-export default function Header({ isFloat = false }: HeaderProps) {
+export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -49,70 +46,56 @@ export default function Header({ isFloat = false }: HeaderProps) {
   }, []);
 
   return (
-    <Container isFloat={isFloat}>
-      <HeaderEl isScrolled={isScrolled}>
-        <Element onClick={openModal}>
-          <RxHamburgerMenu
-            size="24"
-            color="black"
+    <HeaderEl isScrolled={isScrolled}>
+      <Element onClick={openModal}>
+        <RxHamburgerMenu
+          size="24"
+          color="black"
+        />
+      </Element>
+      {showModal && (
+        <MenuModal
+          username={'김니니 님'}
+          closeModal={closeModal}
+        />
+      )}
+      <Link to={paths.home()}>
+        <StyledLogo />
+      </Link>
+      <DesktopMenu>
+        <HeaderMenu />
+      </DesktopMenu>
+      <Element2>
+        <button>
+          <PiMagnifyingGlass
+            size="26"
+            onClick={openSearch}
           />
-        </Element>
-        {showModal && (
-          <MenuModal
-            username={'김니니 님'}
-            closeModal={closeModal}
-          />
-        )}
-        <Link to={paths.home()}>
-          <StyledLogo />
+        </button>
+        <Link to={paths.cart()}>
+          <HiOutlineShoppingBag size="26" />
         </Link>
-        <DesktopMenu>
-          <HeaderMenu />
-        </DesktopMenu>
-        <Element2>
-          <button>
-            <PiMagnifyingGlass
-              size="26"
-              onClick={openSearch}
-            />
-          </button>
-          <Link to={paths.cart()}>
-            <HiOutlineShoppingBag size="26" />
+        <TextMenuBox>
+          <Link to={paths.myPage()}>
+            <TextMenuItem>{'MY PAGE'}</TextMenuItem>
           </Link>
-          <TextMenuBox>
-            <Link to={paths.myPage()}>
-              <TextMenuItem>{'MY PAGE'}</TextMenuItem>
-            </Link>
-            <Divider
-              direction="vertical"
-              length="1.5rem"
-              style={{ backgroundColor: theme.colors.gray[800] }}
-            />
-            <TextMenuItem>{'LOGOUT'}</TextMenuItem>
-          </TextMenuBox>
-        </Element2>
-        {showSearch && <Search closeModal={closeSearch} />}
-      </HeaderEl>
-    </Container>
+          <Divider
+            direction="vertical"
+            length="1.5rem"
+            style={{ backgroundColor: theme.colors.gray[800] }}
+          />
+          <TextMenuItem>{'LOGOUT'}</TextMenuItem>
+        </TextMenuBox>
+      </Element2>
+      {showSearch && <Search closeModal={closeSearch} />}
+    </HeaderEl>
   );
 }
 
 const HEADER_BREAKPOINT = media.md;
 
-const Container = styled.div<HeaderProps>`
-  ${({ isFloat }) =>
-    isFloat
-      ? `
-    height: 100%;
-    position: absolute;
-    top: 0;
-  `
-      : ''}
-  width: 100%;
-  z-index: 9999;
-`;
-
 const HeaderEl = styled.header<{ isScrolled: boolean }>`
+  z-index: 9999;
   height: 6rem;
   background-color: ${(props) => (props.isScrolled ? `rgba(255, 255, 255, 0.8)` : `transparent`)};
   display: flex;

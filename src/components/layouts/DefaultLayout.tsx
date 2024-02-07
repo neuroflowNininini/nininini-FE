@@ -5,16 +5,17 @@ import Header from '../common/Header';
 
 export default function DefaultLayout() {
   return (
-    <>
+    <Layout>
       <Header />
-      <Layout>
+      <Container>
         <Outlet />
-      </Layout>
-    </>
+      </Container>
+    </Layout>
   );
 }
 
-const Layout = styled.div`
+const Layout = styled.div``;
+const Container = styled.div`
   ${media.md`
   max-width: none;
   `}
