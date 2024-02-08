@@ -3,13 +3,13 @@ import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { HomeMenu } from '~/components/HomePage/HomeMenu';
+import { RowProductList } from '~/components/HomePage/RowProductList';
 import { bestDummy, newDummy } from '~/shared/dummy.js';
 import c2 from '~/shared/pics/home_swiper/home2.png';
 import f3 from '~/shared/pics/home_swiper/home3.png';
 import e4 from '~/shared/pics/nail/E/E4.jpg';
 import { deviceSizes } from '~/styles/breakpoints';
-import HomeMenu from '~/view/components/HomeMenu.js';
-import RowProductList from '~/view/product/RowProductList.js';
 
 export default function HomePage() {
   return (

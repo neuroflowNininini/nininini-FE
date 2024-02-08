@@ -1,10 +1,15 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
-import theme from '../../shared/theme';
-import { clickAddCart } from '../cart/CartFunc';
+import styled from 'styled-components';
+import { clickAddCart } from '~/view/cart/CartFunc.js';
 
-export default function ProdCard({ cardData, onClick }) {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+/*FIXME - API 명세 확정 후 임시 any 타입 변경하기 */
+interface ProductCardProps {
+  cardData: any;
+}
+
+export default function ProductCard({ cardData }: ProductCardProps) {
   return (
     <CardWrap>
       <Link

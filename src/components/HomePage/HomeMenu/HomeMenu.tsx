@@ -1,8 +1,7 @@
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import theme from '../../shared/theme';
-import { media } from '~/styles/breakpoints';
+import styled from 'styled-components';
 import { paths } from '~/config/paths';
+import { media } from '~/styles/breakpoints';
 
 export default function HomeMenu() {
   return (
