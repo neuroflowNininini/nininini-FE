@@ -134,8 +134,9 @@ const Element2 = styled.div`
 `;
 
 const TextMenuBox = styled.div`
-  /* flex: 1; */
   display: flex;
+  align-items: center;
+  margin-left: 1rem;
   ${HEADER_BREAKPOINT`
     display: none;
   `}
@@ -143,7 +144,7 @@ const TextMenuBox = styled.div`
 
 const TextMenuItem = styled.div`
   font-weight: 600;
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-size: ${({ theme }) => theme.fontSize.small};
 `;
 
 const DesktopMenu = styled.div`

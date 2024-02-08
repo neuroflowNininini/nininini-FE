@@ -13,7 +13,7 @@ interface Size {
 export const deviceSizes: Size = {
   xs: 400,
   sm: 600,
-  md: 960,
+  md: 992,
   lg: 1280,
   xl: 1440,
   xxl: 1920,

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
+import { media } from '~/styles/breakpoints';
 import { MainItems, OtherItems } from './HeaderMenu.const';
 
 export default function HeaderMenu() {
@@ -19,6 +20,7 @@ export default function HeaderMenu() {
       <Divider
         length="2rem"
         direction="vertical"
+        margin="2rem"
       />
       <MenuBox>
         {OtherItems.map(({ label, path }, index) => (
@@ -48,9 +50,15 @@ const MenuBox = styled.div`
 const MainItem = styled.div`
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.large};
+  ${media.lg`
+    font-size: ${({ theme }) => theme.fontSize.medium};
+  `};
 `;
 
 const OtherItem = styled.div`
   font-weight: 200;
-  font-size: ${({ theme }) => theme.fontSize.largemedium};
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  ${media.lg`
+    font-size: ${({ theme }) => theme.fontSize.small};
+  `};
 `;
