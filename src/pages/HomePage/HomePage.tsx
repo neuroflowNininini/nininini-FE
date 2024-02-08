@@ -29,13 +29,13 @@ export default function HomePage() {
         slidesPerView={1}
       >
         <SwiperSlide>
-          <ImageBox src={isMobile ? e4 : 'https://picsum.photos/800/300'} />
+          <ImageBox src={isMobile ? e4 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobile ? f3 : 'https://picsum.photos/800/300'} />
+          <ImageBox src={isMobile ? f3 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobile ? c2 : 'https://picsum.photos/800/300'} />
+          <ImageBox src={isMobile ? c2 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
       </Swiper>
       <Layout>
@@ -56,7 +56,7 @@ export default function HomePage() {
 }
 
 const Layout = styled.div`
-  max-width: ${deviceSizes.md}px;
+  max-width: ${deviceSizes.lg}px;
   margin: 0 auto;
   padding-bottom: 10rem;
 `;
