@@ -1,5 +1,3 @@
-/* @import url('./breakpoints.ts'); */
-
 /* overrides default */
 
 .swiper-button-prev,
@@ -10,7 +8,7 @@
   width: 4rem !important;
   border-radius: 50% !important;
   color: black !important;
-  @media (max-width: 600px) {
+  @media (max-width: 992px) {
     display: none !important;
   }
 }
@@ -23,13 +21,12 @@
 /* custom elements */
 
 .swiper.swiper-container-products {
-  @media (min-width: 960px) {
+  @media (min-width: 992px) {
     padding: 0 4rem;
   }
 }
 
 .swiper-container-hero {
-  @media (min-width: 960px) {
-    max-height: 50rem;
-  }
+  max-width: clamp(50rem, 100vw, 150rem);
+  max-height: clamp(90rem, 60vh, 160rem);
 }

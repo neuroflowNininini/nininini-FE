@@ -92,7 +92,7 @@ export default function Header() {
   );
 }
 
-const HEADER_BREAKPOINT = media.md;
+const HEADER_BREAKPOINT = media.lg;
 
 const HeaderEl = styled.header<{ isScrolled: boolean }>`
   z-index: 9999;
@@ -103,24 +103,24 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
   align-items: center;
   position: sticky;
   top: 0;
-  padding-left: 3rem;
+  padding: 0.8rem;
   ${HEADER_BREAKPOINT`
-    padding: 0.8rem;
+    padding-left: 3rem;
   `}
 `;
 
 const StyledLogo = styled(Logo)`
-  width: 10rem;
+  width: 15rem;
   ${HEADER_BREAKPOINT`
-    width: 15rem;
+    width: 10rem;
   `}
 `;
 
 const Element = styled.div`
-  display: none;
+  flex: 1;
+  display: flex;
   ${HEADER_BREAKPOINT`
-    flex: 1;
-    display: flex;
+    display: none;
   `}
 `;
 
@@ -134,11 +134,11 @@ const Element2 = styled.div`
 `;
 
 const TextMenuBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
+  display: none;
   ${HEADER_BREAKPOINT`
-    display: none;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
   `}
 `;
 
@@ -148,7 +148,8 @@ const TextMenuItem = styled.div`
 `;
 
 const DesktopMenu = styled.div`
+  display: none;
   ${HEADER_BREAKPOINT`
-    display: none;
+    display: block;
   `}
 `;

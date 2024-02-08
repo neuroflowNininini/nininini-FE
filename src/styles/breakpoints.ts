@@ -12,11 +12,11 @@ interface Size {
 
 export const deviceSizes: Size = {
   xs: 400,
-  sm: 600,
-  md: 992,
-  lg: 1280,
-  xl: 1440,
-  xxl: 1920,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1440,
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -30,7 +30,7 @@ export const media = Object.entries(deviceSizes).reduce((acc, [key, value]) => {
   return {
     ...acc,
     [key]: (first: CSSObject | TemplateStringsArray, ...interpolations: any[]) => css`
-      @media (max-width: ${value}px) {
+      @media (min-width: ${value}px) {
         ${css(first, ...interpolations)}
       }
     `,

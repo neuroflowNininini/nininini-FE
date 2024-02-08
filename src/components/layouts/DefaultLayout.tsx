@@ -16,10 +16,10 @@ export default function DefaultLayout() {
 
 const Layout = styled.div``;
 const Container = styled.div`
-  ${media.md`
   max-width: none;
+  ${media.md`
+    max-width: ${deviceSizes.lg}px;
+    margin: 0 auto;
+    position: relative;
   `}
-  max-width: ${deviceSizes.md}px;
-  margin: 0 auto;
-  position: relative;
 `;
