@@ -23,13 +23,13 @@
 /* custom elements */
 
 .swiper.swiper-container-products {
-  @media (min-width: 600px) {
-    padding: 4rem;
+  @media (min-width: 960px) {
+    padding: 0 4rem;
   }
 }
 
 .swiper-container-hero {
-  @media (min-width: 600px) {
+  @media (min-width: 960px) {
     max-height: 50rem;
   }
 }
