@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
-import { media } from '~/styles/breakpoints';
+import { deviceSizes, media } from '~/styles/breakpoints';
 import theme from '~/styles/theme';
 import MenuModal from '~/view/components/MenuModal.js';
 import Divider from '../Divider';
@@ -47,46 +47,48 @@ export default function Header() {
 
   return (
     <HeaderEl isScrolled={isScrolled}>
-      <Element onClick={openModal}>
-        <RxHamburgerMenu
-          size="24"
-          color="black"
-        />
-      </Element>
+      <HeaderContainer>
+        <Element onClick={openModal}>
+          <RxHamburgerMenu
+            size="24"
+            color="black"
+          />
+        </Element>
+        <Link to={paths.home()}>
+          <StyledLogo />
+        </Link>
+        <DesktopMenu>
+          <HeaderMenu />
+        </DesktopMenu>
+        <Element2>
+          <button>
+            <PiMagnifyingGlass
+              size="26"
+              onClick={openSearch}
+            />
+          </button>
+          <Link to={paths.cart()}>
+            <HiOutlineShoppingBag size="26" />
+          </Link>
+          <TextMenuBox>
+            <Link to={paths.myPage()}>
+              <TextMenuItem>{'MY PAGE'}</TextMenuItem>
+            </Link>
+            <Divider
+              direction="vertical"
+              length="1.5rem"
+              style={{ backgroundColor: theme.colors.gray[800] }}
+            />
+            <TextMenuItem>{'LOGOUT'}</TextMenuItem>
+          </TextMenuBox>
+        </Element2>
+      </HeaderContainer>
       {showModal && (
         <MenuModal
           username={'김니니 님'}
           closeModal={closeModal}
         />
       )}
-      <Link to={paths.home()}>
-        <StyledLogo />
-      </Link>
-      <DesktopMenu>
-        <HeaderMenu />
-      </DesktopMenu>
-      <Element2>
-        <button>
-          <PiMagnifyingGlass
-            size="26"
-            onClick={openSearch}
-          />
-        </button>
-        <Link to={paths.cart()}>
-          <HiOutlineShoppingBag size="26" />
-        </Link>
-        <TextMenuBox>
-          <Link to={paths.myPage()}>
-            <TextMenuItem>{'MY PAGE'}</TextMenuItem>
-          </Link>
-          <Divider
-            direction="vertical"
-            length="1.5rem"
-            style={{ backgroundColor: theme.colors.gray[800] }}
-          />
-          <TextMenuItem>{'LOGOUT'}</TextMenuItem>
-        </TextMenuBox>
-      </Element2>
       {showSearch && <Search closeModal={closeSearch} />}
     </HeaderEl>
   );
@@ -98,15 +100,22 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
   z-index: 9999;
   height: 6rem;
   background-color: ${(props) => (props.isScrolled ? `rgba(255, 255, 255, 0.8)` : `transparent`)};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: sticky;
   top: 0;
-  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${HEADER_BREAKPOINT`
     padding-left: 3rem;
   `}
+`;
+
+const HeaderContainer = styled.div`
+  width: ${deviceSizes.xxl}px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
 `;
 
 const StyledLogo = styled(Logo)`
