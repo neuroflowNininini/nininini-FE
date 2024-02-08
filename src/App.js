@@ -1,4 +1,5 @@
 import './App.css';
+import '~/styles/swiper.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
@@ -20,19 +21,15 @@ import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
 import CartPage from './view/pages/CartPage';
 import ADPage from './view/components/ADPage';
-import styled, { ThemeProvider } from 'styled-components';
-import { IoIosArrowUp } from 'react-icons/io';
+import { ThemeProvider } from 'styled-components';
 import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import { paths } from './config/paths';
 import { DefaultLayout, HomeLayout } from './components/layouts';
+import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 
 function App() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -129,11 +126,7 @@ function App() {
               />
             </Route>
           </Routes>
-          <GoTop onClick={scrollToTop}>
-            <div>
-              <IoIosArrowUp size={22} />
-            </div>
-          </GoTop>
+          <FixedButtonsGroup />
         </div>
       </ThemeProvider>
     </BrowserRouter>
@@ -141,19 +134,3 @@ function App() {
 }
 
 export default App;
-
-const GoTop = styled.div`
-  position: fixed;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 36px;
-  right: 20px;
-  bottom: 120px;
-  border-radius: 5px;
-  border: solid 1px #909090;
-  background-color: white;
-  opacity: 0.8;
-`;
