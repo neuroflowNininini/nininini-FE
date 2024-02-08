@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import styled from 'styled-components';
 import ProdCard from './ProdCard';
 import { Pagination, Navigation, FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -25,16 +23,16 @@ export default function RowProductList({ dummy }) {
           },
         }}
       >
-        <SwiperSlide className="swiper-item-product">
+        <SwiperSlide>
           <ProdCard cardData={dummy[0]} />
         </SwiperSlide>
-        <SwiperSlide className="swiper-item-product">
+        <SwiperSlide>
           <ProdCard cardData={dummy[1]} />
         </SwiperSlide>
-        <SwiperSlide className="swiper-item-product">
+        <SwiperSlide>
           <ProdCard cardData={dummy[2]} />
         </SwiperSlide>
-        <SwiperSlide className="swiper-item-product">
+        <SwiperSlide>
           <ProdCard cardData={dummy[3]} />
         </SwiperSlide>
       </Swiper>
