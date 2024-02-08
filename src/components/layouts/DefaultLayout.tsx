@@ -19,7 +19,7 @@ const Container = styled.div`
   ${media.md`
   max-width: none;
   `}
-  max-width: ${deviceSizes.md};
+  max-width: ${deviceSizes.md}px;
   margin: 0 auto;
   position: relative;
 `;

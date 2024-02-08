@@ -49,7 +49,7 @@ export default function HomePage() {
 }
 
 const Container = styled.div`
-  max-width: ${deviceSizes.md};
+  max-width: ${deviceSizes.md}px;
   margin: 0 auto;
 `;
 
