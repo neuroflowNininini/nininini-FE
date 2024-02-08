@@ -33,14 +33,15 @@ export default function ProdCard({ cardData, onClick }) {
 const CardWrap = styled.div`
   display: inline-block;
   padding: 0px 10px;
-  margin-bottom: 20px;
 `;
 
 const ImageBox = styled.img`
-  width: 50vw;
-  height: 30vh;
+  width: 100%;
+  margin: 0 auto;
   object-fit: cover;
+  object-position: bottom;
 `;
+
 const BlockWrap = styled.div`
   margin: 15px 0px 0px 0px;
   padding: 0px 5px 0px 5px;

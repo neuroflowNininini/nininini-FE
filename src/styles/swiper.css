@@ -1,0 +1,35 @@
+/* @import url('./breakpoints.ts'); */
+
+/* overrides default */
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #fff;
+  opacity: 0.6;
+  height: 4rem !important;
+  width: 4rem !important;
+  border-radius: 50% !important;
+  color: black !important;
+  @media (max-width: 600px) {
+    display: none !important;
+  }
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+}
+
+/* custom elements */
+
+.swiper.swiper-container-products {
+  @media (min-width: 600px) {
+    padding: 4rem;
+  }
+}
+
+.swiper-container-hero {
+  @media (min-width: 600px) {
+    max-height: 50rem;
+  }
+}

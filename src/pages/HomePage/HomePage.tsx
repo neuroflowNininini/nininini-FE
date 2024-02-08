@@ -15,6 +15,7 @@ export default function HomePage() {
   return (
     <>
       <Swiper
+        className="swiper-container-hero"
         pagination={true}
         modules={[Pagination, Autoplay]}
         spaceBetween={0}

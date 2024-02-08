@@ -1,24 +1,43 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import ProdCard from './ProdCard';
+import { Pagination, Navigation, FreeMode } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { deviceSizes } from '~/styles/breakpoints';
 
 export default function RowProductList({ dummy }) {
   return (
     <>
-      <ProductListWrap>
-        <ProdCard cardData={dummy[0]} />
-        <ProdCard cardData={dummy[1]} />
-        <ProdCard cardData={dummy[2]} />
-        <ProdCard cardData={dummy[3]} />
-      </ProductListWrap>
+      <Swiper
+        className={'swiper-container-products'}
+        modules={[Pagination, Navigation, FreeMode]}
+        spaceBetween={0}
+        slidesPerView={1.8}
+        freeMode={true}
+        navigation={true}
+        breakpoints={{
+          [deviceSizes.sm]: {
+            slidesPerView: 3,
+            freeMode: false,
+          },
+        }}
+      >
+        <SwiperSlide className="swiper-item-product">
+          <ProdCard cardData={dummy[0]} />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-item-product">
+          <ProdCard cardData={dummy[1]} />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-item-product">
+          <ProdCard cardData={dummy[2]} />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-item-product">
+          <ProdCard cardData={dummy[3]} />
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 }
-
-const ProductListWrap = styled.div`
-  display: flex;
-  overflow: auto;
-  overflow-x: auto;
-  margin-top: 20px;
-  margin-bottom: 30px;
-`;
