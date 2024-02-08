@@ -9,7 +9,7 @@ import { bestDummy, newDummy } from '~/shared/dummy.js';
 import c2 from '~/shared/pics/home_swiper/home2.png';
 import f3 from '~/shared/pics/home_swiper/home3.png';
 import e4 from '~/shared/pics/nail/E/E4.jpg';
-import { deviceSizes } from '~/styles/breakpoints';
+import { deviceSizes, media } from '~/styles/breakpoints';
 
 export default function HomePage() {
   return (
@@ -36,22 +36,27 @@ export default function HomePage() {
           <ImageBox src={c2} />
         </SwiperSlide>
       </Swiper>
-      <Container>
+      <Layout>
         <HomeMenu />
-        <Box>
-          <TitleWrap>이 달의 신상품</TitleWrap>
-          <RowProductList dummy={newDummy} />
-          <TitleWrap>주간 베스트</TitleWrap>
-          <RowProductList dummy={bestDummy} />
-        </Box>
-      </Container>
+        <RowContainer>
+          <div>
+            <TitleWrap>이 달의 신상품</TitleWrap>
+            <RowProductList dummy={newDummy} />
+          </div>
+          <div>
+            <TitleWrap>주간 베스트</TitleWrap>
+            <RowProductList dummy={bestDummy} />
+          </div>
+        </RowContainer>
+      </Layout>
     </>
   );
 }
 
-const Container = styled.div`
+const Layout = styled.div`
   max-width: ${deviceSizes.md}px;
   margin: 0 auto;
+  padding-bottom: 10rem;
 `;
 
 const ImageBox = styled.img`
@@ -60,12 +65,20 @@ const ImageBox = styled.img`
   object-fit: cover;
   object-position: bottom;
 `;
-const Box = styled.div`
-  height: 500px;
+
+const RowContainer = styled.div`
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 `;
+
 const TitleWrap = styled.div`
-  text-align: start;
-  margin: 20px 0px 0px 10px;
-  font-weight: bolder;
-  padding-top: 20px;
+  padding: 2rem 4rem;
+  font-size: ${({ theme }) => theme.fontSize.large};
+  ${media.md`
+    padding: 2rem 1rem;
+    font-size: ${({ theme }) => theme.fontSize.largemedium};
+  `}
+  font-weight: 700;
 `;

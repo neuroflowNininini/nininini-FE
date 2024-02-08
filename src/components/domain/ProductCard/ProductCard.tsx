@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
 import styled from 'styled-components';
+import { media } from '~/styles/breakpoints';
 import { clickAddCart } from '~/view/cart/CartFunc.js';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -11,54 +12,67 @@ interface ProductCardProps {
 
 export default function ProductCard({ cardData }: ProductCardProps) {
   return (
-    <CardWrap>
-      <Link
-        to={`/product/${cardData.id}`}
-        style={{ textDecoration: 'none', color: 'black' }}
-      >
+    <Container>
+      <Link to={`/product/${cardData.id}`}>
         <ImageBox src={cardData.pics[0]} />
       </Link>
-      <BlockWrap>
-        <Link
-          to={`/product/${cardData.id}`}
-          style={{ textDecoration: 'none', color: 'black' }}
-        >
-          <NameWrap>{cardData.name}</NameWrap>
-        </Link>
+      <InfoBox>
+        <TextSection>
+          <Link to={`/product/${cardData.id}`}>
+            <Title>{cardData.name}</Title>
+          </Link>
+          <Description>{cardData.cost}원</Description>
+        </TextSection>
         <BsBag
+          className={'bag-icon'}
           onClick={() => clickAddCart(cardData.id, 1)}
           size="20"
           color="black"
         />
-      </BlockWrap>
-      <CostWrap>{cardData.cost}원</CostWrap>
-    </CardWrap>
+      </InfoBox>
+    </Container>
   );
 }
-const CardWrap = styled.div`
-  display: inline-block;
-  padding: 0px 10px;
+const Container = styled.div`
+  padding: 0 1rem;
 `;
 
 const ImageBox = styled.img`
   width: 100%;
   margin: 0 auto;
   object-fit: cover;
-  object-position: bottom;
 `;
 
-const BlockWrap = styled.div`
-  margin: 15px 0px 0px 0px;
-  padding: 0px 5px 0px 5px;
+const InfoBox = styled.div`
+  margin: 1.5rem 0;
   display: flex;
   justify-content: space-between;
+
+  .bag-icon {
+    margin-right: 0.7rem;
+  }
 `;
 
-const NameWrap = styled.div`
-  font-weight: 600;
-`;
-const CostWrap = styled.div`
+const TextSection = styled.div`
+  width: 90%;
   display: flex;
-  padding: 5px;
-  font-weight: 400;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+const Title = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  ${media.xs`
+    font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  `}
+`;
+
+const Description = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  ${media.xs`
+    font-size: ${({ theme }) => theme.fontSize.small};
+  `}
 `;
