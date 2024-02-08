@@ -60,19 +60,19 @@ const TextSection = styled.div`
   gap: 0.5rem;
 `;
 const Title = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-size: ${({ theme }) => theme.fontSize.smallmedium};
   font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   ${media.xs`
-    font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  font-size: ${({ theme }) => theme.fontSize.medium};
   `}
 `;
 
 const Description = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  font-size: ${({ theme }) => theme.fontSize.small};
   ${media.xs`
-    font-size: ${({ theme }) => theme.fontSize.small};
+    font-size: ${({ theme }) => theme.fontSize.smallmedium};
   `}
 `;

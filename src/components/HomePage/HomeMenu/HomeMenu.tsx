@@ -30,7 +30,7 @@ export default function HomeMenu() {
 
 const Menu = styled.div`
   display: none;
-  ${media.md`
+  ${media.lg`
     display: grid;
     grid-template-rows: repeat(2);
     grid-template-columns: repeat(3, 1fr);

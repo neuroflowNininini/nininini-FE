@@ -63,9 +63,8 @@ const Layout = styled.div`
 
 const ImageBox = styled.img`
   width: 100vw;
-  height: 64vh;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center center;
 `;
 
 const RowContainer = styled.div`
@@ -76,11 +75,11 @@ const RowContainer = styled.div`
 `;
 
 const TitleWrap = styled.div`
-  padding: 2rem 4rem;
-  font-size: ${({ theme }) => theme.fontSize.large};
-  ${media.md`
-    padding: 2rem 1rem;
-    font-size: ${({ theme }) => theme.fontSize.largemedium};
+  padding: 2rem 1rem;
+  font-size: ${({ theme }) => theme.fontSize.largemedium};
+  ${media.lg`
+    padding: 2rem 4rem;
+    font-size: ${({ theme }) => theme.fontSize.large};
   `}
   font-weight: 700;
 `;
