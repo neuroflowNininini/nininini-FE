@@ -81,6 +81,7 @@ export default function BasicInfo() {
                 variant="reversed"
                 width="15rem"
                 height="100%"
+                fontSize={'smallmedium'}
                 style={{ marginLeft: '3px' }}
               >
                 중복확인

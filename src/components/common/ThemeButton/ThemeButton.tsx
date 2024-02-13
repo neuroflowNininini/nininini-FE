@@ -1,4 +1,5 @@
 import styled, { CSSProperties } from 'styled-components';
+import theme from '~/styles/theme';
 
 interface ThemeButtonProps {
   children: string;
@@ -6,6 +7,7 @@ interface ThemeButtonProps {
   variant?: 'default' | 'reversed';
   width?: string;
   height?: string;
+  fontSize?: keyof typeof theme.fontSize;
   style?: CSSProperties;
 }
 
@@ -15,6 +17,7 @@ export default function ThemeButton({
   variant = 'default',
   width = '100%',
   height = '5rem',
+  fontSize = 'medium',
   style,
 }: ThemeButtonProps) {
   return (
@@ -23,6 +26,7 @@ export default function ThemeButton({
       variant={variant}
       width={width}
       height={height}
+      fontSize={fontSize}
       style={{ ...style }}
     >
       {children}
@@ -30,14 +34,14 @@ export default function ThemeButton({
   );
 }
 
-const Button = styled.button<Pick<ThemeButtonProps, 'variant' | 'width' | 'height'>>`
+const Button = styled.button<Pick<ThemeButtonProps, 'variant' | 'width' | 'height' | 'fontSize'>>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border: 1px solid ${({ theme }) => theme.colors.gray['900']};
-  font-size: ${({ theme }) => theme.fontSize.medium};
+  font-size: ${({ fontSize }) => fontSize};
   background-color: ${({ theme }) => theme.colors.gray['900']};
   color: ${({ theme }) => theme.colors.white['100']};
   ${({ theme, variant }) =>
