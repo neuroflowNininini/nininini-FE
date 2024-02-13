@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Stepper } from '~/components/common/Stepper';
+import Divider from '~/components/common/Divider';
+import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { SignUpHeader } from '../SignUpHeader';
 
@@ -11,8 +12,8 @@ export default function BasicInfo() {
   const [pwConfirm, setPwConfirm] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [sex, setSex] = useState('');
   const [birth, setBirth] = useState('');
+  const [sex, setSex] = useState<number>();
 
   const handleIdChange = (e) => {
     const text = e.target.value;
@@ -36,6 +37,9 @@ export default function BasicInfo() {
   };
   const handleSexChange = (e) => {
     const text = e.target.value;
+    if (text.length > 1) {
+      return;
+    }
     setSex(text);
   };
   const handleBirthChange = (e) => {
@@ -55,7 +59,7 @@ export default function BasicInfo() {
     };
     navigate('/likedesign', { state: { signupInfo: signupInfo } });
   };
-  const [startDate, setStartDate] = useState(new Date());
+
   return (
     <Container>
       <TopWrap>
@@ -63,165 +67,110 @@ export default function BasicInfo() {
           totalSteps={4}
           step={2}
         />
-        <Hang>
-          <Label>아이디</Label>
+        <FormWrap onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
           <InputBtnWrap>
-            <Input1
-              value={id} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-              onChange={handleIdChange} // 입력 필드 값이 변경될 때 핸들러 호출
-            />
-            <ThemeButton
-              onClick={() => {}}
-              variant="reversed"
-              style={{ width: '1rem', color: 'red' }}
-            >
-              중복확인
-            </ThemeButton>
+            <Label>아이디</Label>
+            <InputBtnWrap>
+              <Input
+                value={id} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+                onChange={handleIdChange} // 입력 필드 값이 변경될 때 핸들러 호출
+              />
+              {/*TODO - 중복확인 기능 */}
+              <ThemeButton
+                onClick={() => {}}
+                variant="reversed"
+                width="15rem"
+                height="100%"
+                style={{ marginLeft: '3px' }}
+              >
+                중복확인
+              </ThemeButton>
+            </InputBtnWrap>
           </InputBtnWrap>
-        </Hang>
-        <Hang>
-          <Label>비밀번호</Label>
-          <Input
-            value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            type="password"
-            onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-        <Hang>
-          <div>
-            <Label>비밀번호</Label>
-            <Label>확인</Label>
-          </div>
-          <Input
-            value={pwConfirm} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            type="password"
-            onChange={handlePwConfirmChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-        <Hang>
-          <Label>이름</Label>
-          <Input
-            value={name} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            onChange={handleNameChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-        <Hang>
-          <Label>이메일</Label>
-          <Input
-            value={email} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            onChange={handleEmailChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-        <Hang>
-          <Label>성별</Label>
-          <InputSex
-            onChange={handleSexChange}
-            type="radio"
-            value="woman"
-          />
-          <Wrap1>여성</Wrap1>
-          <InputSex
-            onChange={handleSexChange}
-            type="radio"
-            value="man"
-          />
-          <Wrap1>남성</Wrap1>
-        </Hang>
-        <Hang>
-          <Label>생년월일</Label>
-          {/* <DatePicker
-            dateFormat="yyyy.MM.dd"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)} /> */}
-          <InputWrap>
-            <InputY
-              onChange={handleBirthChange}
-              placeholder="yyyy.mm.dd"
+          <InputBtnWrap>
+            <InputBtnWrap>
+              <Label>비밀번호</Label>
+              <Input
+                value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+                type="password"
+                onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
+              />
+            </InputBtnWrap>
+          </InputBtnWrap>
+          <InputBtnWrap>
+            <Label>비밀번호 확인</Label>
+            <Input
+              value={pwConfirm} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+              type="password"
+              onChange={handlePwConfirmChange} // 입력 필드 값이 변경될 때 핸들러 호출
             />
-            {/* <Wrap1>년</Wrap1> */}
-            {/* <InputMD /><Wrap1>월</Wrap1> */}
-            {/* <InputMD /><Wrap1>일</Wrap1> */}
-          </InputWrap>
-        </Hang>
+          </InputBtnWrap>
+          <InputBtnWrap>
+            <Label>이름</Label>
+            <Input
+              value={name} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+              onChange={handleNameChange} // 입력 필드 값이 변경될 때 핸들러 호출
+            />
+          </InputBtnWrap>
+          <InputBtnWrap>
+            <Label>이메일</Label>
+            <Input
+              value={email} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+              onChange={handleEmailChange} // 입력 필드 값이 변경될 때 핸들러 호출
+            />
+          </InputBtnWrap>
+          <InputBtnWrap>
+            <Label>주민등록번호</Label>
+            <Input
+              value={birth}
+              onChange={handleBirthChange}
+              placeholder="주민번호 앞 6자리"
+              style={{ width: '15rem' }}
+            />
+            <Divider
+              length="2rem"
+              margin="0 .7rem"
+            />
+            <Input
+              value={sex}
+              onChange={handleSexChange}
+              style={{ width: '5rem' }}
+            />
+            <Text>xxxxxx</Text>
+          </InputBtnWrap>
+        </FormWrap>
       </TopWrap>
       <ThemeButton onClick={handleContinue}>회원가입</ThemeButton>
     </Container>
   );
 }
-const Container = styled.div`
-  padding-bottom: 80px;
-`;
-const InputWrap = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const Wrap1 = styled.div`
-  margin-left: 3px;
-  margin-right: 6px;
-`;
-
-const Pick = styled.div`
-  border: solid 1px;
-`;
-
-const InputSex = styled.input``;
-const InputY = styled.input`
-  width: 70px;
-  border: solid 1px rgb(218, 218, 218);
-  height: 30px;
-  padding: 0px 10px;
-`;
-const InputMD = styled.input`
-  width: 30px;
-  border: solid 1px rgb(218, 218, 218);
-  height: 30px;
-  padding: 0px 10px;
-`;
-
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px;
-  width: 90px;
-  height: 31px;
-  margin-left: 5px;
-  flex-shrink: 0;
-`;
+const Container = styled.div``;
 
 const TopWrap = styled.div`
-  bottom: 49px;
-  padding: 60px 20px 0px 20px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 7rem;
 `;
-const Hang = styled.div`
+
+const FormWrap = styled.form`
   display: flex;
-  padding: 5px 0px;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const InputBtnWrap = styled.div`
+  display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 4.5rem;
 `;
 
 const Label = styled.div`
-  font-weight: 700;
   font-size: ${({ theme }) => theme.fontSize.smallmedium};
-  /* width: 60px; */
+  min-width: 25%;
 `;
-const InputBtnWrap = styled.div`
-  display: flex;
-  width: calc(100vw - 90px);
-`;
-const Input = styled.input`
-  height: 30px;
-  padding: 0px 10px;
-  border: solid 1px rgb(218, 218, 218);
-  flex-grow: 1;
-  margin: 0;
-`;
-const Input1 = styled.input`
-  height: 30px;
-  padding: 0px 10px;
-  border: solid 1px rgb(218, 218, 218);
-  width: calc(80vw - 150px);
-  margin: 0;
+
+const Text = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  margin-left: 1rem;
 `;

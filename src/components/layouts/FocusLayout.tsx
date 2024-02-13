@@ -16,10 +16,10 @@ export default function FocusLayout() {
 
 const Layout = styled.div``;
 const Container = styled.div`
-  max-width: none;
+  max-width: 90%;
+  margin: 0 auto;
+  padding-top: 10vh;
   ${media.sm`
-    max-width: 45rem;
-    margin: 0 auto;
-    position: relative;
+    width: 45rem;
   `}
 `;

@@ -1,10 +1,11 @@
 import styled, { CSSProperties } from 'styled-components';
 
-type ButtonVariant = 'default' | 'reversed';
 interface ThemeButtonProps {
   children: string;
   onClick: () => void;
-  variant?: ButtonVariant;
+  variant?: 'default' | 'reversed';
+  width?: string;
+  height?: string;
   style?: CSSProperties;
 }
 
@@ -12,12 +13,16 @@ export default function ThemeButton({
   children,
   onClick,
   variant = 'default',
-  ...style
+  width = '100%',
+  height = '5rem',
+  style,
 }: ThemeButtonProps) {
   return (
     <Button
       onclick={onClick}
       variant={variant}
+      width={width}
+      height={height}
       style={{ ...style }}
     >
       {children}
@@ -25,12 +30,12 @@ export default function ThemeButton({
   );
 }
 
-const Button = styled.button<{ variant: ButtonVariant }>`
+const Button = styled.button<Pick<ThemeButtonProps, 'variant' | 'width' | 'height'>>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 5rem;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   border: 1px solid ${({ theme }) => theme.colors.gray['900']};
   font-size: ${({ theme }) => theme.fontSize.medium};
   background-color: ${({ theme }) => theme.colors.gray['900']};
