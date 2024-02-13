@@ -1,10 +1,9 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import theme from '../../shared/theme';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
-import { useNavigate } from 'react-router-dom';
-export default function SignUp() {
+export default function SignUpPage() {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
@@ -146,7 +145,6 @@ const InputWrap = styled.div`
   align-items: center;
 `;
 const Wrap1 = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
   margin-left: 3px;
   margin-right: 6px;
 `;
@@ -157,14 +155,12 @@ const Pick = styled.div`
 
 const InputSex = styled.input``;
 const InputY = styled.input`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
   width: 70px;
   border: solid 1px rgb(218, 218, 218);
   height: 30px;
   padding: 0px 10px;
 `;
 const InputMD = styled.input`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
   width: 30px;
   border: solid 1px rgb(218, 218, 218);
   height: 30px;
@@ -172,7 +168,6 @@ const InputMD = styled.input`
 `;
 
 const Button = styled.div`
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,7 +196,6 @@ const Hang = styled.div`
 
 const Tag = styled.div`
   display: flex;
-  font-size: ${(props) => theme.fontSize[props.size] || theme.fontSize.xsmall};
   text-align: left;
   font-weight: 700;
   width: 60px;

@@ -9,4 +9,5 @@ export const paths = {
   faq: () => `/faq`,
   myPage: () => `/mypage`,
   cart: () => `/cart`,
+  signUp: () => `/sign-up`,
 };
