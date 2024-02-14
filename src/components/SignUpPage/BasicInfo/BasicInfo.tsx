@@ -1,63 +1,46 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
 import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { BasicInfo } from '~/types/basicInfo';
 import { SignUpHeader } from '../SignUpHeader';
 
-export default function BasicInfo() {
+interface BasicInfoProps {
+  onNext: (args: Omit<BasicInfo, 'tags' | 'ai_measure'>) => void;
+}
+export default function BasicInfo({ onNext }: BasicInfoProps) {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
   const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [birth, setBirth] = useState('');
-  const [sex, setSex] = useState<number>();
+  const [sex, setSex] = useState('');
 
-  const handleIdChange = (e) => {
-    const text = e.target.value;
-    setId(text);
-  };
-  const handlePwChange = (e) => {
-    const text = e.target.value;
-    setPw(text);
-  };
-  const handlePwConfirmChange = (e) => {
-    const text = e.target.value;
-    setPwConfirm(text);
-  };
-  const handleNameChange = (e) => {
-    const text = e.target.value;
-    setName(text);
-  };
-  const handleEmailChange = (e) => {
-    const text = e.target.value;
-    setEmail(text);
-  };
-  const handleSexChange = (e) => {
+  const handleSexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const text = e.target.value;
     if (text.length > 1) {
       return;
     }
     setSex(text);
   };
-  const handleBirthChange = (e) => {
-    const text = e.target.value;
-    setBirth(text);
-  };
-  const navigate = useNavigate();
+
   const handleContinue = () => {
-    // 특정 링크로 이동
-    const signupInfo = {
-      id: id,
-      pw: pwConfirm,
+    if (pwConfirm !== pw) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+    const basicInfo = {
+      user_id: id,
+      user_pw: pw,
       name: name,
+      phone_number: phoneNumber,
       email: email,
-      sex: sex,
-      birth: birth,
+      birth_sex: birth + sex,
     };
-    navigate('/likedesign', { state: { signupInfo: signupInfo } });
+    onNext(basicInfo);
   };
 
   return (
@@ -67,13 +50,13 @@ export default function BasicInfo() {
           totalSteps={4}
           step={2}
         />
-        <FormWrap onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}>
+        <FormWrap>
           <InputBtnWrap>
             <Label>아이디</Label>
             <InputBtnWrap>
               <Input
                 value={id} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-                onChange={handleIdChange} // 입력 필드 값이 변경될 때 핸들러 호출
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setId(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
               />
               {/*TODO - 중복확인 기능 */}
               <ThemeButton
@@ -94,7 +77,7 @@ export default function BasicInfo() {
               <Input
                 value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
                 type="password"
-                onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPw(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
               />
             </InputBtnWrap>
           </InputBtnWrap>
@@ -103,28 +86,35 @@ export default function BasicInfo() {
             <Input
               value={pwConfirm} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
               type="password"
-              onChange={handlePwConfirmChange} // 입력 필드 값이 변경될 때 핸들러 호출
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPwConfirm(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
             />
           </InputBtnWrap>
           <InputBtnWrap>
             <Label>이름</Label>
             <Input
               value={name} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-              onChange={handleNameChange} // 입력 필드 값이 변경될 때 핸들러 호출
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+            />
+          </InputBtnWrap>
+          <InputBtnWrap>
+            <Label>연락처</Label>
+            <Input
+              value={phoneNumber} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
             />
           </InputBtnWrap>
           <InputBtnWrap>
             <Label>이메일</Label>
             <Input
               value={email} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-              onChange={handleEmailChange} // 입력 필드 값이 변경될 때 핸들러 호출
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
             />
           </InputBtnWrap>
           <InputBtnWrap>
             <Label>주민등록번호</Label>
             <Input
               value={birth}
-              onChange={handleBirthChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBirth(e.target.value)}
               placeholder="주민번호 앞 6자리"
               style={{ width: '15rem' }}
             />
@@ -134,14 +124,14 @@ export default function BasicInfo() {
             />
             <Input
               value={sex}
-              onChange={handleSexChange}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSexChange(e)}
               style={{ width: '5rem' }}
             />
             <Text>xxxxxx</Text>
           </InputBtnWrap>
         </FormWrap>
       </TopWrap>
-      <ThemeButton onClick={handleContinue}>회원가입</ThemeButton>
+      <ThemeButton onClick={handleContinue}>다음</ThemeButton>
     </Container>
   );
 }
@@ -153,7 +143,7 @@ const TopWrap = styled.div`
   margin-bottom: 7rem;
 `;
 
-const FormWrap = styled.form`
+const FormWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
