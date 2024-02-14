@@ -34,7 +34,9 @@ export default function ThemeButton({
   );
 }
 
-const Button = styled.button<Pick<ThemeButtonProps, 'variant' | 'width' | 'height' | 'fontSize'>>`
+export const Button = styled.button<
+  Pick<ThemeButtonProps, 'variant' | 'width' | 'height' | 'fontSize'>
+>`
   display: flex;
   justify-content: center;
   align-items: center;
