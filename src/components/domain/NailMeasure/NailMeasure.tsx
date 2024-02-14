@@ -36,16 +36,18 @@ export default function NailMeasure() {
               src={left}
             />
             <Button>
-              <FaCamera color={theme.colors.gray['500']} />
-              <span>왼손 측정하기</span>
-              <CameraInput
-                type="file"
-                id="camera"
-                name="camera"
-                capture="camera"
-                accept="image/*"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'left')}
-              />
+              <label htmlFor={'camera-left'}>
+                <FaCamera color={theme.colors.gray['500']} />
+                <span>왼손 측정하기</span>
+                <CameraInput
+                  type="file"
+                  id="camera-left"
+                  name="camera"
+                  capture="camera"
+                  accept="image/*"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'left')}
+                />
+              </label>
             </Button>
           </SlideContainer>
         </SwiperSlide>
@@ -56,16 +58,20 @@ export default function NailMeasure() {
               src={right}
             />
             <Button>
-              <FaCamera color={theme.colors.gray['500']} />
-              <span>오른손 측정하기</span>
-              <CameraInput
-                type="file"
-                id="camera"
-                name="camera"
-                capture="camera"
-                accept="image/*"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'right')}
-              />
+              <label htmlFor={'camera-right'}>
+                <FaCamera color={theme.colors.gray['500']} />
+                <span>오른손 측정하기</span>
+                <CameraInput
+                  type="file"
+                  id="camera-right"
+                  name="camera"
+                  capture="camera"
+                  accept="image/*"
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFileChange(e, 'right')
+                  }
+                />
+              </label>
             </Button>
           </SlideContainer>
         </SwiperSlide>
@@ -83,7 +89,7 @@ const SlideContainer = styled.div`
 `;
 const Img = styled.img`
   border: solid 1px;
-  width: 40rem;
+  max-width: 40rem;
 `;
 
 const Container = styled.div`
@@ -96,15 +102,7 @@ const Container = styled.div`
 const Button = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.gray['400']};
   padding: 1rem 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 1rem;
-  background-color: white;
-  margin: auto;
-  &:hover {
-    opacity: 80%;
-  }
   span {
     margin-left: 1rem;
     color: ${({ theme }) => theme.colors.gray['500']};
@@ -112,11 +110,5 @@ const Button = styled.button`
 `;
 
 const CameraInput = styled.input`
-  position: absolute;
-  left: 40vw;
-  border: solid 1px;
-  width: 20vw;
-  padding: 10px 0px;
-  z-index: 999;
-  opacity: 0;
+  display: none;
 `;
