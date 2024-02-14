@@ -25,7 +25,7 @@ export default function NailMeasure() {
       <Swiper
         pagination={true}
         modules={[Pagination]}
-        spaceBetween={0}
+        spaceBetween={20}
         rewind={true}
         slidesPerView={1}
       >
@@ -80,6 +80,13 @@ export default function NailMeasure() {
   );
 }
 
+const Container = styled.div`
+  border: solid 1px ${({ theme }) => theme.colors.gray['300']};
+  border-radius: 2rem;
+  width: 100%;
+  padding: 2rem;
+`;
+
 const SlideContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -87,16 +94,10 @@ const SlideContainer = styled.div`
   gap: 2rem;
   padding-bottom: 3rem;
 `;
+
 const Img = styled.img`
   border: solid 1px;
-  max-width: 40rem;
-`;
-
-const Container = styled.div`
-  border: solid 1px ${({ theme }) => theme.colors.gray['300']};
-  border-radius: 2rem;
   width: 100%;
-  padding: 2rem 0;
 `;
 
 const Button = styled.button`
