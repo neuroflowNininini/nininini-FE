@@ -1,10 +1,9 @@
-import styled from 'styled-components';
-import theme from '../../shared/theme';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Checkbox from '../components/element/Checkbox';
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import Checkbox from '~/view/components/element/Checkbox.js';
 
-export default function LikeDesign() {
+export default function InterestTags() {
   const location = useLocation();
   const { state } = location;
   const signupInfo = state.signupInfo;
@@ -46,36 +45,42 @@ export default function LikeDesign() {
           <Checkbox
             checked={fall}
             onChange={setFall}
+            disabled={false}
           >
             가을 느낌 낭낭한
           </Checkbox>
           <Checkbox
             checked={warm}
             onChange={setWarm}
+            disabled={false}
           >
             따뜻한 색감 위주의
           </Checkbox>
           <Checkbox
             checked={cute}
             onChange={setCute}
+            disabled={false}
           >
             귀엽고 알록달록한
           </Checkbox>
           <Checkbox
             checked={chic}
             onChange={setChic}
+            disabled={false}
           >
             시크하고 도시적인
           </Checkbox>
           <Checkbox
             checked={simple}
             onChange={setSimple}
+            disabled={false}
           >
             심플하고 자연스러운
           </Checkbox>
           <Checkbox
             checked={unique}
             onChange={setUnique}
+            disabled={false}
           >
             유니크하고 독창적인
           </Checkbox>

@@ -14,7 +14,6 @@ import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
 import Login from './view/pages/Login';
 import { SignUpPage } from './pages/SignUpPage';
-import LikeDesign from './view/signup/LikeDesign';
 import NailMeasure from './view/signup/NailMeasure';
 import SignUpDone from './view/signup/SignUpDone';
 import Notice from './view/pages/Notice';
@@ -97,10 +96,6 @@ function App() {
               <Route
                 path="/orderdone"
                 element={<OrderEnd />}
-              />
-              <Route
-                path="/likedesign"
-                element={<LikeDesign />}
               />
               <Route
                 path="/nailmeasure"
