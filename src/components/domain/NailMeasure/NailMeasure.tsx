@@ -1,16 +1,13 @@
-import styled from 'styled-components';
-import theme from '../../shared/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
-import ai from '../../shared/pics/signup_ai.png';
-import ImageUploader from './ImageUploader';
+import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper';
-import ImageUploader1 from './ImageUploader1';
-import left from '../../shared/pics/default_left.png';
-import right from '../../shared/pics/default_right.png';
+import left from '~/shared/pics/default_left.png';
+import right from '~/shared/pics/default_right.png';
+import ImageUploader from '~/view/signup/ImageUploader.js';
+import ImageUploader1 from '~/view/signup/ImageUploader1.js';
 
 export default function NailMeasure() {
   const location = useLocation();
