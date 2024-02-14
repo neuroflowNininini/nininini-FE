@@ -27,6 +27,13 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     setSex(text);
   };
 
+  const handlePwChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const text = e.target.value;
+    if (text.length > 6) {
+      return;
+    }
+    setPw(text);
+  };
   const handleContinue = () => {
     if (pwConfirm !== pw) {
       alert('비밀번호가 일치하지 않습니다.');
@@ -77,7 +84,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               <Input
                 value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
                 type="password"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPw(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+                onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
               />
             </InputBtnWrap>
           </InputBtnWrap>
