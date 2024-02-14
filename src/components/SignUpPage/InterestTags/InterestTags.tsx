@@ -6,13 +6,16 @@ import { SignUpInterestTags } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface InterstTagsProps {
-  onNext: (args: SignUpInterestTags) => void;
+  onNext: (args?: SignUpInterestTags) => void;
 }
 
 export default function InterestTags({ onNext }: InterstTagsProps) {
-  const handleContinue = () => {};
-
-  const handleSkip = () => {};
+  const handleContinue = () => {
+    const tags = Object.keys(checkedStatus)
+      .map(Number)
+      .filter((id) => checkedStatus[id]);
+    onNext({ tags });
+  };
 
   const tags = [
     {
@@ -52,7 +55,7 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
     <Container>
       <SignUpHeader
         totalSteps={4}
-        step={1}
+        step={3}
       />
       <Title>{'관심가는 디자인을 선택해주세요\n비슷한 네일을 추천해드려요!'}</Title>
       <CheckBoxWrap>
@@ -71,7 +74,7 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
       </CheckBoxWrap>
       <ButtonsWrap>
         <ThemeButton onClick={handleContinue}>다음</ThemeButton>
-        <button onClick={handleSkip}>다음에 답변하기</button>
+        <button onClick={() => onNext()}>다음에 답변하기</button>
       </ButtonsWrap>
     </Container>
   );

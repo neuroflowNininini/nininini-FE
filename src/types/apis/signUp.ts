@@ -13,7 +13,7 @@ export type SignUpBasicInfo = {
 };
 
 export type SignUpInterestTags = {
-  tags: string[];
+  tags?: number[];
 };
 
 export type SignUpAiMeasure = {

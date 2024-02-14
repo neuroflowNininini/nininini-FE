@@ -33,8 +33,10 @@ export default function SignUpPage() {
       )}
       {step === 'interestTags' && (
         <InterestTags
-          onNext={({ tags }) => {
-            setSignUpData((prev: SignUp) => ({ ...prev, tags }));
+          onNext={(data) => {
+            setStep('aiRegister');
+            if (!data) return;
+            setSignUpData((prev: SignUp) => ({ ...prev, tags: data.tags }));
           }}
         />
       )}
