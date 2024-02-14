@@ -1,120 +1,122 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { FaCamera } from 'react-icons/fa';
 import styled from 'styled-components';
+import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Pagination } from 'swiper';
 import left from '~/shared/pics/default_left.png';
 import right from '~/shared/pics/default_right.png';
-import ImageUploader from '~/view/signup/ImageUploader.js';
-import ImageUploader1 from '~/view/signup/ImageUploader1.js';
+import theme from '~/styles/theme';
 
 export default function NailMeasure() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { state } = location;
-  const signupInfo = state.signupInfo;
-  const likedesigns = state.likedesigns;
-  const aiMeasure = {};
-
-  const handleContinue = () => {
-    //회원 가입 user pool에 반영하기2
-    navigate('/signupdone', {
-      state: {
-        signupInfo: signupInfo,
-        likedesigns: likedesigns,
-        aiMeasure: aiMeasure,
-      },
-    });
-  };
-  const handleSkip = () => {
-    // 회원 가입 signupInfo 로 user pool 반영하기 추가해야.
-    navigate('/');
+  const handleFileChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    direction: 'left' | 'right',
+  ) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      if (file) {
+        console.log(file);
+      }
+    }
   };
   return (
     <Container>
-      <TopWrap id="hometop">
-        <DescWrap>
-          <Desc>지금 AI를 통해 손톱을 측정하세요.</Desc>
-          <Desc>내 손톱 맞춤 상품을 만나볼 수 있어요!</Desc>
-        </DescWrap>
-        <AiBox>
-          <Swiper
-            pagination={true}
-            modules={[Pagination]}
-            spaceBetween={0}
-            rewind={true}
-            slidesPerView={1}
-          >
-            <SwiperSlide>
-              <ImageUploader />
-              <ImgBox
-                id="pic"
-                src={left}
+      <Swiper
+        pagination={true}
+        modules={[Pagination]}
+        spaceBetween={0}
+        rewind={true}
+        slidesPerView={1}
+      >
+        <SwiperSlide>
+          <SlideContainer>
+            <Img
+              id="pic"
+              src={left}
+            />
+            <Button>
+              <FaCamera color={theme.colors.gray['500']} />
+              <span>왼손 측정하기</span>
+              <CameraInput
+                type="file"
+                id="camera"
+                name="camera"
+                capture="camera"
+                accept="image/*"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'left')}
               />
-            </SwiperSlide>
-            <SwiperSlide>
-              <ImageUploader1 />
-              <ImgBox
-                id="pic1"
-                src={right}
+            </Button>
+          </SlideContainer>
+        </SwiperSlide>
+        <SwiperSlide>
+          <SlideContainer>
+            <Img
+              id="pic1"
+              src={right}
+            />
+            <Button>
+              <FaCamera color={theme.colors.gray['500']} />
+              <span>오른손 측정하기</span>
+              <CameraInput
+                type="file"
+                id="camera"
+                name="camera"
+                capture="camera"
+                accept="image/*"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'right')}
               />
-            </SwiperSlide>
-          </Swiper>
-        </AiBox>
-      </TopWrap>
-      <Button2 onClick={handleContinue}>회원가입완료</Button2>
-      <Skip onClick={handleSkip}>다음에 등록하기</Skip>
+            </Button>
+          </SlideContainer>
+        </SwiperSlide>
+      </Swiper>
     </Container>
   );
 }
 
-const ImgBox = styled.img`
+const SlideContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding-bottom: 3rem;
+`;
+const Img = styled.img`
   border: solid 1px;
-  width: 65vw;
-  height: 40vh;
-  object-fit: cover;
-  // background-color:#eeeeee;
-`;
-const Image = styled.img`
-  object-fit: cover;
-`;
-const AiBox = styled.div`
-  border: solid 1px #959595;
-  border-radius: 20px;
-  width: calc(100vw - 40px);
-  margin: auto;
-  padding: 20px 0px;
-`;
-
-const TopWrap = styled.div`
-  position: relative;
-  bottom: 49px;
-  padding: 60px 20px 0px 20px;
-`;
-const Skip = styled.div`
-  padding: 10px 0px;
+  width: 40rem;
 `;
 
 const Container = styled.div`
-  padding-bottom: 80px;
+  border: solid 1px ${({ theme }) => theme.colors.gray['300']};
+  border-radius: 2rem;
+  width: 100%;
+  padding: 2rem 0;
 `;
-const Desc = styled.div`
-  text-align: left;
-`;
-const DescWrap = styled.div`
-  margin-top: 20px;
-  margin-bottom: 30px;
-  text-align: left;
-`;
-const Button2 = styled.div`
+
+const Button = styled.button`
+  border: 1px solid ${({ theme }) => theme.colors.gray['400']};
+  padding: 1rem 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: calc(100vw - 40px);
-  height: 50px;
-  background-color: black;
-  color: white;
-  font-weight: 700;
+  border-radius: 1rem;
+  background-color: white;
   margin: auto;
+  &:hover {
+    opacity: 80%;
+  }
+  span {
+    margin-left: 1rem;
+    color: ${({ theme }) => theme.colors.gray['500']};
+  }
+`;
+
+const CameraInput = styled.input`
+  position: absolute;
+  left: 40vw;
+  border: solid 1px;
+  width: 20vw;
+  padding: 10px 0px;
+  z-index: 999;
+  opacity: 0;
 `;
