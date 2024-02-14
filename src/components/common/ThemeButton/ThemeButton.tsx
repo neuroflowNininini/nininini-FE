@@ -22,7 +22,7 @@ export default function ThemeButton({
 }: ThemeButtonProps) {
   return (
     <Button
-      onclick={onClick}
+      onClick={onClick}
       variant={variant}
       width={width}
       height={height}

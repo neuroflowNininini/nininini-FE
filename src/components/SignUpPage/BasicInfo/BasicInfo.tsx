@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
 import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
-import { BasicInfo } from '~/types/basicInfo';
+import { SignUpBasicInfo } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface BasicInfoProps {
-  onNext: (args: Omit<BasicInfo, 'tags' | 'ai_measure'>) => void;
+  onNext: (args: SignUpBasicInfo) => void;
 }
 export default function BasicInfo({ onNext }: BasicInfoProps) {
   const [id, setId] = useState('');
