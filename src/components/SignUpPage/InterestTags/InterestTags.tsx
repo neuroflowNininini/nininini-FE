@@ -1,135 +1,111 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { CheckBoxTag } from '~/components/common/CheckBoxTag';
+import { ThemeButton } from '~/components/common/ThemeButton';
 import { SignUpInterestTags } from '~/types/apis/signUp';
-import Checkbox from '~/view/components/element/Checkbox.js';
+import { SignUpHeader } from '../SignUpHeader';
 
 interface InterstTagsProps {
   onNext: (args: SignUpInterestTags) => void;
 }
 
 export default function InterestTags({ onNext }: InterstTagsProps) {
-  const location = useLocation();
-  const { state } = location;
-  const signupInfo = state.signupInfo;
+  const handleContinue = () => {};
 
-  const [fall, setFall] = useState(false);
-  const [warm, setWarm] = useState(false);
-  const [cute, setCute] = useState(false);
-  const [chic, setChic] = useState(false);
-  const [simple, setSimple] = useState(false);
-  const [unique, setUnique] = useState(false);
+  const handleSkip = () => {};
 
-  const navigate = useNavigate();
-  const handleContinue = () => {
-    // 특정 링크로 이동
-    const likedesigns = {
-      fall: fall,
-      warm: warm,
-      cute: cute,
-      chic: chic,
-      simple: simple,
-      unique: unique,
-    };
-    navigate('/nailmeasure', { state: { signupInfo: signupInfo, likedesigns: likedesigns } });
-  };
+  const tags = [
+    {
+      id: 1,
+      text: '가을 느낌 낭낭한',
+    },
+    {
+      id: 2,
+      text: '따뜻한 색감 위주의',
+    },
+    {
+      id: 3,
+      text: '귀엽고 알록달록한',
+    },
+    {
+      id: 4,
+      text: '시크하고 도시적인',
+    },
+    {
+      id: 5,
+      text: '심플하고 자연스러운',
+    },
+    {
+      id: 6,
+      text: '유니크하고 독창적인',
+    },
+  ];
 
-  const handleSkip = () => {
-    // 회원 가입 signupInfo 로 user pool 반영하기 추가해야.
-    navigate('/nailmeasure', { state: { signupInfo: signupInfo, likedesigns: null } });
-  };
+  const [checkedStatus, setCheckedStatus] = useState(
+    tags.reduce((acc, cur) => {
+      acc[cur.id] = false;
+      return acc;
+    }, {}),
+  );
 
   return (
     <Container>
-      <TopWrap id="hometop">
-        <DescWrap>
-          <Desc>관심디자인을 선택해주세요.</Desc>
-          <Desc>선택하신 디자인의 제품을 추천해드려요!</Desc>
-        </DescWrap>
-        <CheckBoxWrap>
-          <Checkbox
-            checked={fall}
-            onChange={setFall}
-            disabled={false}
-          >
-            가을 느낌 낭낭한
-          </Checkbox>
-          <Checkbox
-            checked={warm}
-            onChange={setWarm}
-            disabled={false}
-          >
-            따뜻한 색감 위주의
-          </Checkbox>
-          <Checkbox
-            checked={cute}
-            onChange={setCute}
-            disabled={false}
-          >
-            귀엽고 알록달록한
-          </Checkbox>
-          <Checkbox
-            checked={chic}
-            onChange={setChic}
-            disabled={false}
-          >
-            시크하고 도시적인
-          </Checkbox>
-          <Checkbox
-            checked={simple}
-            onChange={setSimple}
-            disabled={false}
-          >
-            심플하고 자연스러운
-          </Checkbox>
-          <Checkbox
-            checked={unique}
-            onChange={setUnique}
-            disabled={false}
-          >
-            유니크하고 독창적인
-          </Checkbox>
-        </CheckBoxWrap>
-      </TopWrap>
-      <Button2 onClick={handleContinue}>다음</Button2>
-      <Skip onClick={handleSkip}>다음에 답변하기</Skip>
+      <SignUpHeader
+        totalSteps={4}
+        step={1}
+      />
+      <Title>{'관심가는 디자인을 선택해주세요\n비슷한 네일을 추천해드려요!'}</Title>
+      <CheckBoxWrap>
+        {tags.map(({ id, text }) => (
+          <CheckBoxTag
+            key={id}
+            id={id.toString()}
+            text={text}
+            fontSize={'small'}
+            isChecked={checkedStatus[id]}
+            onChange={() => {
+              setCheckedStatus((prev) => ({ ...prev, [id]: !prev[id] }));
+            }}
+          />
+        ))}
+      </CheckBoxWrap>
+      <ButtonsWrap>
+        <ThemeButton onClick={handleContinue}>다음</ThemeButton>
+        <button onClick={handleSkip}>다음에 답변하기</button>
+      </ButtonsWrap>
     </Container>
   );
 }
 
-const Skip = styled.div`
-  padding: 10px 0px;
+const Title = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.largemedium};
+  font-weight: 700;
+  text-align: center;
+  white-space: pre-wrap;
+  flex-shrink: 0;
 `;
 
 const Container = styled.div`
-  padding-bottom: 80px;
-`;
-const Desc = styled.div`
-  text-align: left;
-`;
-const DescWrap = styled.div`
-  margin-top: 20px;
-  margin-bottom: 30px;
-  text-align: left;
-`;
-const TopWrap = styled.div`
-  position: relative;
-  bottom: 49px;
-  padding: 60px 20px 0px 20px;
-`;
-const CheckBoxWrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 5rem;
 `;
-const Button2 = styled.div`
+
+const CheckBoxWrap = styled.div`
+  width: 90%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 0.7rem;
+  row-gap: 0.5rem;
+`;
+
+const ButtonsWrap = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  width: calc(100vw - 40px);
-  height: 50px;
-  background-color: black;
-  color: white;
-  font-weight: 700;
-  margin: auto;
+  gap: 1rem;
+  width: 100%;
 `;

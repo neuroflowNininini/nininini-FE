@@ -24,7 +24,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 5rem;
 
   font-size: ${({ theme }) => theme.fontSize.xlarge};
   font-weight: 900;
