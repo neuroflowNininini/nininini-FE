@@ -104,6 +104,10 @@ const Button = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.gray['400']};
   padding: 1rem 3rem;
   border-radius: 1rem;
+  label {
+    display: flex;
+    align-items: center;
+  }
   span {
     margin-left: 1rem;
     color: ${({ theme }) => theme.colors.gray['500']};
