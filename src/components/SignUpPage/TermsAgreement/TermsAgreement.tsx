@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckBoxInput from '~/components/common/CheckBoxInput/CheckBoxInput';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { SignUpTermsAgreement } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface TermsAgreementProps {
-  onNext: (args: boolean[]) => void;
+  onNext: (args: SignUpTermsAgreement) => void;
 }
 
 export default function TermsAgreement({ onNext }: TermsAgreementProps) {
@@ -106,7 +107,10 @@ export default function TermsAgreement({ onNext }: TermsAgreementProps) {
             alert('필수 약관에 동의가 필요합니다.');
             return;
           }
-          onNext([marketingSMSChecked, marketingEmailChecked]);
+          onNext({
+            agree_sms: marketingSMSChecked,
+            agree_email: marketingEmailChecked,
+          });
         }}
       >
         다음

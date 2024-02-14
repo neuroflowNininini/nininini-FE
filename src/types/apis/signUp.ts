@@ -1,3 +1,8 @@
+export type SignUpTermsAgreement = {
+  agree_sms: boolean;
+  agree_email: boolean;
+};
+
 export type SignUpBasicInfo = {
   user_id: string;
   user_pw: string;
@@ -7,9 +12,12 @@ export type SignUpBasicInfo = {
   birth_sex: string;
 };
 
-export type SignUp = SignUpBasicInfo & {
-  agree_sms: boolean;
-  agree_email: boolean;
+export type SignUpInterestTags = {
   tags: string[];
+};
+
+export type SignUpAiMeasure = {
   ai_measure: string;
 };
+
+export type SignUp = SignUpBasicInfo & SignUpInterestTags & SignUpInterestTags & SignUpAiMeasure;

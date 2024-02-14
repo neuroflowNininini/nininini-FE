@@ -1,9 +1,14 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { SignUpInterestTags } from '~/types/apis/signUp';
 import Checkbox from '~/view/components/element/Checkbox.js';
 
-export default function InterestTags() {
+interface InterstTagsProps {
+  onNext: (args: SignUpInterestTags) => void;
+}
+
+export default function InterestTags({ onNext }: InterstTagsProps) {
   const location = useLocation();
   const { state } = location;
   const signupInfo = state.signupInfo;
