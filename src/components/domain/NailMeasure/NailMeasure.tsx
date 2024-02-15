@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FaCamera } from 'react-icons/fa';
 import styled from 'styled-components';
 import { Pagination } from 'swiper';
@@ -13,6 +14,19 @@ interface NailMeasureProps {
   onImageChange: (e: React.ChangeEvent<HTMLInputElement>, handType: HandType) => void;
 }
 export default function NailMeasure({ onImageChange }: NailMeasureProps) {
+  const [previewImage, setPreviewImage] = useState<Record<HandType, string | undefined>>({
+    left: undefined,
+    right: undefined,
+  });
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, handType: HandType) => {
+    if (!e.target.files) return;
+    onImageChange(e, handType);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setPreviewImage((prev) => ({ ...prev, [handType]: reader.result as string }));
+    };
+  };
   return (
     <Container>
       <Swiper
@@ -26,7 +40,7 @@ export default function NailMeasure({ onImageChange }: NailMeasureProps) {
           <SlideContainer>
             <Img
               id="pic"
-              src={left}
+              src={previewImage.left ?? left}
             />
             <Button>
               <label htmlFor={'camera-left'}>
@@ -38,7 +52,9 @@ export default function NailMeasure({ onImageChange }: NailMeasureProps) {
                   name="camera"
                   capture="camera"
                   accept="image/*"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onImageChange(e, 'left')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleImageChange(e, 'left');
+                  }}
                 />
               </label>
             </Button>
@@ -48,7 +64,7 @@ export default function NailMeasure({ onImageChange }: NailMeasureProps) {
           <SlideContainer>
             <Img
               id="pic1"
-              src={right}
+              src={previewImage.right ?? right}
             />
             <Button>
               <label htmlFor={'camera-right'}>
@@ -60,7 +76,9 @@ export default function NailMeasure({ onImageChange }: NailMeasureProps) {
                   name="camera"
                   capture="camera"
                   accept="image/*"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onImageChange(e, 'right')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleImageChange(e, 'right');
+                  }}
                 />
               </label>
             </Button>
