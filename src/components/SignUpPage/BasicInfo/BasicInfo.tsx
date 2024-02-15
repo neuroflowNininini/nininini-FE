@@ -40,12 +40,12 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
       return;
     }
     const basicInfo = {
-      user_id: id,
-      user_pw: pw,
+      userId: id,
+      userPw: pw,
       name: name,
-      phone_number: phoneNumber,
+      phoneNumber: phoneNumber,
       email: email,
-      birth_sex: birth + sex,
+      birthSex: birth + sex,
     };
     onNext(basicInfo);
   };
