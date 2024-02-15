@@ -47,16 +47,15 @@ export default function SignUpPage() {
       {step === 'nailRegister' && (
         <NailRegister
           onNext={(aiMeasure: Record<HandType, File>) => {
-            if (aiMeasure) {
-              setSignUpData((prev: SignUp) => ({ ...prev, aiMeasure }));
-            }
             if (!signUpData) return;
-            postSignUp(signUpData).then(({ accessToken, refreshToken }) => {
-              if (accessToken && refreshToken) {
-                /*TODO - response로 받은 토큰 관리 */
-              }
-            });
-            setStep('complete');
+            postSignUp(aiMeasure ? { ...signUpData, aiMeasure } : signUpData).then(
+              ({ accessToken, refreshToken }) => {
+                if (accessToken && refreshToken) {
+                  setStep('complete');
+                  /*TODO - response로 받은 토큰 관리 */
+                }
+              },
+            );
           }}
         />
       )}
