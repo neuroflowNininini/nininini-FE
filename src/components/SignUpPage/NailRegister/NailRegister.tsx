@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { postNailMeasure } from '~/api/nailMeasure';
 import { ThemeButton } from '~/components/common/ThemeButton';
