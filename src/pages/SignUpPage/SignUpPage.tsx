@@ -3,6 +3,7 @@ import { postSignUp } from '~/api/signUp';
 import { BasicInfo } from '~/components/SignUpPage/BasicInfo';
 import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
+import { SignUpComplete } from '~/components/SignUpPage/SignUpComplete';
 import { TermsAgreement } from '~/components/SignUpPage/TermsAgreement';
 import { SignUp } from '~/types/apis/signUp';
 
@@ -51,13 +52,14 @@ export default function SignUpPage() {
             if (!signUpData) return;
             postSignUp(signUpData).then(({ accessToken, refreshToken }) => {
               if (accessToken && refreshToken) {
-                setStep('complete');
                 /*TODO - response로 받은 토큰 관리 */
               }
             });
+            setStep('complete');
           }}
         />
       )}
+      {step === 'complete' && <SignUpComplete />}
     </>
   );
 }
