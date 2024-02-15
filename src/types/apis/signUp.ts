@@ -1,3 +1,5 @@
+import { HandType } from './handType';
+
 export type SignUpTermsAgreement = {
   agreeSms: boolean;
   agreeEmail: boolean;
@@ -17,7 +19,7 @@ export type SignUpInterestTags = {
 };
 
 export type SignUpAiMeasure = {
-  aiMeasure: string;
+  aiMeasure?: Record<HandType, File>;
 };
 
 export type SignUp = SignUpBasicInfo & SignUpInterestTags & SignUpInterestTags & SignUpAiMeasure;

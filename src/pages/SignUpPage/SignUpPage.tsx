@@ -5,6 +5,7 @@ import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
 import { SignUpComplete } from '~/components/SignUpPage/SignUpComplete';
 import { TermsAgreement } from '~/components/SignUpPage/TermsAgreement';
+import { HandType } from '~/types/apis/handType';
 import { SignUp } from '~/types/apis/signUp';
 
 type Step = 'agreement' | 'basicInfo' | 'interestTags' | 'nailRegister' | 'complete';
@@ -45,17 +46,16 @@ export default function SignUpPage() {
       )}
       {step === 'nailRegister' && (
         <NailRegister
-          onNext={(aiMeasure: string) => {
-            if (aiMeasure) {
-              setSignUpData((prev: SignUp) => ({ ...prev, aiMeasure }));
-            }
+          onNext={(aiMeasure: Record<HandType, File>) => {
             if (!signUpData) return;
-            postSignUp(signUpData).then(({ accessToken, refreshToken }) => {
-              if (accessToken && refreshToken) {
-                /*TODO - response로 받은 토큰 관리 */
-              }
-            });
-            setStep('complete');
+            postSignUp(aiMeasure ? { ...signUpData, aiMeasure } : signUpData).then(
+              ({ accessToken, refreshToken }) => {
+                if (accessToken && refreshToken) {
+                  setStep('complete');
+                  /*TODO - response로 받은 토큰 관리 */
+                }
+              },
+            );
           }}
         />
       )}

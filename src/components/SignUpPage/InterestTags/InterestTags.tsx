@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getInterestTags } from '~/api/interestTags';
 import { CheckBoxTag } from '~/components/common/CheckBoxTag';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { SignUpInterestTags } from '~/types/apis/signUp';
@@ -10,6 +11,13 @@ interface InterstTagsProps {
 }
 
 export default function InterestTags({ onNext }: InterstTagsProps) {
+  const [tagsData, setTagsData] = useState<{ id: number; tag_id: number; tag: string }[]>();
+  useEffect(() => {
+    getInterestTags().then(({ tags }) => {
+      setTagsData(tags);
+    });
+  }, []);
+
   const handleContinue = () => {
     const tags = Object.keys(checkedStatus)
       .map(Number)
@@ -17,38 +25,11 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
     onNext({ tags });
   };
 
-  const tags = [
-    {
-      id: 1,
-      text: '가을 느낌 낭낭한',
-    },
-    {
-      id: 2,
-      text: '따뜻한 색감 위주의',
-    },
-    {
-      id: 3,
-      text: '귀엽고 알록달록한',
-    },
-    {
-      id: 4,
-      text: '시크하고 도시적인',
-    },
-    {
-      id: 5,
-      text: '심플하고 자연스러운',
-    },
-    {
-      id: 6,
-      text: '유니크하고 독창적인',
-    },
-  ];
-
   const [checkedStatus, setCheckedStatus] = useState(
-    tags.reduce((acc, cur) => {
-      acc[cur.id] = false;
+    tagsData?.reduce((acc, cur) => {
+      acc[cur['tag_id']] = false;
       return acc;
-    }, {}),
+    }, {}) ?? {},
   );
 
   return (
@@ -59,15 +40,15 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
       />
       <Title>{'관심가는 디자인을 선택해주세요\n비슷한 네일을 추천해드려요!'}</Title>
       <CheckBoxWrap>
-        {tags.map(({ id, text }) => (
+        {tagsData?.map(({ tag_id, tag }) => (
           <CheckBoxTag
-            key={id}
-            id={id.toString()}
-            text={text}
+            key={tag_id}
+            id={tag_id.toString()}
+            text={tag}
             fontSize={'small'}
-            isChecked={checkedStatus[id]}
+            isChecked={checkedStatus[tag_id]}
             onChange={() => {
-              setCheckedStatus((prev) => ({ ...prev, [id]: !prev[id] }));
+              setCheckedStatus((prev) => ({ ...prev, [tag_id]: !prev[tag_id] }));
             }}
           />
         ))}
