@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { postNailMeasure } from '~/api/nailMeasure';
 import { ThemeButton } from '~/components/common/ThemeButton';
@@ -8,7 +8,7 @@ import { HandType } from '~/types/apis/handType';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface NailRegisterProps {
-  onNext: (aiResult?: string) => void;
+  onNext: (aiResult?: Record<HandType, File>) => void;
 }
 
 export default function NailRegister({ onNext }: NailRegisterProps) {
@@ -23,13 +23,13 @@ export default function NailRegister({ onNext }: NailRegisterProps) {
     setImageFiles((prev) => ({ ...prev, [handType]: imageFile as File }));
   };
   const handleNailRegister = () => {
-    /*TODO - form data를 이미지 등록하는 API 쏘고, 측정 결과값을 반환받기 */
     const nailImageFormData = new FormData();
     for (const handType in imageFiles) {
       nailImageFormData.append(handType, imageFiles[handType]);
     }
-    postNailMeasure(nailImageFormData);
-    onNext();
+    postNailMeasure(nailImageFormData).then((data) => {
+      onNext(data.resultText);
+    });
   };
 
   return (
