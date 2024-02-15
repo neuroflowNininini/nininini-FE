@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { postSignUp } from '~/api/signUp';
 import { BasicInfo } from '~/components/SignUpPage/BasicInfo';
 import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
@@ -44,10 +45,16 @@ export default function SignUpPage() {
       {step === 'nailRegister' && (
         <NailRegister
           onNext={(aiMeasure: string) => {
-            setStep('complete');
-            if (!aiMeasure) return;
-            // setSignUpData((prev: SignUp) => ({ ...prev, aiMeasure }));
-            /*TODO - 회원가입 최종 api 쏘기 */
+            if (aiMeasure) {
+              setSignUpData((prev: SignUp) => ({ ...prev, aiMeasure }));
+            }
+            if (!signUpData) return;
+            postSignUp(signUpData).then(({ accessToken, refreshToken }) => {
+              if (accessToken && refreshToken) {
+                setStep('complete');
+                /*TODO - response로 받은 토큰 관리 */
+              }
+            });
           }}
         />
       )}
