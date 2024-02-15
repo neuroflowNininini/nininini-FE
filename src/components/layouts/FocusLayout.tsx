@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { deviceSizes, media } from '~/styles/breakpoints';
-import Header from '../common/Header';
+import Header from '~/components/common/Header';
+import { media } from '~/styles/breakpoints';
 
-export default function DefaultLayout() {
+export default function FocusLayout() {
   return (
     <Layout>
       <Header />
@@ -16,10 +16,10 @@ export default function DefaultLayout() {
 
 const Layout = styled.div``;
 const Container = styled.div`
-  max-width: none;
-  ${media.md`
-    max-width: ${deviceSizes.lg}px;
-    margin: 0 auto;
-    position: relative;
+  max-width: 90%;
+  margin: 0 auto;
+  padding-top: 10vh;
+  ${media.sm`
+    width: 45rem;
   `}
 `;

@@ -2,21 +2,21 @@ import { css } from 'styled-components';
 import type { CSSObject } from 'styled-components';
 
 interface Size {
-  xs: string;
-  sm: string;
-  md: string;
-  lg: string;
-  xl: string;
-  xxl: string;
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  xxl: number;
 }
 
 export const deviceSizes: Size = {
-  xs: '400px',
-  sm: '600px',
-  md: '960px',
-  lg: '1280px',
-  xl: '1440px',
-  xxl: '1920px',
+  xs: 400,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1440,
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -30,7 +30,7 @@ export const media = Object.entries(deviceSizes).reduce((acc, [key, value]) => {
   return {
     ...acc,
     [key]: (first: CSSObject | TemplateStringsArray, ...interpolations: any[]) => css`
-      @media (max-width: ${value}) {
+      @media (min-width: ${value}px) {
         ${css(first, ...interpolations)}
       }
     `,

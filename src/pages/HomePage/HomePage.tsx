@@ -3,18 +3,21 @@ import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { HomeMenu } from '~/components/HomePage/HomeMenu';
+import { RowProductList } from '~/components/HomePage/RowProductList';
+import { useDeviceDetect } from '~/hooks/useDeviceDetect';
 import { bestDummy, newDummy } from '~/shared/dummy.js';
 import c2 from '~/shared/pics/home_swiper/home2.png';
 import f3 from '~/shared/pics/home_swiper/home3.png';
 import e4 from '~/shared/pics/nail/E/E4.jpg';
-import { deviceSizes } from '~/styles/breakpoints';
-import HomeMenu from '~/view/components/HomeMenu.js';
-import RowProductList from '~/view/product/RowProductList.js';
+import { deviceSizes, media } from '~/styles/breakpoints';
 
 export default function HomePage() {
+  const { isMobile } = useDeviceDetect();
   return (
     <>
       <Swiper
+        className="swiper-container-hero"
         pagination={true}
         modules={[Pagination, Autoplay]}
         spaceBetween={0}
@@ -26,45 +29,57 @@ export default function HomePage() {
         slidesPerView={1}
       >
         <SwiperSlide>
-          <ImageBox src={e4} />
+          <ImageBox src={isMobile ? e4 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={f3} />
+          <ImageBox src={isMobile ? f3 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={c2} />
+          <ImageBox src={isMobile ? c2 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
       </Swiper>
-      <Container>
+      <Layout>
         <HomeMenu />
-        <Box>
-          <TitleWrap>이 달의 신상품</TitleWrap>
-          <RowProductList dummy={newDummy} />
-          <TitleWrap>주간 베스트</TitleWrap>
-          <RowProductList dummy={bestDummy} />
-        </Box>
-      </Container>
+        <RowContainer>
+          <div>
+            <TitleWrap>이 달의 신상품</TitleWrap>
+            <RowProductList dummy={newDummy} />
+          </div>
+          <div>
+            <TitleWrap>주간 베스트</TitleWrap>
+            <RowProductList dummy={bestDummy} />
+          </div>
+        </RowContainer>
+      </Layout>
     </>
   );
 }
 
-const Container = styled.div`
-  max-width: ${deviceSizes.md};
+const Layout = styled.div`
+  max-width: ${deviceSizes.lg}px;
   margin: 0 auto;
+  padding-bottom: 10rem;
 `;
 
 const ImageBox = styled.img`
   width: 100vw;
-  height: 64vh;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center center;
 `;
-const Box = styled.div`
-  height: 500px;
+
+const RowContainer = styled.div`
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 `;
+
 const TitleWrap = styled.div`
-  text-align: start;
-  margin: 20px 0px 0px 10px;
-  font-weight: bolder;
-  padding-top: 20px;
+  padding: 2rem 1rem;
+  font-size: ${({ theme }) => theme.fontSize.largemedium};
+  ${media.lg`
+    padding: 2rem 4rem;
+    font-size: ${({ theme }) => theme.fontSize.large};
+  `}
+  font-weight: 700;
 `;
