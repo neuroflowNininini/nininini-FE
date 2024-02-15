@@ -13,10 +13,7 @@ import ProdDetail from './view/product/ProdDetail';
 import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
 import Login from './view/pages/Login';
-import SignUp from './view/signup/SignUp';
-import LikeDesign from './view/signup/LikeDesign';
-import NailMeasure from './view/signup/NailMeasure';
-import SignUpDone from './view/signup/SignUpDone';
+import { SignUpPage } from './pages/SignUpPage';
 import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
 import CartPage from './view/pages/CartPage';
@@ -26,7 +23,7 @@ import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import { paths } from './config/paths';
-import { DefaultLayout, HomeLayout } from './components/layouts';
+import { DefaultLayout, FocusLayout, HomeLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 
 function App() {
@@ -43,14 +40,16 @@ function App() {
                 element={<HomePage />}
               />
             </Route>
+            <Route element={<FocusLayout />}>
+              <Route
+                path={paths.signUp()}
+                element={<SignUpPage />}
+              />
+            </Route>
             <Route element={<DefaultLayout />}>
               <Route
                 path="/login"
                 element={<Login />}
-              />
-              <Route
-                path="/signup"
-                element={<SignUp />}
               />
               <Route
                 path="/mypage"
@@ -95,18 +94,6 @@ function App() {
               <Route
                 path="/orderdone"
                 element={<OrderEnd />}
-              />
-              <Route
-                path="/likedesign"
-                element={<LikeDesign />}
-              />
-              <Route
-                path="/nailmeasure"
-                element={<NailMeasure />}
-              />
-              <Route
-                path="/signupdone"
-                element={<SignUpDone />}
               />
               <Route
                 path={paths.notice()}

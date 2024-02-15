@@ -46,6 +46,7 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     outline: none;
+    border: none;
   }
   
   a, a:visited {
