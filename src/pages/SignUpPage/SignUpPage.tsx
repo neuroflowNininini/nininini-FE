@@ -14,11 +14,11 @@ export default function SignUpPage() {
     <>
       {step === 'agreement' && (
         <TermsAgreement
-          onNext={({ agree_sms, agree_email }) => {
+          onNext={({ agreeSms, agreeEmail }) => {
             setSignUpData((prev: SignUp) => ({
               ...prev,
-              agree_sms,
-              agree_email,
+              agreeSms,
+              agreeEmail,
             }));
             setStep('basicInfo');
           }}
@@ -41,7 +41,16 @@ export default function SignUpPage() {
           }}
         />
       )}
-      {step === 'nailRegister' && <NailRegister onNext={() => {}} />}
+      {step === 'nailRegister' && (
+        <NailRegister
+          onNext={(aiMeasure: string) => {
+            setStep('complete');
+            if (!aiMeasure) return;
+            // setSignUpData((prev: SignUp) => ({ ...prev, aiMeasure }));
+            /*TODO - 회원가입 최종 api 쏘기 */
+          }}
+        />
+      )}
     </>
   );
 }

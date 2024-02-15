@@ -108,8 +108,8 @@ export default function TermsAgreement({ onNext }: TermsAgreementProps) {
             return;
           }
           onNext({
-            agree_sms: marketingSMSChecked,
-            agree_email: marketingEmailChecked,
+            agreeSms: marketingSMSChecked,
+            agreeEmail: marketingEmailChecked,
           });
         }}
       >

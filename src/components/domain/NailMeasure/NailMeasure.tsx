@@ -7,19 +7,12 @@ import 'swiper/css/pagination';
 import left from '~/shared/pics/default_left.png';
 import right from '~/shared/pics/default_right.png';
 import theme from '~/styles/theme';
+import { HandType } from '~/types/apis/handType';
 
-export default function NailMeasure() {
-  const handleFileChange = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    direction: 'left' | 'right',
-  ) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      if (file) {
-        console.log(file);
-      }
-    }
-  };
+interface NailMeasureProps {
+  onImageChange: (e: React.ChangeEvent<HTMLInputElement>, handType: HandType) => void;
+}
+export default function NailMeasure({ onImageChange }: NailMeasureProps) {
   return (
     <Container>
       <Swiper
@@ -45,7 +38,7 @@ export default function NailMeasure() {
                   name="camera"
                   capture="camera"
                   accept="image/*"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFileChange(e, 'left')}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onImageChange(e, 'left')}
                 />
               </label>
             </Button>
@@ -67,9 +60,7 @@ export default function NailMeasure() {
                   name="camera"
                   capture="camera"
                   accept="image/*"
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleFileChange(e, 'right')
-                  }
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => onImageChange(e, 'right')}
                 />
               </label>
             </Button>

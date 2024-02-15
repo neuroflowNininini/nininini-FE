@@ -2,14 +2,26 @@ import styled from 'styled-components';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { Button } from '~/components/common/ThemeButton/ThemeButton';
 import { NailMeasure } from '~/components/domain/NailMeasure';
+import { HandType } from '~/types/apis/handType';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface NailRegisterProps {
-  onNext: () => void;
+  onNext: (aiResult?: string) => void;
 }
 
 export default function NailRegister({ onNext }: NailRegisterProps) {
   const isMobile = navigator.userAgent.indexOf('Mobi') > -1;
+
+  const nailImageFormData = new FormData();
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>, handType: HandType) => {
+    if (e.target.files) {
+      nailImageFormData.append(handType, e.target.files[0] as File);
+    }
+  };
+  const handleNailRegister = () => {
+    /*TODO - form data를 이미지 등록하는 API 쏘고, 측정 결과값을 반환받기 */
+    onNext();
+  };
   return (
     <Container>
       <SignUpHeader
@@ -21,10 +33,10 @@ export default function NailRegister({ onNext }: NailRegisterProps) {
           <Title>
             {'지금 AI를 통해 손톱을 측정하세요.\n내 손톱 맞춤 상품을 만나볼 수 있어요!'}
           </Title>
-          <NailMeasure />
+          <NailMeasure onImageChange={handleImageChange} />
         </div>
         <ButtonsWrap>
-          <ThemeButton onClick={onNext}>다음</ThemeButton>
+          <ThemeButton onClick={handleNailRegister}>다음</ThemeButton>
           <button onClick={() => onNext()}>다음에 답변하기</button>
         </ButtonsWrap>
         {!isMobile && (

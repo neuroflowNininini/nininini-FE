@@ -1,15 +1,15 @@
 export type SignUpTermsAgreement = {
-  agree_sms: boolean;
-  agree_email: boolean;
+  agreeSms: boolean;
+  agreeEmail: boolean;
 };
 
 export type SignUpBasicInfo = {
-  user_id: string;
-  user_pw: string;
+  userId: string;
+  userPw: string;
   name: string;
-  phone_number: string;
+  phoneNumber: string;
   email: string;
-  birth_sex: string;
+  birthSex: string;
 };
 
 export type SignUpInterestTags = {
@@ -17,7 +17,7 @@ export type SignUpInterestTags = {
 };
 
 export type SignUpAiMeasure = {
-  ai_measure: string;
+  aiMeasure: string;
 };
 
 export type SignUp = SignUpBasicInfo & SignUpInterestTags & SignUpInterestTags & SignUpAiMeasure;
