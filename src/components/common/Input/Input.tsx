@@ -1,12 +1,4 @@
-import { error } from 'console';
-import {
-  ErrorOption,
-  FieldError,
-  FieldErrors,
-  FieldValues,
-  Message,
-  UseFormRegisterReturn,
-} from 'react-hook-form';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import styled, { CSSProperties } from 'styled-components';
 
 type Variant = 'squared' | 'rounded';
