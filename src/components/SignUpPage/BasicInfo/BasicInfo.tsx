@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { postCheckDuplicateId } from '~/api/signUp';
 import Divider from '~/components/common/Divider';
@@ -10,7 +11,15 @@ import { SignUpHeader } from '../SignUpHeader';
 interface BasicInfoProps {
   onNext: (args: SignUpBasicInfo) => void;
 }
+
+type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & { birth: string; sex: string };
 export default function BasicInfo({ onNext }: BasicInfoProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<BasicInfoForm>();
+
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
@@ -40,15 +49,15 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
       alert('비밀번호가 일치하지 않습니다.');
       return;
     }
-    const basicInfo = {
-      userId: id,
-      userPw: pw,
-      name: name,
-      phoneNumber: phoneNumber,
-      email: email,
-      birthSex: birth + sex,
-    };
-    onNext(basicInfo);
+    // const basicInfo = {
+    //   userId: id,
+    //   userPw: pw,
+    //   name: name,
+    //   phoneNumber: phoneNumber,
+    //   email: email,
+    //   birthSex: birth + sex,
+    // };
+    // onNext(basicInfo);
   };
 
   const [isDuplicateIdChecked, setIsDuplicateIdChecked] = useState(false);
@@ -63,77 +72,83 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     });
   };
 
+  const onSubmit: SubmitHandler<BasicInfoForm> = (data) => {
+    console.log('data', data);
+  };
+
   return (
     <Container>
       <SignUpHeader
         totalSteps={4}
         step={2}
       />
-      <FormWrap>
-        <InputBtnWrap>
-          <Label>아이디</Label>
-          <InputBtnWrap>
-            <Input
-              value={id} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setId(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
-            />
-            {/*TODO - 중복확인 기능 */}
-            <ThemeButton
-              onClick={handleCheckDuplicateId}
-              variant="reversed"
-              width="15rem"
-              height="100%"
-              fontSize={'smallmedium'}
-              style={{ marginLeft: '3px' }}
-            >
-              중복확인
-            </ThemeButton>
-          </InputBtnWrap>
-        </InputBtnWrap>
-        <InputBtnWrap>
-          <InputBtnWrap>
-            <Label>비밀번호</Label>
-            <Input
-              value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-              type="password"
-              onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
-            />
-          </InputBtnWrap>
-        </InputBtnWrap>
-        <InputBtnWrap>
+      <FormWrap onSubmit={handleSubmit(onSubmit)}>
+        <InputRow>
+          <Label htmlFor="userId">아이디</Label>
+          <Input
+            id="userId"
+            register={{ ...register('userId', { required: '필수 입력 값입니다.' }) }}
+            error={errors.userId}
+          />
+          {/*TODO - 중복확인 기능 */}
+          <ThemeButton
+            onClick={handleCheckDuplicateId}
+            variant="reversed"
+            width="15rem"
+            height="100%"
+            fontSize={'smallmedium'}
+            style={{ marginLeft: '3px', padding: '1rem 0' }}
+          >
+            중복확인
+          </ThemeButton>
+        </InputRow>
+        <InputRow>
+          <Label htmlFor="userPw">비밀번호</Label>
+          <Input
+            id="userPw"
+            type="password"
+            register={{ ...register('userPw', { required: '필수 입력 값입니다.' }) }}
+            error={errors.userPw}
+          />
+        </InputRow>
+        <InputRow>
           <Label>비밀번호 확인</Label>
           <Input
             value={pwConfirm} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
             type="password"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPwConfirm(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
           />
-        </InputBtnWrap>
-        <InputBtnWrap>
-          <Label>이름</Label>
+        </InputRow>
+        <InputRow>
+          <Label htmlFor="name">이름</Label>
           <Input
-            value={name} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+            id="name"
+            register={{ ...register('name', { required: '필수 입력 값입니다.' }) }}
+            error={errors.name}
           />
-        </InputBtnWrap>
-        <InputBtnWrap>
-          <Label>연락처</Label>
+        </InputRow>
+        <InputRow>
+          <Label htmlFor="phoneNumber">연락처</Label>
           <Input
-            value={phoneNumber} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+            id="phoneNumber"
+            register={{ ...register('phoneNumber', { required: '필수 입력 값입니다.' }) }}
+            error={errors.phoneNumber}
           />
-        </InputBtnWrap>
-        <InputBtnWrap>
-          <Label>이메일</Label>
+        </InputRow>
+        <InputRow>
+          <Label htmlFor="email">이메일</Label>
           <Input
-            value={email} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+            id="email"
+            register={{ ...register('email', { required: '필수 입력 값입니다.' }) }}
+            error={errors.email}
           />
-        </InputBtnWrap>
-        <InputBtnWrap>
+        </InputRow>
+        <InputRow>
           <Label>생년월일 및 성별</Label>
           <Input
-            value={birth}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBirth(e.target.value)}
+            id="birth"
+            register={{ ...register('birth', { required: '필수 입력 값입니다.' }) }}
+            error={errors.birth}
             placeholder="주민번호 앞 6자리"
             style={{ width: '15rem' }}
           />
@@ -142,19 +157,20 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             margin="0 .7rem"
           />
           <Input
-            value={sex}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSexChange(e)}
+            id="sex"
+            register={{ ...register('sex', { required: '필수 입력 값입니다.' }) }}
+            error={errors.sex}
             style={{ width: '5rem' }}
           />
           <PwSymbol>••••••</PwSymbol>
-        </InputBtnWrap>
+        </InputRow>
+        <ThemeButton
+          type="submit"
+          style={{ marginTop: '3rem' }}
+        >
+          다음
+        </ThemeButton>
       </FormWrap>
-      <ThemeButton
-        onClick={handleContinue}
-        disabled={!isDuplicateIdChecked}
-      >
-        다음
-      </ThemeButton>
     </Container>
   );
 }
@@ -164,20 +180,19 @@ const Container = styled.div`
   gap: 5rem;
 `;
 
-const FormWrap = styled.div`
+const FormWrap = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
 `;
 
-const InputBtnWrap = styled.div`
+const InputRow = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 4.5rem;
 `;
 
-const Label = styled.div`
+const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSize.smallmedium};
   min-width: 25%;
 `;
