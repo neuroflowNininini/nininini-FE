@@ -20,22 +20,22 @@ export const BASIC_INFO_VALIDATION: Partial<Record<keyof BasicInfoForm, Register
   userPw: {
     required: '비밀번호를 입력해주세요.',
     minLength: {
-      value: 3,
+      value: 5,
       message: '5자 ~ 20자로 입력해주세요.',
     },
     maxLength: {
-      value: 10,
+      value: 20,
       message: '5자 ~ 20자로 입력해주세요.',
     },
   },
   name: {
     required: '이름을 입력해주세요.',
     minLength: {
-      value: 3,
+      value: 2,
       message: '2자 ~ 15자로 입력해주세요.',
     },
     maxLength: {
-      value: 10,
+      value: 15,
       message: '2자 ~ 15자로 입력해주세요.',
     },
     pattern: {
@@ -47,7 +47,7 @@ export const BASIC_INFO_VALIDATION: Partial<Record<keyof BasicInfoForm, Register
     required: '이메일을 입력해주세요.',
     maxLength: {
       value: 30,
-      message: '2자 ~ 15자로 입력해주세요.',
+      message: '30자 이하로 입력이 가능합니다.',
     },
     pattern: {
       value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
