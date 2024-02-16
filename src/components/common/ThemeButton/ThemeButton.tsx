@@ -3,7 +3,7 @@ import theme from '~/styles/theme';
 
 interface ThemeButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children: string;
-  onClick: () => void;
+  onClick?: () => void;
   variant?: 'default' | 'reversed';
   width?: string;
   height?: string;
@@ -56,5 +56,4 @@ export const Button = styled.button<
     color: ${theme.colors.gray['900']};
   `}
   font-weight: 700;
-  margin: auto;
 `;
