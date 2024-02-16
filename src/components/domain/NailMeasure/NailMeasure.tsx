@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import left from '~/shared/pics/default_left.png';
 import right from '~/shared/pics/default_right.png';
 import theme from '~/styles/theme';
-import { HandType } from '~/types/apis/handType';
+import { HandType } from '~/types/handType';
 
 interface NailMeasureProps {
   onImageChange: (e: React.ChangeEvent<HTMLInputElement>, handType: HandType) => void;

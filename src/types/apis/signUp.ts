@@ -1,4 +1,4 @@
-import { HandType } from './handType';
+import { ReadAiMeasure } from './aiMeasure';
 
 export type SignUpTermsAgreement = {
   agreeSms: boolean;
@@ -19,7 +19,7 @@ export type SignUpInterestTags = {
 };
 
 export type SignUpAiMeasure = {
-  aiMeasure?: Record<HandType, File>;
+  aiMeasure?: ReadAiMeasure;
 };
 
 export type SignUp = SignUpBasicInfo & SignUpInterestTags & SignUpInterestTags & SignUpAiMeasure;
