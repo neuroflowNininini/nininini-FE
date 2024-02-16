@@ -5,8 +5,9 @@ import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
 import { SignUpComplete } from '~/components/SignUpPage/SignUpComplete';
 import { TermsAgreement } from '~/components/SignUpPage/TermsAgreement';
-import { HandType } from '~/types/apis/handType';
+import { ReadAiMeasure } from '~/types/apis/aiMeasure';
 import { SignUp } from '~/types/apis/signUp';
+import { HandType } from '~/types/handType';
 
 type Step = 'agreement' | 'basicInfo' | 'interestTags' | 'nailRegister' | 'complete';
 
@@ -46,7 +47,7 @@ export default function SignUpPage() {
       )}
       {step === 'nailRegister' && (
         <NailRegister
-          onNext={(aiMeasure: Record<HandType, File>) => {
+          onNext={(aiMeasure: ReadAiMeasure) => {
             if (!signUpData) return;
             postSignUp(aiMeasure ? { ...signUpData, aiMeasure } : signUpData).then(
               ({ accessToken, refreshToken }) => {

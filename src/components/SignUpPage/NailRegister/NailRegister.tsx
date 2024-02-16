@@ -4,11 +4,12 @@ import { postNailMeasure } from '~/api/nailMeasure';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { Button } from '~/components/common/ThemeButton/ThemeButton';
 import { NailMeasure } from '~/components/domain/NailMeasure';
-import { HandType } from '~/types/apis/handType';
+import { ReadAiMeasure } from '~/types/apis/aiMeasure';
+import { HandType } from '~/types/handType';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface NailRegisterProps {
-  onNext: (aiResult?: Record<HandType, File>) => void;
+  onNext: (aiResult?: ReadAiMeasure) => void;
 }
 
 export default function NailRegister({ onNext }: NailRegisterProps) {
@@ -27,8 +28,8 @@ export default function NailRegister({ onNext }: NailRegisterProps) {
     for (const handType in imageFiles) {
       nailImageFormData.append(handType, imageFiles[handType]);
     }
-    postNailMeasure(nailImageFormData).then((data) => {
-      onNext(data.resultText);
+    postNailMeasure(nailImageFormData).then(({ resultText, resultImage }) => {
+      onNext({ resultText, resultImage });
     });
   };
 
