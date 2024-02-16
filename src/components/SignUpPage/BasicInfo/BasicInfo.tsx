@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { postCheckDuplicateId } from '~/api/signUp';
 import Divider from '~/components/common/Divider';
 import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
@@ -50,6 +51,18 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     onNext(basicInfo);
   };
 
+  const [isDuplicateIdChecked, setIsDuplicateIdChecked] = useState(false);
+  const handleCheckDuplicateId = () => {
+    postCheckDuplicateId(id).then((res) => {
+      if (res.exception && res.exception.errorCode === 'ID_ALREADY_EXIST') {
+        setIsDuplicateIdChecked(false);
+        alert('이미 사용 중인 아이디입니다.');
+      } else {
+        setIsDuplicateIdChecked(true);
+      }
+    });
+  };
+
   return (
     <Container>
       <SignUpHeader
@@ -66,7 +79,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             />
             {/*TODO - 중복확인 기능 */}
             <ThemeButton
-              onClick={() => {}}
+              onClick={handleCheckDuplicateId}
               variant="reversed"
               width="15rem"
               height="100%"
@@ -117,7 +130,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputBtnWrap>
         <InputBtnWrap>
-          <Label>주민등록번호</Label>
+          <Label>생년월일 및 성별</Label>
           <Input
             value={birth}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setBirth(e.target.value)}
@@ -133,10 +146,15 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSexChange(e)}
             style={{ width: '5rem' }}
           />
-          <Text>xxxxxx</Text>
+          <PwSymbol>••••••</PwSymbol>
         </InputBtnWrap>
       </FormWrap>
-      <ThemeButton onClick={handleContinue}>다음</ThemeButton>
+      <ThemeButton
+        onClick={handleContinue}
+        disabled={!isDuplicateIdChecked}
+      >
+        다음
+      </ThemeButton>
     </Container>
   );
 }
@@ -164,7 +182,8 @@ const Label = styled.div`
   min-width: 25%;
 `;
 
-const Text = styled.div`
-  font-size: ${({ theme }) => theme.fontSize.smallmedium};
+const PwSymbol = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.large};
+  letter-spacing: 0.5rem;
   margin-left: 1rem;
 `;
