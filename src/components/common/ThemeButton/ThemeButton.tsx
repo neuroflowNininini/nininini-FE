@@ -3,7 +3,7 @@ import theme from '~/styles/theme';
 
 interface ThemeButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: 'default' | 'reversed';
   width?: string;
   height?: string;

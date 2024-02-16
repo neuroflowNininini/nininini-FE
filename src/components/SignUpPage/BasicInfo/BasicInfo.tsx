@@ -25,7 +25,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     formState: { errors },
     control,
   } = useForm<BasicInfoForm>();
-  const [pwConfirm, setPwConfirm] = useState('');
 
   const [idChecked, setIdChecked] = useState(false);
 
@@ -38,7 +37,8 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     name: 'userPw',
   });
 
-  const handleCheckDuplicateId = () => {
+  const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     postCheckDuplicateId(userId).then(async (res) => {
       if (res.exception && res.exception.errorCode === 'ID_ALREADY_EXIST') {
         setIdChecked(false);
@@ -72,9 +72,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }),
             }}
             error={errors.userId}
+            message={idChecked ? '멋진 아이디네요. :)' : ''}
           />
           <ThemeButton
-            onClick={handleCheckDuplicateId}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleCheckDuplicateId(e)}
             variant="reversed"
             width="15rem"
             height="100%"
