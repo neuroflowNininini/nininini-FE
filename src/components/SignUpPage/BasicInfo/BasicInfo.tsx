@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import styled from 'styled-components';
 import { postCheckDuplicateId } from '~/api/signUp';
 import Divider from '~/components/common/Divider';
@@ -7,73 +7,43 @@ import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { SignUpBasicInfo } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
+import { BASIC_INFO_VALIDATION } from './validation.const';
 
 interface BasicInfoProps {
   onNext: (args: SignUpBasicInfo) => void;
 }
 
-type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & { birth: string; sex: string };
+export type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & { birth: string; sex: string };
 export default function BasicInfo({ onNext }: BasicInfoProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<BasicInfoForm>();
-
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
-  const [name, setName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [birth, setBirth] = useState('');
-  const [sex, setSex] = useState('');
 
-  const handleSexChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    if (text.length > 1) {
-      return;
-    }
-    setSex(text);
-  };
+  const [idChecked, setIdChecked] = useState(false);
 
-  const handlePwChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const text = e.target.value;
-    if (text.length > 6) {
-      return;
-    }
-    setPw(text);
-  };
-  const handleContinue = () => {
-    if (pwConfirm !== pw) {
-      alert('비밀번호가 일치하지 않습니다.');
-      return;
-    }
-    // const basicInfo = {
-    //   userId: id,
-    //   userPw: pw,
-    //   name: name,
-    //   phoneNumber: phoneNumber,
-    //   email: email,
-    //   birthSex: birth + sex,
-    // };
-    // onNext(basicInfo);
-  };
+  const userId = useWatch({
+    control,
+    name: 'userId',
+  });
 
-  const [isDuplicateIdChecked, setIsDuplicateIdChecked] = useState(false);
   const handleCheckDuplicateId = () => {
-    postCheckDuplicateId(id).then((res) => {
+    postCheckDuplicateId(userId).then(async (res) => {
       if (res.exception && res.exception.errorCode === 'ID_ALREADY_EXIST') {
-        setIsDuplicateIdChecked(false);
+        setIdChecked(false);
         alert('이미 사용 중인 아이디입니다.');
-      } else {
-        setIsDuplicateIdChecked(true);
+      } else if (res.message) {
+        setIdChecked(true);
       }
     });
   };
 
   const onSubmit: SubmitHandler<BasicInfoForm> = (data) => {
-    console.log('data', data);
+    const { birth, sex, ...restData } = data;
+    onNext({ ...restData, birthSex: birth + sex });
   };
 
   return (
@@ -87,10 +57,14 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="userId">아이디</Label>
           <Input
             id="userId"
-            register={{ ...register('userId', { required: '필수 입력 값입니다.' }) }}
+            register={{
+              ...register('userId', {
+                ...BASIC_INFO_VALIDATION.userId,
+                validate: () => idChecked || '이미 사용 중인 아이디입니다.',
+              }),
+            }}
             error={errors.userId}
           />
-          {/*TODO - 중복확인 기능 */}
           <ThemeButton
             onClick={handleCheckDuplicateId}
             variant="reversed"
@@ -107,7 +81,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Input
             id="userPw"
             type="password"
-            register={{ ...register('userPw', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('userPw', BASIC_INFO_VALIDATION.userPw) }}
             error={errors.userPw}
           />
         </InputRow>
@@ -123,7 +97,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="name">이름</Label>
           <Input
             id="name"
-            register={{ ...register('name', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
             error={errors.name}
           />
         </InputRow>
@@ -131,7 +105,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="phoneNumber">연락처</Label>
           <Input
             id="phoneNumber"
-            register={{ ...register('phoneNumber', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('phoneNumber', { required: '연락처로 본인인증을 해주세요.' }) }}
             error={errors.phoneNumber}
           />
         </InputRow>
@@ -139,7 +113,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="email">이메일</Label>
           <Input
             id="email"
-            register={{ ...register('email', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
             error={errors.email}
           />
         </InputRow>
@@ -147,7 +121,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label>생년월일 및 성별</Label>
           <Input
             id="birth"
-            register={{ ...register('birth', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
             error={errors.birth}
             placeholder="주민번호 앞 6자리"
             style={{ width: '15rem' }}
@@ -158,7 +132,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
           <Input
             id="sex"
-            register={{ ...register('sex', { required: '필수 입력 값입니다.' }) }}
+            register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
             error={errors.sex}
             style={{ width: '5rem' }}
           />
