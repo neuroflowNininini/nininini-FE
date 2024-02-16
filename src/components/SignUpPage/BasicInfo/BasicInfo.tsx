@@ -13,7 +13,11 @@ interface BasicInfoProps {
   onNext: (args: SignUpBasicInfo) => void;
 }
 
-export type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & { birth: string; sex: string };
+export type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & {
+  birth: string;
+  sex: string;
+  pwConfirm: string;
+};
 export default function BasicInfo({ onNext }: BasicInfoProps) {
   const {
     register,
@@ -28,6 +32,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
   const userId = useWatch({
     control,
     name: 'userId',
+  });
+  const userPw = useWatch({
+    control,
+    name: 'userPw',
   });
 
   const handleCheckDuplicateId = () => {
@@ -86,11 +94,17 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label>비밀번호 확인</Label>
+          <Label htmlFor="pwConfirm">비밀번호 확인</Label>
           <Input
-            value={pwConfirm} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
+            id="pwConfirm"
             type="password"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPwConfirm(e.target.value)} // 입력 필드 값이 변경될 때 핸들러 호출
+            register={{
+              ...register('pwConfirm', {
+                required: '비밀번호 재확인이 필요합니다.',
+                validate: (value) => value === userPw || '비밀번호가 일치하지 않습니다.',
+              }),
+            }}
+            error={errors.pwConfirm}
           />
         </InputRow>
         <InputRow>
