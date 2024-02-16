@@ -8,6 +8,7 @@ interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   register?: UseFormRegisterReturn;
   error?: FieldError;
+  message?: string;
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   style,
   register,
   error,
+  message,
   ...props
 }: InputProps) {
   return (
@@ -32,6 +34,7 @@ export default function Input({
         />
       </InputBox>
       {error && <ErrorMessage>{error.message}</ErrorMessage>}
+      {!error && message && <NonErrorMessage>{message}</NonErrorMessage>}
     </Layout>
   );
 }
@@ -58,4 +61,9 @@ const InputBox = styled.div<{ variant: Variant }>`
 const ErrorMessage = styled.div`
   font-size: ${({ theme }) => theme.fontSize.small};
   color: red;
+`;
+
+const NonErrorMessage = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.small};
+  color: ${({ theme }) => theme.colors.gray['300']};
 `;
