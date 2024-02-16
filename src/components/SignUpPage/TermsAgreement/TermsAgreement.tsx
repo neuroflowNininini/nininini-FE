@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckBoxInput from '~/components/common/CheckBoxInput/CheckBoxInput';
+import { ChevronToggle } from '~/components/common/ChevronToggle';
 import { ThemeButton } from '~/components/common/ThemeButton';
 import { SignUpTermsAgreement } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
@@ -43,24 +44,36 @@ export default function TermsAgreement({ onNext }: TermsAgreementProps) {
           />
         </HeaderCheckBoxContainer>
         <BorderBox>
-          <CheckBoxInput
-            onChange={(e) => {
-              setMandatoryUsageChecked(e.target.checked);
-            }}
-            id="mandatory-usage"
-            text="[필수] 이용약관 동의"
-            isChecked={mandatoryUsageChecked}
-          />
+          {/*TODO - 약관 내용 토글의 children으로 작성하기 */}
+          <ChevronToggle
+            label={
+              <CheckBoxInput
+                onChange={(e) => {
+                  setMandatoryUsageChecked(e.target.checked);
+                }}
+                id="mandatory-usage"
+                text="[필수] 이용약관 동의"
+                isChecked={mandatoryUsageChecked}
+              />
+            }
+            fontSize={'large'}
+          ></ChevronToggle>
         </BorderBox>
         <BorderBox>
-          <CheckBoxInput
-            onChange={(e) => {
-              setMandatoryPersonalChecked(e.target.checked);
-            }}
-            id="mandatory-personal"
-            text="[필수] 개인정보 수집 및 이용 동의"
-            isChecked={mandatoryPersonalChecked}
-          />
+          {/*TODO - 약관 내용 토글의 children으로 작성하기 */}
+          <ChevronToggle
+            label={
+              <CheckBoxInput
+                onChange={(e) => {
+                  setMandatoryPersonalChecked(e.target.checked);
+                }}
+                id="mandatory-personal"
+                text="[필수] 개인정보 수집 및 이용 동의"
+                isChecked={mandatoryPersonalChecked}
+              />
+            }
+            fontSize={'large'}
+          ></ChevronToggle>
         </BorderBox>
       </FormItem>
       <FormItem>
