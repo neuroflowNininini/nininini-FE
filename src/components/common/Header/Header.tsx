@@ -4,6 +4,7 @@ import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import styled from 'styled-components';
+import { postLogout } from '~/api/login';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
@@ -45,6 +46,10 @@ export default function Header() {
     };
   }, []);
 
+  const handleLogout = async () => {
+    await postLogout();
+  };
+
   return (
     <HeaderEl isScrolled={isScrolled}>
       <HeaderContainer>
@@ -79,7 +84,7 @@ export default function Header() {
               length="1.5rem"
               style={{ backgroundColor: theme.colors.gray[800] }}
             />
-            <TextMenuItem>{'LOGOUT'}</TextMenuItem>
+            <TextMenuItem onClick={handleLogout}>{'LOGOUT'}</TextMenuItem>
           </TextMenuBox>
         </Element2>
       </HeaderContainer>
@@ -151,7 +156,7 @@ const TextMenuBox = styled.div`
   `}
 `;
 
-const TextMenuItem = styled.div`
+const TextMenuItem = styled.button`
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontSize.small};
 `;
