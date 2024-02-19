@@ -1,6 +1,7 @@
+import { NinininiAxios } from '~/config/axios';
 import { CONSTANTS } from '~/constants';
 import { Login } from '~/types/apis/login';
-import { getCookie } from '~/utils/cookie';
+import { deleteCookie, getCookie } from '~/utils/cookie';
 import { ENVIRONMENTS } from '~/utils/getEnv';
 
 /*FIXME - status code에 따른 분기처리, 에러 핸들링 */
@@ -9,9 +10,9 @@ export const postLogin = async <T>(body: Login): Promise<T> => {
     const res = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/members/login`, {
       method: 'POST',
       body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      // headers: {
+      //   'Content-Type': 'application/json',
+      // },
     });
 
     return res.json();
@@ -33,4 +34,20 @@ export const postLogout = async () => {
   } catch (e) {
     throw Error(e);
   }
+};
+
+export const postReIssueAccessToken = async () => {
+  const res = await NinininiAxios.post(`/api/members/reissue`, {
+    refresh: CONSTANTS.REFRESH_TOKEN_KEY,
+  });
+  switch (res.status) {
+    case 200:
+      return { newAccessToken: res.data.accessToken };
+    case 403:
+      /*TODO - 재로그인 */
+      deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
+      deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
+      break;
+  }
+  return;
 };
