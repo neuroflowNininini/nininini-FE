@@ -10,4 +10,5 @@ export const paths = {
   myPage: () => `/mypage`,
   cart: () => `/cart`,
   signUp: () => `/sign-up`,
+  logIn: () => `/login`,
 };
