@@ -12,7 +12,6 @@ import EtcPage from './view/pages/category/EtcPage';
 import ProdDetail from './view/product/ProdDetail';
 import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
-import Login from './view/pages/Login';
 import { SignUpPage } from './pages/SignUpPage';
 import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
@@ -25,6 +24,7 @@ import theme from './styles/theme';
 import { paths } from './config/paths';
 import { DefaultLayout, FocusLayout, HomeLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
+import { LoginPage } from './pages/LoginPage';
 
 function App() {
   return (
@@ -45,12 +45,12 @@ function App() {
                 path={paths.signUp()}
                 element={<SignUpPage />}
               />
+              <Route
+                path={paths.logIn()}
+                element={<LoginPage />}
+              />
             </Route>
             <Route element={<DefaultLayout />}>
-              <Route
-                path="/login"
-                element={<Login />}
-              />
               <Route
                 path="/mypage"
                 element={<Mypage />}
