@@ -1,6 +1,6 @@
 import { NinininiAxios } from '~/config/axios';
 import { CONSTANTS } from '~/constants';
-import { Login } from '~/types/apis/login';
+import { Login, LoginRes } from '~/types/apis/login';
 import { deleteCookie, getCookie } from '~/utils/cookie';
 import { ENVIRONMENTS } from '~/utils/getEnv';
 
@@ -36,18 +36,14 @@ export const postLogout = async () => {
   }
 };
 
-export const postReIssueAccessToken = async () => {
-  const res = await NinininiAxios.post(`/api/members/reissue`, {
+export const postReIssueAccessToken = async (): Promise<LoginRes> => {
+  const { data, status } = await NinininiAxios.post(`/api/members/reissue`, {
     refresh: CONSTANTS.REFRESH_TOKEN_KEY,
   });
-  switch (res.status) {
-    case 200:
-      return { newAccessToken: res.data.accessToken };
-    case 403:
-      /*TODO - 재로그인 */
-      deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
-      deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
-      break;
+  if (status === 403) {
+    /*TODO - 재로그인 */
+    deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
+    deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
   }
-  return;
+  return data;
 };
