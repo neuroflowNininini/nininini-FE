@@ -22,10 +22,10 @@ NinininiAxios.interceptors.response.use(
           const originalReqConfig = error.config;
           originalReqConfig._retry = true;
           try {
-            const res = await postReIssueAccessToken();
-            if (res?.newAccessToken) {
-              setCookie(CONSTANTS.ACCESS_TOKEN_KEY, res.newAccessToken);
-              originalReqConfig.headers.Authorization = `Bearer ${res.newAccessToken}`;
+            const { accessToken: newAccessToken } = await postReIssueAccessToken();
+            if (newAccessToken) {
+              setCookie(CONSTANTS.ACCESS_TOKEN_KEY, newAccessToken);
+              originalReqConfig.headers.Authorization = `Bearer ${newAccessToken}`;
             }
             return axios(originalReqConfig);
           } catch (e) {
