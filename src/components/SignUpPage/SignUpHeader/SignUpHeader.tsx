@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Heading } from '~/components/common/Heading';
 import { Stepper } from '~/components/common/Stepper';
 
 interface SignUpHeaderProps {
@@ -10,7 +11,7 @@ interface SignUpHeaderProps {
 export default function SignUpHeader({ title = '회원가입', totalSteps, step }: SignUpHeaderProps) {
   return (
     <Container>
-      <div>{title}</div>
+      <Heading>{title}</Heading>
       <Stepper
         total={totalSteps}
         step={step}
@@ -24,7 +25,4 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-
-  font-size: ${({ theme }) => theme.fontSize.xlarge};
-  font-weight: 900;
 `;

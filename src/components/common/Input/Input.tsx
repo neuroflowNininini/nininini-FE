@@ -4,6 +4,7 @@ import styled, { CSSProperties } from 'styled-components';
 type Variant = 'squared' | 'rounded';
 interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   variant?: Variant;
+  padding?: string;
   style?: CSSProperties;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   register?: UseFormRegisterReturn;
@@ -13,6 +14,7 @@ interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
 
 export default function Input({
   variant = 'squared',
+  padding = '1rem',
   onChange,
   style,
   register,
@@ -24,6 +26,7 @@ export default function Input({
     <Layout>
       <InputBox
         variant={variant}
+        padding={padding}
         style={{ ...style }}
       >
         <input
@@ -46,12 +49,13 @@ const Layout = styled.div`
   height: 100%;
   width: 100%;
 `;
-const InputBox = styled.div<{ variant: Variant }>`
+
+const InputBox = styled.div<{ variant: Variant; padding: string }>`
   border: 0.5px solid ${({ theme }) => theme.colors.gray['200']};
   border-radius: ${({ variant }) => variant === 'rounded' && '.5rem'};
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: ${({ padding }) => padding};
   & > input {
     width: 100%;
     font-size: ${({ theme }) => theme.fontSize.smallmedium};
