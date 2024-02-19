@@ -6,11 +6,13 @@ import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
 import { Input } from '~/components/common/Input';
 import { paths } from '~/config/paths';
+import { CONSTANTS } from '~/constants';
 import appleIcon from '~/shared/login_icons/icon_apple.png';
 import kakaoIcon from '~/shared/login_icons/kakao.png';
 import naverIcon from '~/shared/login_icons/naver.svg';
 import theme from '~/styles/theme';
-import { Login } from '~/types/apis/login';
+import { Login, LoginRes } from '~/types/apis/login';
+import { setCookie } from '~/utils/cookie';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -27,16 +29,14 @@ export default function LoginPage() {
   } = useForm<Login>();
 
   const onLoginSubmit: SubmitHandler<Login> = async (value) => {
-    const res = await postLogin(value);
-
-    switch (res.status) {
-      case 401:
-        alert('아이디 또는 비밀번호를 다시 확인해주세요.');
-        break;
-      case 201:
-        /*TODO - 받아온 토큰 관리 */
-        navigate(paths.home());
-        break;
+    const res = await postLogin<LoginRes>(value);
+    /*FIXME - status code에 따른 분기처리 */
+    if ('accessToken' in res) {
+      setCookie(CONSTANTS.ACCESS_TOKEN_KEY, res.accessToken);
+      setCookie(CONSTANTS.REFRESH_TOKEN_KEY, res.refreshToken);
+      navigate(paths.home());
+    } else {
+      alert('아이디 또는 비밀번호를 다시 확인해주세요.');
     }
   };
 
