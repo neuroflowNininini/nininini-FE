@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import appleIcon from '../../shared/login_icons/icon_apple.png';
-import kakaoIcon from '../../shared/login_icons/kakao.png';
-import { GoLogIn } from '../../shared/State';
-import theme from '../../shared/theme';
-import { users } from '../../shared/user';
+import Divider from '~/components/common/Divider';
+import { Heading } from '~/components/common/Heading';
+import { Input } from '~/components/common/Input';
+import appleIcon from '~/shared/login_icons/icon_apple.png';
+import kakaoIcon from '~/shared/login_icons/kakao.png';
+import naverIcon from '~/shared/login_icons/naver.svg';
+import { GoLogIn } from '~/shared/State.js';
+import theme from '~/styles/theme';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -32,142 +35,105 @@ export default function LoginPage() {
 
   return (
     <Container>
-      <Desc>로그인</Desc>
-      <CenterWrap>
-        <Hang>
-          <Input
-            value={id} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            placeholder="  아이디를 입력해주세요"
-            onChange={handleIdChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-      </CenterWrap>
-      <CenterWrap>
-        <Hang>
-          <Input
-            value={pw} // 입력 필드의 값은 상태 변수와 바인딩됩니다.
-            type="password"
-            placeholder="  비밀번호를 입력해주세요"
-            onChange={handlePwChange} // 입력 필드 값이 변경될 때 핸들러 호출
-          />
-        </Hang>
-      </CenterWrap>
-      <CenterWrap>
-        <LoginButton onClick={handleLogin}>로그인</LoginButton>
-      </CenterWrap>
-      <CenterWrap>
-        <KakaoButton>
-          <Icon src={kakaoIcon} />
-          <div style={{ flex: '1' }}>카카오로 3초만에 시작하기</div>
-        </KakaoButton>
-      </CenterWrap>
-      <CenterWrap>
-        <AppleButton>
-          <Icon src={appleIcon} />
-          <div style={{ flex: '1' }}>Apple로 로그인</div>
-        </AppleButton>
-      </CenterWrap>
-      <CenterWrap>
-        <SignUpButton onClick={handleSignUp}>회원가입 후 나만의 네일 즐기기</SignUpButton>
-      </CenterWrap>
-      <BottomWrap>
-        <BottomText>아이디 찾기</BottomText>
-        <BottomText>비밀번호 찾기</BottomText>
-      </BottomWrap>
+      <Heading>로그인</Heading>
+      <Input
+        variant={'rounded'}
+        padding="1.5rem"
+        placeholder="아이디를 입력해주세요"
+      />
+      <Input
+        variant={'rounded'}
+        padding="1.5rem"
+        placeholder="비밀번호를 입력해주세요"
+      />
+      <LoginButton
+        onClick={handleLogin}
+        isLightFont
+      >
+        로그인
+      </LoginButton>
+      <TextButtonsWrap>
+        <TextButton>아이디 찾기</TextButton>
+        <Divider
+          direction={'vertical'}
+          length="1.3rem"
+        />
+        <TextButton>비밀번호 찾기</TextButton>
+      </TextButtonsWrap>
+      <Divider color={theme.colors.gray[200]} />
+      <KakaoButton>
+        <Icon src={kakaoIcon} />
+        <span>카카오로 3초만에 시작하기</span>
+      </KakaoButton>
+      <AppleButton>
+        <Icon src={appleIcon} />
+        <span>Apple로 로그인</span>
+      </AppleButton>
+      <NaverButton>
+        <Icon src={naverIcon} />
+        <span>네이버 로그인</span>
+      </NaverButton>
+      <SignUpButton onClick={handleSignUp}>회원가입 후 나만의 네일 즐기기</SignUpButton>
     </Container>
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+`;
 
-const BottomText = styled.div`
+const TextButtonsWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TextButton = styled.button`
   justify-content: center;
   padding: 10px;
+  font-size: ${({ theme }) => theme.fontSize.small};
+  color: ${({ theme }) => theme.colors.gray['500']};
 `;
-const BottomWrap = styled.div`
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-`;
-const CenterWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 10px 0px;
-`;
+
 const Icon = styled.img`
-  width: 23px;
-  height: 23px;
-`;
-const TopWrap = styled.div`
-  position: relative;
-  bottom: 49px;
-  padding-top: 60px;
-  padding-bottom: 80px;
-`;
-const Space = styled.div`
-  height: 58px;
-`;
-const Desc = styled.div`
-  margin-top: 20px;
-  margin-bottom: 30px;
-`;
-const Hang = styled.div`
-  padding: 5px 0px;
-  align-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
 `;
 
-const LoginButton = styled.div`
+const LoginButton = styled.button`
+  background-color: ${({ theme }) => theme.colors.gray['900']};
+  color: ${({ theme }) => theme.colors.white['100']};
+  border-radius: 4px;
+  width: 100%;
+  height: 5rem;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  border: solid 1px #e2e2e2;
-  border-radius: 4px;
-  background-color: black;
-  color: white;
-  height: 50px;
-  width: 85vw;
   font-weight: 700;
-  padding-left: 10px;
+  font-size: ${({ theme }) => theme.fontSize.smallmedium};
+  span {
+    margin-left: 2rem;
+  }
 `;
 
-const SignUpButton = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px #757575;
-  background-color: pink;
-  border-radius: 4px;
-  height: 50px;
-  width: 85vw;
-  font-weight: 700;
-  padding-left: 10px;
-`;
-
-const KakaoButton = styled.div`
-  display: flex;
-  font-weight: 700;
-  align-items: center;
-  border-radius: 4px;
-  border: solid 1px #fae300;
+const KakaoButton = styled(LoginButton)`
   background-color: #fae300;
-  width: 85vw;
-  height: 50px;
-  padding-left: 10px;
-`;
-const AppleButton = styled.div`
-  border: solid 1px #e2e2e2;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  width: 85vw;
-  font-weight: 700;
-  height: 50px;
+  color: ${({ theme }) => theme.colors.gray['700']};
 `;
 
-const Input = styled.input`
-  height: 43px;
-  width: 85vw;
-  padding: 0px 10px;
-  border: solid 1px rgb(218, 218, 218);
+const AppleButton = styled(LoginButton)`
+  border: 1px solid #e2e2e2;
+  background-color: ${({ theme }) => theme.colors.white['100']};
+  color: ${({ theme }) => theme.colors.gray['700']};
+`;
+
+const NaverButton = styled(LoginButton)`
+  background-color: #03c75a;
+`;
+
+const SignUpButton = styled(LoginButton)`
+  background-color: ${({ theme }) => theme.colors.theme};
 `;
