@@ -2,8 +2,9 @@ import axios from 'axios';
 import { postReIssueAccessToken } from '~/api/login';
 import { CONSTANTS } from '~/constants';
 import { ErrorCode } from '~/types/apiResponse';
-import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
+import { getCookie, setCookie } from '~/utils/cookie';
 import { ENVIRONMENTS } from '~/utils/getEnv';
+import { paths } from './paths';
 
 export const NinininiAxios = axios.create({
   baseURL: ENVIRONMENTS.baseUrl(),
@@ -32,12 +33,11 @@ NinininiAxios.interceptors.response.use(
 
     switch (error.response.status) {
       case 401:
-        console.log(error.response.data);
         if (errorCode === 'INVALID_ACCESS_TOKEN') {
-          // deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
           const refreshToken = getCookie(CONSTANTS.REFRESH_TOKEN_KEY);
           if (!refreshToken) {
-            /*TODO - 재로그인 시키기 */
+            alert('로그인이 필요합니다.');
+            window.location.href = paths.logIn();
             return;
           }
           const originalReqConfig = error.config;

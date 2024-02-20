@@ -1,4 +1,5 @@
 import { NinininiAxios } from '~/config/axios';
+import { paths } from '~/config/paths';
 import { CONSTANTS } from '~/constants';
 import { Login, LoginRes } from '~/types/apis/login';
 import { deleteCookie, getCookie } from '~/utils/cookie';
@@ -29,7 +30,8 @@ export const postReIssueAccessToken = async (): Promise<LoginRes> => {
     refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
   });
   if (status === 403) {
-    /*TODO - 재로그인 */
+    alert('로그인이 필요합니다.');
+    window.location.href = paths.logIn();
     deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
     deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
   }
