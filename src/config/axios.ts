@@ -17,7 +17,7 @@ NinininiAxios.interceptors.request.use(
   (config) => {
     const accessToken = getCookie(CONSTANTS.ACCESS_TOKEN_KEY);
     if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+      config.headers['Authorization'] = accessToken;
     }
     return config;
   },
