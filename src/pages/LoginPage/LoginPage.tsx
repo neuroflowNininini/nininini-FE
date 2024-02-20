@@ -29,14 +29,15 @@ export default function LoginPage() {
   } = useForm<Login>();
 
   const onLoginSubmit: SubmitHandler<Login> = async (value) => {
-    const res = await postLogin<LoginRes>(value);
-    /*FIXME - status code에 따른 분기처리 */
-    if ('accessToken' in res) {
-      setCookie(CONSTANTS.ACCESS_TOKEN_KEY, res.accessToken);
-      setCookie(CONSTANTS.REFRESH_TOKEN_KEY, res.refreshToken);
+    const { data, status } = await postLogin(value);
+    if (status === 401) {
+      alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
+      return;
+    }
+    if (data.accessToken) {
+      setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+      setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
       navigate(paths.home());
-    } else {
-      alert('아이디 또는 비밀번호를 다시 확인해주세요.');
     }
   };
 
