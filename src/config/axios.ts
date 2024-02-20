@@ -3,7 +3,7 @@ import { postReIssueAccessToken } from '~/api/login';
 import { CONSTANTS } from '~/constants';
 import { ErrorCode } from '~/types/apiResponse';
 import { getCookie, setCookie } from '~/utils/cookie';
-import { ENVIRONMENTS } from '~/utils/getEnv';
+import { ENVIRONMENTS } from '~/config/environments';
 import { paths } from './paths';
 
 export const NinininiAxios = axios.create({
