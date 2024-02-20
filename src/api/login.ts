@@ -18,7 +18,10 @@ export const postLogin = async (body: Login) => {
       const status = e.response.status;
       switch (status) {
         case 401:
-          if (e.response.data.exception.errorCode === 'INVALID_AUTHENTICATION') {
+          if (
+            e.response.data.exception.errorCode === 'WRONG_ID' ||
+            e.response.data.exception.errorCode === 'WRONG_PW'
+          ) {
             alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
           }
           break;
@@ -55,9 +58,10 @@ export const postReIssueAccessToken = async () => {
     if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
       const status = e.response.status;
       switch (status) {
-        case 403:
+        case 401:
           if (e.response.data.exception.errorCode === 'INVALID_AUTHENTICATION') {
             alert('로그인이 필요합니다.');
+            /*TODO - 로그인 후 이전 페이지로 다시 돌아갈 수 있도록 */
             window.location.href = paths.logIn();
             deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
             deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
