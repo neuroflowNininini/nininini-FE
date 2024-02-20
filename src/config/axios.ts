@@ -48,7 +48,7 @@ NinininiAxios.interceptors.response.use(
               setCookie(CONSTANTS.ACCESS_TOKEN_KEY, newAccessToken);
               originalReqConfig.headers.Authorization = `Bearer ${newAccessToken}`;
             }
-            return axios(originalReqConfig);
+            return NinininiAxios(originalReqConfig);
           } catch (e) {
             throw Error(e);
           }
