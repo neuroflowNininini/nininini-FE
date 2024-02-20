@@ -1,6 +1,8 @@
+import { isAxiosError } from 'axios';
 import { NinininiAxios } from '~/config/axios';
 import { paths } from '~/config/paths';
 import { CONSTANTS } from '~/constants';
+import { NinininiErrorResponse } from '~/types/apiResponse';
 import { Login, LoginRes } from '~/types/apis/login';
 import { deleteCookie, getCookie } from '~/utils/cookie';
 import { ENVIRONMENTS } from '~/utils/getEnv';
@@ -25,21 +27,31 @@ export const postLogout = async () => {
   }
 };
 
-export const postReIssueAccessToken = async (): Promise<LoginRes> => {
-  const { data, status } = await NinininiAxios.post(
-    `/api/members/reissue`,
-    {},
-    {
-      headers: {
-        'refresh-token': getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
+export const postReIssueAccessToken = async () => {
+  try {
+    const { data } = await NinininiAxios.post(
+      `/api/members/reissue`,
+      {},
+      {
+        headers: {
+          'refresh-token': getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
+        },
       },
-    },
-  );
-  if (status === 403) {
-    alert('로그인이 필요합니다.');
-    window.location.href = paths.logIn();
-    deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
-    deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
+    );
+    return data;
+  } catch (e) {
+    if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
+      const status = e.response.status;
+      switch (status) {
+        case 403:
+          if (e.response.data.exception.errorCode === 'INVALID_AUTHENTICATION') {
+            alert('로그인이 필요합니다.');
+            window.location.href = paths.logIn();
+            deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
+            deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
+          }
+          break;
+      }
+    }
   }
-  return data;
 };

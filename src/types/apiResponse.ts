@@ -1,4 +1,4 @@
-export type ErrorCode = 'INVALID_ACCESS_TOKEN';
+export type ErrorCode = 'INVALID_ACCESS_TOKEN' | 'INVALID_AUTHENTICATION';
 
 export interface NinininiResponse<T> extends Response {
   parsedBody: T | NinininiErrorResponse;
