@@ -1,7 +1,6 @@
-export const getInterestTags = async () => {
-  const res = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/tags`, {
-    method: 'GET',
-  });
+import { NinininiAxios } from '~/config/axios';
 
-  return res.json();
+export const getInterestTags = async () => {
+  const data = await NinininiAxios.get(`/api/tags`);
+  return data;
 };

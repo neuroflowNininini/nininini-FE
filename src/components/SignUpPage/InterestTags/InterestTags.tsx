@@ -12,10 +12,15 @@ interface InterstTagsProps {
 
 export default function InterestTags({ onNext }: InterstTagsProps) {
   const [tagsData, setTagsData] = useState<{ id: number; tag_id: number; tag: string }[]>();
+
   useEffect(() => {
-    getInterestTags().then(({ tags }) => {
+    const updateTags = async () => {
+      const {
+        data: { tags },
+      } = await getInterestTags();
       setTagsData(tags);
-    });
+    };
+    updateTags();
   }, []);
 
   const handleContinue = () => {
