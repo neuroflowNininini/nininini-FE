@@ -5,14 +5,11 @@ import { postLogin } from '~/api/login';
 import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
 import { Input } from '~/components/common/Input';
-import { paths } from '~/config/paths';
-import { CONSTANTS } from '~/constants';
 import appleIcon from '~/shared/login_icons/icon_apple.png';
 import kakaoIcon from '~/shared/login_icons/kakao.png';
 import naverIcon from '~/shared/login_icons/naver.svg';
 import theme from '~/styles/theme';
-import { Login, LoginRes } from '~/types/apis/login';
-import { setCookie } from '~/utils/cookie';
+import { Login } from '~/types/apis/login';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -29,16 +26,7 @@ export default function LoginPage() {
   } = useForm<Login>();
 
   const onLoginSubmit: SubmitHandler<Login> = async (value) => {
-    const { data, status } = await postLogin(value);
-    if (status === 401) {
-      alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
-      return;
-    }
-    if (data.accessToken) {
-      setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
-      setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
-      navigate(paths.home());
-    }
+    await postLogin(value);
   };
 
   return (

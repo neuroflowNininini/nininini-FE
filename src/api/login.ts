@@ -3,25 +3,37 @@ import { NinininiAxios } from '~/config/axios';
 import { paths } from '~/config/paths';
 import { CONSTANTS } from '~/constants';
 import { NinininiErrorResponse } from '~/types/apiResponse';
-import { Login, LoginRes } from '~/types/apis/login';
-import { deleteCookie, getCookie } from '~/utils/cookie';
-import { ENVIRONMENTS } from '~/utils/getEnv';
+import { Login } from '~/types/apis/login';
+import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
 
-/*FIXME - status code에 따른 분기처리, 에러 핸들링 */
 export const postLogin = async (body: Login) => {
-  return await NinininiAxios.post(`/api/members/login`, body);
+  try {
+    const { data } = await NinininiAxios.post(`/api/members/login`, body);
+    setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+    setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
+    window.location.href = paths.home();
+    return;
+  } catch (e) {
+    if (isAxiosError<NinininiErrorResponse> && e.response) {
+      const status = e.response.status;
+      switch (status) {
+        case 401:
+          if (e.response.data.exception.errorCode === 'INVALID_AUTHENTICATION') {
+            alert('아이디 혹은 비밀번호를 다시 확인해주세요.');
+          }
+          break;
+      }
+    }
+  }
 };
 
 export const postLogout = async () => {
   try {
-    const res = await fetch(ENVIRONMENTS.baseUrl() + `/api/members/logout`, {
-      method: 'POST',
-      body: JSON.stringify({
-        refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
-      }),
+    const { data } = await NinininiAxios.post(`/api/members/logout`, {
+      refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
     });
 
-    return res.json();
+    return data;
   } catch (e) {
     throw Error(e);
   }
