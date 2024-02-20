@@ -6,7 +6,7 @@ import { NinininiErrorResponse } from '~/types/apiResponse';
 import { Login } from '~/types/apis/login';
 import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
 
-export const postLogin = async <T>(body: Login) => {
+export const postLogin = async (body: Login) => {
   try {
     const { data } = await NinininiAxios.post(`/api/members/login`, body);
     setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
