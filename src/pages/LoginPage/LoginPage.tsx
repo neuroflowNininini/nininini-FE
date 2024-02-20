@@ -5,7 +5,6 @@ import { postLogin } from '~/api/login';
 import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
 import { Input } from '~/components/common/Input';
-import { paths } from '~/config/paths';
 import appleIcon from '~/shared/login_icons/icon_apple.png';
 import kakaoIcon from '~/shared/login_icons/kakao.png';
 import naverIcon from '~/shared/login_icons/naver.svg';
@@ -27,17 +26,7 @@ export default function LoginPage() {
   } = useForm<Login>();
 
   const onLoginSubmit: SubmitHandler<Login> = async (value) => {
-    const res = await postLogin(value);
-
-    switch (res.status) {
-      case 401:
-        alert('아이디 또는 비밀번호를 다시 확인해주세요.');
-        break;
-      case 201:
-        /*TODO - 받아온 토큰 관리 */
-        navigate(paths.home());
-        break;
-    }
+    await postLogin(value);
   };
 
   return (
