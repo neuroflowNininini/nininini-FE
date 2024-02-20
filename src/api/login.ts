@@ -26,9 +26,15 @@ export const postLogout = async () => {
 };
 
 export const postReIssueAccessToken = async (): Promise<LoginRes> => {
-  const { data, status } = await NinininiAxios.post(`/api/members/reissue`, {
-    refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
-  });
+  const { data, status } = await NinininiAxios.post(
+    `/api/members/reissue`,
+    {},
+    {
+      headers: {
+        'refresh-token': getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
+      },
+    },
+  );
   if (status === 403) {
     alert('로그인이 필요합니다.');
     window.location.href = paths.logIn();
