@@ -5,6 +5,7 @@ import { postLogin } from '~/api/login';
 import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
 import { Input } from '~/components/common/Input';
+import { paths } from '~/config/paths';
 import appleIcon from '~/shared/login_icons/icon_apple.png';
 import kakaoIcon from '~/shared/login_icons/kakao.png';
 import naverIcon from '~/shared/login_icons/naver.svg';
@@ -13,11 +14,6 @@ import { Login } from '~/types/apis/login';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-
-  const handleSignUp = () => {
-    // 회원 여부 체크 추가해야함. + 모달
-    navigate('/signup');
-  };
 
   const {
     register,
@@ -76,7 +72,9 @@ export default function LoginPage() {
         <Icon src={naverIcon} />
         <span>네이버 로그인</span>
       </NaverButton>
-      <SignUpButton onClick={handleSignUp}>회원가입 후 나만의 네일 즐기기</SignUpButton>
+      <SignUpButton onClick={() => navigate(paths.signUp())}>
+        회원가입 후 나만의 네일 즐기기
+      </SignUpButton>
     </Container>
   );
 }
