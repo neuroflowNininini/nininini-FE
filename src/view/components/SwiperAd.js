@@ -10,8 +10,9 @@ import ad3 from '../../shared/pics/AD/ad3.png';
 import { useNavigate } from 'react-router-dom';
 import theme from '../../shared/theme';
 
+/*TODO - navigate 대신 다른 리다이렉트 훅 사용 */
 export default function SwiperAd() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleToADPage = (idx) => {
     var imgSrc = ad1;
     if (idx === 2) {
@@ -20,7 +21,7 @@ export default function SwiperAd() {
     if (idx === 3) {
       imgSrc = ad3;
     }
-    navigate('/adpage', { state: { imgSrc: imgSrc } });
+    // navigate('/adpage', { state: { imgSrc: imgSrc } });
   };
   return (
     <>

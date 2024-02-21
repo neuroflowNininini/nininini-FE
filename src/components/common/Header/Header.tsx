@@ -14,7 +14,7 @@ import MenuModal from '~/view/components/MenuModal.js';
 import Divider from '../Divider';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
-export default function Header() {
+export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -76,15 +76,27 @@ export default function Header() {
             <HiOutlineShoppingBag size="26" />
           </Link>
           <TextMenuBox>
-            <Link to={paths.myPage()}>
-              <TextMenuItem>{'MY PAGE'}</TextMenuItem>
-            </Link>
+            {isLoggedIn ? (
+              <Link to={paths.myPage()}>
+                <TextMenuItem>{'MY PAGE'}</TextMenuItem>
+              </Link>
+            ) : (
+              <Link to={paths.logIn()}>
+                <TextMenuItem>{'LOGIN'}</TextMenuItem>
+              </Link>
+            )}
             <Divider
               direction="vertical"
               length="1.5rem"
               style={{ backgroundColor: theme.colors.gray[800] }}
             />
-            <TextMenuItem onClick={handleLogout}>{'LOGOUT'}</TextMenuItem>
+            {isLoggedIn ? (
+              <TextMenuItem onClick={handleLogout}>{'LOGOUT'}</TextMenuItem>
+            ) : (
+              <Link to={paths.signUp()}>
+                <TextMenuItem>{'SIGN UP'}</TextMenuItem>
+              </Link>
+            )}
           </TextMenuBox>
         </Element2>
       </HeaderContainer>
