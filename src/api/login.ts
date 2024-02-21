@@ -35,7 +35,9 @@ export const postLogout = async () => {
     const { data } = await NinininiAxios.post(`/api/members/logout`, {
       refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
     });
-
+    deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
+    deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
+    window.location.href = paths.home();
     return data;
   } catch (e) {
     throw Error(e);
