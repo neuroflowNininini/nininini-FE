@@ -57,18 +57,10 @@ export const postReIssueAccessToken = async () => {
     );
     return data;
   } catch (e) {
-    if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
-      const status = e.response.status;
-      switch (status) {
-        case 401:
-          if (e.response.data.exception.errorCode === 'INVALID_AUTHENTICATION') {
-            alert('로그인이 필요합니다.');
-            /*TODO - 로그인 후 이전 페이지로 다시 돌아갈 수 있도록 */
-            window.location.href = paths.logIn();
-            deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
-            deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
-          }
-          break;
+    if (isAxiosError<NinininiErrorResponse> && e.response) {
+      if (e.response.status === 401) {
+        deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
+        deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
       }
     }
   }
