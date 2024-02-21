@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { postLogout } from '~/api/login';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
+import { useAuth } from '~/lib/contexts/AuthProvider';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import theme from '~/styles/theme';
@@ -49,6 +50,8 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const handleLogout = async () => {
     await postLogout();
   };
+
+  const { isLoggedIn, userInfo } = useAuth();
 
   return (
     <HeaderEl isScrolled={isScrolled}>
