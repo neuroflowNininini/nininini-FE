@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { postReIssueAccessToken } from '~/api/login';
+import { ENVIRONMENTS } from '~/config/environments';
 import { CONSTANTS } from '~/constants';
 import { ErrorCode } from '~/types/apiResponse';
 import { getCookie, setCookie } from '~/utils/cookie';
-import { ENVIRONMENTS } from '~/config/environments';
 import { paths } from './paths';
 
 export const NinininiAxios = axios.create({
@@ -46,7 +46,7 @@ NinininiAxios.interceptors.response.use(
             const { accessToken: newAccessToken } = await postReIssueAccessToken();
             if (newAccessToken) {
               setCookie(CONSTANTS.ACCESS_TOKEN_KEY, newAccessToken);
-              originalReqConfig.headers.Authorization = `Bearer ${newAccessToken}`;
+              originalReqConfig.headers.Authorization = newAccessToken;
             }
             return NinininiAxios(originalReqConfig);
           } catch (e) {

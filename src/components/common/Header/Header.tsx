@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { postLogout } from '~/api/login';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
+import { useAuth } from '~/lib/contexts/AuthProvider';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import theme from '~/styles/theme';
@@ -50,6 +51,8 @@ export default function Header() {
     await postLogout();
   };
 
+  const { isLoggedIn, userInfo } = useAuth();
+
   return (
     <HeaderEl isScrolled={isScrolled}>
       <HeaderContainer>
@@ -76,15 +79,27 @@ export default function Header() {
             <HiOutlineShoppingBag size="26" />
           </Link>
           <TextMenuBox>
-            <Link to={paths.myPage()}>
-              <TextMenuItem>{'MY PAGE'}</TextMenuItem>
-            </Link>
+            {isLoggedIn ? (
+              <Link to={paths.myPage()}>
+                <TextMenuItem>{'MY PAGE'}</TextMenuItem>
+              </Link>
+            ) : (
+              <Link to={paths.logIn()}>
+                <TextMenuItem>{'LOGIN'}</TextMenuItem>
+              </Link>
+            )}
             <Divider
               direction="vertical"
               length="1.5rem"
               style={{ backgroundColor: theme.colors.gray[800] }}
             />
-            <TextMenuItem onClick={handleLogout}>{'LOGOUT'}</TextMenuItem>
+            {isLoggedIn ? (
+              <TextMenuItem onClick={handleLogout}>{'LOGOUT'}</TextMenuItem>
+            ) : (
+              <Link to={paths.signUp()}>
+                <TextMenuItem>{'SIGN UP'}</TextMenuItem>
+              </Link>
+            )}
           </TextMenuBox>
         </Element2>
       </HeaderContainer>
