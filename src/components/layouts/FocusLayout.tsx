@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '~/components/common/Header';
+import { useAuth } from '~/lib/contexts/AuthProvider';
 import { media } from '~/styles/breakpoints';
 
 export default function FocusLayout() {
+  const { isLoggedIn } = useAuth();
   return (
     <Layout>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <Container>
         <Outlet />
       </Container>

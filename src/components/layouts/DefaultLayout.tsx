@@ -1,12 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuth } from '~/lib/contexts/AuthProvider';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import Header from '../common/Header';
 
 export default function DefaultLayout() {
+  const { isLoggedIn } = useAuth();
   return (
     <Layout>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <Container>
         <Outlet />
       </Container>
