@@ -32,9 +32,15 @@ export const postLogin = async (body: Login) => {
 
 export const postLogout = async () => {
   try {
-    const { data } = await NinininiAxios.post(`/api/members/logout`, {
-      refresh: getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
-    });
+    const { data } = await NinininiAxios.post(
+      `/api/members/logout`,
+      {},
+      {
+        headers: {
+          'refresh-token': getCookie(CONSTANTS.REFRESH_TOKEN_KEY),
+        },
+      },
+    );
     deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
     deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);
     window.location.href = paths.home();
