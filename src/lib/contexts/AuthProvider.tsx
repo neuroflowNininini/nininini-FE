@@ -3,7 +3,16 @@ import { NinininiAxios } from '~/config/axios';
 import { CONSTANTS } from '~/constants';
 import { getCookie } from '~/utils/cookie';
 
-const AuthContext = createContext({
+/*FIXME - user 타입 지정 */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+type AuthState = {
+  userInfo: any;
+  isLoggedIn: boolean;
+  getUserInfo: () => void;
+};
+
+const AuthContext = createContext<AuthState>({
   userInfo: null,
   isLoggedIn: false,
   getUserInfo: () => {},
@@ -41,6 +50,6 @@ export const useAuth = () => {
     if (accessToken) {
       getUserInfo();
     }
-  }, []);
+  }, [accessToken]);
   return { userInfo, isLoggedIn };
 };
