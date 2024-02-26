@@ -72,36 +72,38 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="userId">
             아이디 <span>*</span>
           </Label>
-          <Input
-            id="userId"
-            register={{
-              ...register('userId', {
-                ...BASIC_INFO_VALIDATION.userId,
-                validate: () => {
-                  if (idChecked === false) {
-                    return '* 이미 사용 중인 아이디입니다.';
-                  } else if (!idChecked) {
-                    return '* 아이디 중복확인이 필요합니다.';
-                  }
-                  return true;
-                },
-              }),
-            }}
-            placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
-            error={errors.userId}
-            showErrorMessage={false}
-            message={idChecked ? '멋진 아이디네요. :)' : ''}
-          />
-          <ThemeButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleCheckDuplicateId(e)}
-            variant="reversed"
-            width="15rem"
-            height="100%"
-            fontSize={'smallmedium'}
-            style={{ marginLeft: '3px', padding: '1rem 0' }}
-          >
-            중복확인
-          </ThemeButton>
+          <Row>
+            <Input
+              id="userId"
+              register={{
+                ...register('userId', {
+                  ...BASIC_INFO_VALIDATION.userId,
+                  validate: () => {
+                    if (idChecked === false) {
+                      return '* 이미 사용 중인 아이디입니다.';
+                    } else if (!idChecked) {
+                      return '* 아이디 중복확인이 필요합니다.';
+                    }
+                    return true;
+                  },
+                }),
+              }}
+              placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
+              error={errors.userId}
+              showErrorMessage={false}
+              message={idChecked ? '멋진 아이디네요. :)' : ''}
+            />
+            <ThemeButton
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleCheckDuplicateId(e)}
+              variant="reversed"
+              width="15rem"
+              height="100%"
+              fontSize={'smallmedium'}
+              style={{ marginLeft: '3px', padding: '1rem 0' }}
+            >
+              중복확인
+            </ThemeButton>
+          </Row>
         </InputRow>
         <InputRow>
           <Label htmlFor="userPw">
@@ -182,26 +184,30 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label>
             생년월일 및 성별 <span>*</span>
           </Label>
-          <Input
-            id="birth"
-            register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
-            error={errors.birth}
-            showErrorMessage={false}
-            placeholder="주민번호 앞 6자리"
-            style={{ width: '15rem' }}
-          />
-          <Divider
-            length="2rem"
-            margin="0 .7rem"
-          />
-          <Input
-            id="sex"
-            register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
-            error={errors.sex}
-            showErrorMessage={false}
-            style={{ width: '5rem' }}
-          />
-          <PwSymbol>••••••</PwSymbol>
+          <Row>
+            <BirthSexRow>
+              <Input
+                id="birth"
+                register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
+                error={errors.birth}
+                showErrorMessage={false}
+                placeholder="주민번호 앞 6자리"
+                style={{ width: '15rem' }}
+              />
+              <Divider
+                length="2rem"
+                margin="0 .7rem"
+              />
+              <Input
+                id="sex"
+                register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
+                error={errors.sex}
+                showErrorMessage={false}
+                style={{ width: '5rem' }}
+              />
+            </BirthSexRow>
+            <PwSymbol>••••••</PwSymbol>
+          </Row>
         </InputRow>
         {(errors.name || errors.phoneNumber || errors.email || errors.birth || errors.sex) && (
           <ErrorMessages>
@@ -243,13 +249,19 @@ const ErrorMessages = styled.div`
 const FormWrap = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
 `;
 
 const InputRow = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.7rem;
   width: 100%;
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Label = styled.label`
@@ -260,8 +272,13 @@ const Label = styled.label`
   }
 `;
 
+const BirthSexRow = styled(Row)`
+  width: 70%;
+`;
+
 const PwSymbol = styled.div`
   font-size: ${({ theme }) => theme.fontSize.large};
   letter-spacing: 0.5rem;
   margin-left: 1rem;
+  width: 140%;
 `;
