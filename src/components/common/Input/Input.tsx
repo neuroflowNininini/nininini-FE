@@ -73,5 +73,5 @@ const ErrorMessage = styled.div`
 
 const NonErrorMessage = styled.div`
   font-size: ${({ theme }) => theme.fontSize.small};
-  color: ${({ theme }) => theme.colors.gray['300']};
+  color: ${({ theme }) => theme.colors.gray['500']};
 `;
