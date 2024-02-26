@@ -20,6 +20,7 @@ import { paths } from './config/paths';
 import { DefaultLayout, FocusLayout, HomeLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 import { LoginPage } from './pages/LoginPage';
+import { OAuthRedirectPage } from './pages/OAuthRedirectPage';
 import { AuthProvider } from './lib/contexts/AuthProvider';
 import GuestRoute from './routes/GuestRoute';
 import { TermsDetailPage } from './pages/TermsDetailPage';
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
           { path: 'etc', element: <CategoryPage category={'etc'} /> },
         ],
       },
+      { path: paths.oAuthRedirect(), element: <OAuthRedirectPage /> },
     ],
   },
   { path: '*', element: <Root /> },

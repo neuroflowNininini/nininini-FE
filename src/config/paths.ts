@@ -11,4 +11,5 @@ export const paths = {
   cart: () => `/cart`,
   signUp: () => `/sign-up`,
   logIn: () => `/login`,
+  oAuthRedirect: () => `/oauth/:platform`,
 };
