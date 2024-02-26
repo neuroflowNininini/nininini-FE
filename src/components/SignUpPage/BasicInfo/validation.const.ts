@@ -4,14 +4,6 @@ import { BasicInfoForm } from './BasicInfo';
 export const BASIC_INFO_VALIDATION: Partial<Record<keyof BasicInfoForm, RegisterOptions>> = {
   userId: {
     required: '* 아이디를 입력해주세요.',
-    minLength: {
-      value: 3,
-      message: '* 아이디: 3자 ~ 10자의 영문, 특수문자, 숫자 조합으로 입력해주세요.',
-    },
-    maxLength: {
-      value: 10,
-      message: '* 아이디: 3자 ~ 10자의 영문, 특수문자, 숫자 조합으로 입력해주세요.',
-    },
     pattern: {
       value: /^[a-zA-Z0-9-_]{3,10}$/,
       message: '* 아이디: 3자 ~ 10자의 영문, 특수문자, 숫자 조합으로 입력해주세요.',
@@ -19,13 +11,9 @@ export const BASIC_INFO_VALIDATION: Partial<Record<keyof BasicInfoForm, Register
   },
   userPw: {
     required: '* 비밀번호를 입력해주세요.',
-    minLength: {
-      value: 5,
-      message: '* 비밀번호: 5자 ~ 20자로 입력해주세요.',
-    },
-    maxLength: {
-      value: 20,
-      message: '* 비밀번호: 5자 ~ 20자로 입력해주세요.',
+    pattern: {
+      value: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{5,20}$/,
+      message: '* 비밀번호:  5자 ~ 20자의 영문, 특수문자, 숫자를 필수로 입력해주세요.',
     },
   },
   name: {
