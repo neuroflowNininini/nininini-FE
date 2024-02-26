@@ -69,7 +69,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
       />
       <FormWrap onSubmit={handleSubmit(onSubmit)}>
         <InputRow>
-          <Label htmlFor="userId">아이디</Label>
+          <Label htmlFor="userId">
+            아이디 <span>*</span>
+          </Label>
           <Input
             id="userId"
             register={{
@@ -102,7 +104,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           </ThemeButton>
         </InputRow>
         <InputRow>
-          <Label htmlFor="userPw">비밀번호</Label>
+          <Label htmlFor="userPw">
+            비밀번호 <span>*</span>
+          </Label>
           <Input
             id="userPw"
             type="password"
@@ -113,7 +117,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="pwConfirm">비밀번호 확인</Label>
+          <Label htmlFor="pwConfirm">
+            비밀번호 확인 <span>*</span>
+          </Label>
           <Input
             id="pwConfirm"
             type="password"
@@ -137,7 +143,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
         )}
         <Spacer />
         <InputRow>
-          <Label htmlFor="name">이름</Label>
+          <Label htmlFor="name">
+            이름 <span>*</span>
+          </Label>
           <Input
             id="name"
             register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
@@ -146,7 +154,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="phoneNumber">연락처</Label>
+          <Label htmlFor="phoneNumber">
+            연락처 <span>*</span>
+          </Label>
           <Input
             id="phoneNumber"
             register={{
@@ -158,7 +168,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="email">이메일</Label>
+          <Label htmlFor="email">
+            이메일 <span>*</span>
+          </Label>
           <Input
             id="email"
             register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
@@ -167,7 +179,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label>생년월일 및 성별</Label>
+          <Label>
+            생년월일 및 성별 <span>*</span>
+          </Label>
           <Input
             id="birth"
             register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
@@ -241,6 +255,9 @@ const InputRow = styled.div`
 const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSize.smallmedium};
   min-width: 25%;
+  span {
+    color: ${({ theme }) => theme.colors.theme};
+  }
 `;
 
 const PwSymbol = styled.div`
