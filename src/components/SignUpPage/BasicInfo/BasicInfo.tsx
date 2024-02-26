@@ -85,6 +85,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 },
               }),
             }}
+            placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
             error={errors.userId}
             showErrorMessage={false}
             message={idChecked ? '멋진 아이디네요. :)' : ''}
@@ -106,6 +107,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="userPw"
             type="password"
             register={{ ...register('userPw', BASIC_INFO_VALIDATION.userPw) }}
+            placeholder="5자 ~ 20자의 영문, 특수문자, 숫자 (각 필수)"
             error={errors.userPw}
             showErrorMessage={false}
           />
@@ -150,6 +152,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             register={{
               ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
             }}
+            placeholder="- 없이 숫자만 입력"
             error={errors.phoneNumber}
             showErrorMessage={false}
           />
