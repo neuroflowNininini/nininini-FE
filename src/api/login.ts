@@ -14,7 +14,7 @@ export const postLogin = async (body: Login) => {
     window.location.href = paths.home();
     return;
   } catch (e) {
-    if (isAxiosError<NinininiErrorResponse> && e.response) {
+    if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
       const status = e.response.status;
       switch (status) {
         case 401:
@@ -63,7 +63,7 @@ export const postReIssueAccessToken = async () => {
     );
     return data;
   } catch (e) {
-    if (isAxiosError<NinininiErrorResponse> && e.response) {
+    if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
       if (e.response.status === 401) {
         deleteCookie(CONSTANTS.ACCESS_TOKEN_KEY);
         deleteCookie(CONSTANTS.REFRESH_TOKEN_KEY);

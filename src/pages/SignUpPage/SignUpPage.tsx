@@ -5,9 +5,12 @@ import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
 import { SignUpComplete } from '~/components/SignUpPage/SignUpComplete';
 import { TermsAgreement } from '~/components/SignUpPage/TermsAgreement';
+import { paths } from '~/config/paths';
+import { CONSTANTS } from '~/constants';
 import { ReadAiMeasure } from '~/types/apis/aiMeasure';
+import { LoginRes } from '~/types/apis/login';
 import { SignUp } from '~/types/apis/signUp';
-import { HandType } from '~/types/handType';
+import { setCookie } from '~/utils/cookie';
 
 type Step = 'agreement' | 'basicInfo' | 'interestTags' | 'nailRegister' | 'complete';
 
@@ -49,14 +52,17 @@ export default function SignUpPage() {
         <NailRegister
           onNext={(aiMeasure: ReadAiMeasure) => {
             if (!signUpData) return;
-            postSignUp(aiMeasure ? { ...signUpData, aiMeasure } : signUpData).then(
-              ({ accessToken, refreshToken }) => {
-                if (accessToken && refreshToken) {
-                  setStep('complete');
-                  /*TODO - response로 받은 토큰 관리 */
-                }
+            postSignUp({
+              body: aiMeasure ? { ...signUpData, aiMeasure } : signUpData,
+              onDuplicate: () => {
+                alert('이미 가입한 회원입니다.');
               },
-            );
+              onSuccess: (data: LoginRes) => {
+                setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+                setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
+                window.location.href = paths.home();
+              },
+            });
           }}
         />
       )}
