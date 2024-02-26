@@ -9,6 +9,7 @@ interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
   register?: UseFormRegisterReturn;
   error?: FieldError;
+  showErrorMessage?: boolean;
   message?: string;
 }
 
@@ -19,6 +20,7 @@ export default function Input({
   style,
   register,
   error,
+  showErrorMessage = true,
   message,
   ...props
 }: InputProps) {
@@ -27,6 +29,7 @@ export default function Input({
       <InputBox
         variant={variant}
         padding={padding}
+        error={error}
         style={{ ...style }}
       >
         <input
@@ -36,7 +39,7 @@ export default function Input({
           {...props}
         />
       </InputBox>
-      {error && <ErrorMessage>{error.message}</ErrorMessage>}
+      {error && showErrorMessage && <ErrorMessage>{error.message}</ErrorMessage>}
       {!error && message && <NonErrorMessage>{message}</NonErrorMessage>}
     </Layout>
   );
@@ -50,8 +53,9 @@ const Layout = styled.div`
   width: 100%;
 `;
 
-const InputBox = styled.div<{ variant: Variant; padding: string }>`
-  border: 0.5px solid ${({ theme }) => theme.colors.gray['200']};
+const InputBox = styled.div<{ variant: Variant; padding: string; error: FieldError }>`
+  border: 0.5px solid
+    ${({ theme, error }) => (!error ? theme.colors.gray['200'] : theme.colors.theme)};
   border-radius: ${({ variant }) => variant === 'rounded' && '.5rem'};
   display: flex;
   align-items: center;
@@ -69,5 +73,5 @@ const ErrorMessage = styled.div`
 
 const NonErrorMessage = styled.div`
   font-size: ${({ theme }) => theme.fontSize.small};
-  color: ${({ theme }) => theme.colors.gray['300']};
+  color: ${({ theme }) => theme.colors.gray['500']};
 `;
