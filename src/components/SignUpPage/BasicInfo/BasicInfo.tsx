@@ -69,40 +69,46 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
       />
       <FormWrap onSubmit={handleSubmit(onSubmit)}>
         <InputRow>
-          <Label htmlFor="userId">아이디</Label>
-          <Input
-            id="userId"
-            register={{
-              ...register('userId', {
-                ...BASIC_INFO_VALIDATION.userId,
-                validate: () => {
-                  if (idChecked === false) {
-                    return '* 이미 사용 중인 아이디입니다.';
-                  } else if (!idChecked) {
-                    return '* 아이디 중복확인이 필요합니다.';
-                  }
-                  return true;
-                },
-              }),
-            }}
-            placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
-            error={errors.userId}
-            showErrorMessage={false}
-            message={idChecked ? '멋진 아이디네요. :)' : ''}
-          />
-          <ThemeButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleCheckDuplicateId(e)}
-            variant="reversed"
-            width="15rem"
-            height="100%"
-            fontSize={'smallmedium'}
-            style={{ marginLeft: '3px', padding: '1rem 0' }}
-          >
-            중복확인
-          </ThemeButton>
+          <Label htmlFor="userId">
+            아이디 <span>*</span>
+          </Label>
+          <Row>
+            <Input
+              id="userId"
+              register={{
+                ...register('userId', {
+                  ...BASIC_INFO_VALIDATION.userId,
+                  validate: () => {
+                    if (idChecked === false) {
+                      return '* 이미 사용 중인 아이디입니다.';
+                    } else if (!idChecked) {
+                      return '* 아이디 중복확인이 필요합니다.';
+                    }
+                    return true;
+                  },
+                }),
+              }}
+              placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
+              error={errors.userId}
+              showErrorMessage={false}
+              message={idChecked ? '멋진 아이디네요. :)' : ''}
+            />
+            <ThemeButton
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleCheckDuplicateId(e)}
+              variant="reversed"
+              width="15rem"
+              height="100%"
+              fontSize={'smallmedium'}
+              style={{ marginLeft: '3px', padding: '1rem 0' }}
+            >
+              중복확인
+            </ThemeButton>
+          </Row>
         </InputRow>
         <InputRow>
-          <Label htmlFor="userPw">비밀번호</Label>
+          <Label htmlFor="userPw">
+            비밀번호 <span>*</span>
+          </Label>
           <Input
             id="userPw"
             type="password"
@@ -113,7 +119,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="pwConfirm">비밀번호 확인</Label>
+          <Label htmlFor="pwConfirm">
+            비밀번호 확인 <span>*</span>
+          </Label>
           <Input
             id="pwConfirm"
             type="password"
@@ -137,7 +145,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
         )}
         <Spacer />
         <InputRow>
-          <Label htmlFor="name">이름</Label>
+          <Label htmlFor="name">
+            이름 <span>*</span>
+          </Label>
           <Input
             id="name"
             register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
@@ -146,7 +156,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="phoneNumber">연락처</Label>
+          <Label htmlFor="phoneNumber">
+            연락처 <span>*</span>
+          </Label>
           <Input
             id="phoneNumber"
             register={{
@@ -158,7 +170,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label htmlFor="email">이메일</Label>
+          <Label htmlFor="email">
+            이메일 <span>*</span>
+          </Label>
           <Input
             id="email"
             register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
@@ -167,27 +181,33 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           />
         </InputRow>
         <InputRow>
-          <Label>생년월일 및 성별</Label>
-          <Input
-            id="birth"
-            register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
-            error={errors.birth}
-            showErrorMessage={false}
-            placeholder="주민번호 앞 6자리"
-            style={{ width: '15rem' }}
-          />
-          <Divider
-            length="2rem"
-            margin="0 .7rem"
-          />
-          <Input
-            id="sex"
-            register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
-            error={errors.sex}
-            showErrorMessage={false}
-            style={{ width: '5rem' }}
-          />
-          <PwSymbol>••••••</PwSymbol>
+          <Label>
+            생년월일 및 성별 <span>*</span>
+          </Label>
+          <Row>
+            <BirthSexRow>
+              <Input
+                id="birth"
+                register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
+                error={errors.birth}
+                showErrorMessage={false}
+                placeholder="주민번호 앞 6자리"
+                style={{ width: '15rem' }}
+              />
+              <Divider
+                length="2rem"
+                margin="0 .7rem"
+              />
+              <Input
+                id="sex"
+                register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
+                error={errors.sex}
+                showErrorMessage={false}
+                style={{ width: '5rem' }}
+              />
+            </BirthSexRow>
+            <PwSymbol>••••••</PwSymbol>
+          </Row>
         </InputRow>
         {(errors.name || errors.phoneNumber || errors.email || errors.birth || errors.sex) && (
           <ErrorMessages>
@@ -229,22 +249,36 @@ const ErrorMessages = styled.div`
 const FormWrap = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
 `;
 
 const InputRow = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.7rem;
   width: 100%;
+`;
+
+const Row = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Label = styled.label`
   font-size: ${({ theme }) => theme.fontSize.smallmedium};
   min-width: 25%;
+  span {
+    color: ${({ theme }) => theme.colors.theme};
+  }
+`;
+
+const BirthSexRow = styled(Row)`
+  width: 70%;
 `;
 
 const PwSymbol = styled.div`
   font-size: ${({ theme }) => theme.fontSize.large};
   letter-spacing: 0.5rem;
   margin-left: 1rem;
+  width: 140%;
 `;
