@@ -20,7 +20,7 @@ export default function RowProductList({ dummy }: { dummy: any[] }) {
         navigation={true}
         breakpoints={{
           [deviceSizes.sm]: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             freeMode: false,
           },
         }}
@@ -36,6 +36,9 @@ export default function RowProductList({ dummy }: { dummy: any[] }) {
         </SwiperSlide>
         <SwiperSlide>
           <ProductCard cardData={dummy[3]} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <ProductCard cardData={dummy[4]} />
         </SwiperSlide>
       </Swiper>
     </>
