@@ -1,5 +1,7 @@
 export const ENVIRONMENTS = {
   baseUrl: () => getEnv('REACT_APP_API_BASE_URL'),
+  kakaoRestApiKey: () => getEnv('REACT_APP_OAUTH_KAKAO_REST_API_KEY'),
+  kakaoRedirectUri: () => getEnv('REACT_APP_OAUTH_KAKAO_REDIRECT_URI'),
 };
 
 const getEnv = (key: string) => {
