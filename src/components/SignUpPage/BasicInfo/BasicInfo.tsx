@@ -26,7 +26,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     control,
   } = useForm<BasicInfoForm>();
 
-  const [idChecked, setIdChecked] = useState(false);
+  const [idChecked, setIdChecked] = useState<boolean | undefined>();
 
   const userId = useWatch({
     control,
@@ -70,10 +70,17 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             register={{
               ...register('userId', {
                 ...BASIC_INFO_VALIDATION.userId,
-                validate: () => idChecked || '이미 사용 중인 아이디입니다.',
+                validate: () => {
+                  if (idChecked === false) {
+                    return '이미 사용 중인 아이디입니다.';
+                  } else if (!idChecked) {
+                    return '아이디 중복확인이 필요합니다.';
+                  }
+                },
               }),
             }}
             error={errors.userId}
+            showErrorMessage={false}
             message={idChecked ? '멋진 아이디네요. :)' : ''}
           />
           <ThemeButton
@@ -94,6 +101,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             type="password"
             register={{ ...register('userPw', BASIC_INFO_VALIDATION.userPw) }}
             error={errors.userPw}
+            showErrorMessage={false}
           />
         </InputRow>
         <InputRow>
@@ -103,27 +111,41 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             type="password"
             register={{
               ...register('pwConfirm', {
-                required: '비밀번호 재확인이 필요합니다.',
-                validate: (value) => value === userPw || '비밀번호가 일치하지 않습니다.',
+                required: '* 비밀번호 재확인이 필요합니다.',
+                validate: (value) =>
+                  value === userPw || '* 비밀번호 확인: 비밀번호가 일치하지 않습니다.',
               }),
             }}
             error={errors.pwConfirm}
+            showErrorMessage={false}
           />
         </InputRow>
+        {(errors.userId || errors.userPw || errors.pwConfirm) && (
+          <ErrorMessages>
+            {errors.userId && <span>{errors.userId.message}</span>}
+            {errors.userPw && <span>{errors.userPw.message}</span>}
+            {errors.pwConfirm && <span>{errors.pwConfirm.message}</span>}
+          </ErrorMessages>
+        )}
+        <Spacer />
         <InputRow>
           <Label htmlFor="name">이름</Label>
           <Input
             id="name"
             register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
             error={errors.name}
+            showErrorMessage={false}
           />
         </InputRow>
         <InputRow>
           <Label htmlFor="phoneNumber">연락처</Label>
           <Input
             id="phoneNumber"
-            register={{ ...register('phoneNumber', { required: '연락처로 본인인증을 해주세요.' }) }}
+            register={{
+              ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
+            }}
             error={errors.phoneNumber}
+            showErrorMessage={false}
           />
         </InputRow>
         <InputRow>
@@ -132,6 +154,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="email"
             register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
             error={errors.email}
+            showErrorMessage={false}
           />
         </InputRow>
         <InputRow>
@@ -140,6 +163,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="birth"
             register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
             error={errors.birth}
+            showErrorMessage={false}
             placeholder="주민번호 앞 6자리"
             style={{ width: '15rem' }}
           />
@@ -151,10 +175,20 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="sex"
             register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
             error={errors.sex}
+            showErrorMessage={false}
             style={{ width: '5rem' }}
           />
           <PwSymbol>••••••</PwSymbol>
         </InputRow>
+        {(errors.name || errors.phoneNumber || errors.email || errors.birth || errors.sex) && (
+          <ErrorMessages>
+            {errors.name && <span>{errors.name.message}</span>}
+            {errors.phoneNumber && <span>{errors.phoneNumber.message}</span>}
+            {errors.email && <span>{errors.email.message}</span>}
+            {errors.birth && <span>{errors.birth.message}</span>}
+            {errors.sex && <span>{errors.sex.message}</span>}
+          </ErrorMessages>
+        )}
         <ThemeButton
           type="submit"
           style={{ marginTop: '3rem' }}
@@ -169,6 +203,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+`;
+
+const Spacer = styled.div`
+  height: 2rem;
+`;
+
+const ErrorMessages = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: ${({ theme }) => theme.fontSize.small};
+  color: red;
 `;
 
 const FormWrap = styled.form`
