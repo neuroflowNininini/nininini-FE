@@ -1,4 +1,10 @@
-export type ErrorCode = 'INVALID_ACCESS_TOKEN' | 'INVALID_AUTHENTICATION' | 'WRONG_ID' | 'WRONG_PW';
+export type ErrorCode =
+  | 'INVALID_ACCESS_TOKEN'
+  | 'INVALID_AUTHENTICATION'
+  | 'WRONG_ID'
+  | 'WRONG_PW'
+  | 'DUP_SIGNUP'
+  | 'ID_ALREADY_EXIST';
 
 export interface NinininiResponse<T> extends Response {
   parsedBody: T | NinininiErrorResponse;

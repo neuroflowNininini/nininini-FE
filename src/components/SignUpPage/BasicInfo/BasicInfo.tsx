@@ -39,13 +39,15 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
 
   const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    postCheckDuplicateId(userId).then(async (res) => {
-      if (res.exception && res.exception.errorCode === 'ID_ALREADY_EXIST') {
+    postCheckDuplicateId({
+      userId,
+      onDuplicate: () => {
         setIdChecked(false);
         alert('이미 사용 중인 아이디입니다.');
-      } else if (res.message) {
+      },
+      onSuccess: () => {
         setIdChecked(true);
-      }
+      },
     });
   };
 
