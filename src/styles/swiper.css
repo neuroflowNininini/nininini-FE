@@ -27,6 +27,5 @@
 }
 
 .swiper-container-hero {
-  max-width: clamp(50rem, 100vw, 150rem);
   max-height: clamp(90rem, 60vh, 160rem);
 }

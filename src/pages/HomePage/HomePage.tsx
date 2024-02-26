@@ -56,7 +56,7 @@ export default function HomePage() {
 }
 
 const Layout = styled.div`
-  max-width: ${deviceSizes.lg}px;
+  max-width: ${deviceSizes.xl}px;
   margin: 0 auto;
   padding-bottom: 10rem;
 `;
