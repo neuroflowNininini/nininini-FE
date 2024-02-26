@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import styled from 'styled-components';
 import { postCheckDuplicateId } from '~/api/signUp';
@@ -22,6 +22,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
     control,
   } = useForm<BasicInfoForm>();
@@ -43,7 +44,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
       userId,
       onDuplicate: () => {
         setIdChecked(false);
-        alert('이미 사용 중인 아이디입니다.');
       },
       onSuccess: () => {
         setIdChecked(true);
@@ -55,6 +55,11 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     const { birth, sex, ...restData } = data;
     onNext({ ...restData, birthSex: birth + sex });
   };
+
+  useEffect(() => {
+    if (idChecked === undefined) return;
+    trigger('userId');
+  }, [trigger, idChecked]);
 
   return (
     <Container>
@@ -72,10 +77,11 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 ...BASIC_INFO_VALIDATION.userId,
                 validate: () => {
                   if (idChecked === false) {
-                    return '이미 사용 중인 아이디입니다.';
+                    return '* 이미 사용 중인 아이디입니다.';
                   } else if (!idChecked) {
-                    return '아이디 중복확인이 필요합니다.';
+                    return '* 아이디 중복확인이 필요합니다.';
                   }
+                  return true;
                 },
               }),
             }}
