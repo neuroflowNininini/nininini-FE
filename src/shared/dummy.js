@@ -329,7 +329,7 @@ export const bestDummy = [
     id: 'naile',
 
     review: 0,
-    name: '시럽 글리터 프렌치 네일',
+    name: '시럽 글리터 프렌치 네일인데 말이죠 이게 길어지면요 어떻게 되냐면요',
     cost: '12,900',
   },
   {
