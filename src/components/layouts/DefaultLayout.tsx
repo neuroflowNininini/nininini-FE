@@ -22,7 +22,7 @@ const Container = styled.div`
   max-width: none;
   padding: 0 2rem;
   ${media.md`
-    max-width: ${deviceSizes.lg}px;
+    max-width: ${deviceSizes.xl}px;
     margin: 0 auto;
     margin-top: 5rem;
     position: relative;

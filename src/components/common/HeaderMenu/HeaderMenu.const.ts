@@ -1,36 +1,7 @@
 import { paths } from '~/config/paths';
+import { Categories } from '~/constants/categories';
 
-export const MainItems = [
-  {
-    label: 'NEW',
-    path: paths.category('new'),
-  },
-  {
-    label: 'BEST',
-    path: paths.category('best'),
-  },
-  {
-    label: 'Season Art',
-    path: paths.category('season-art'),
-  },
-  {
-    label: 'Sale',
-    path: paths.category('sale'),
-  },
-  {
-    label: 'Nail',
-    path: paths.category('nail'),
-  },
-  {
-    label: 'Pedi',
-    path: paths.category('pedi'),
-  },
-  {
-    label: 'etc',
-    path: paths.category('etc'),
-  },
-] as const;
-
+export const MainItems = Object.values(Categories);
 export const OtherItems = [
   {
     label: 'EVENT',

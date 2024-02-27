@@ -33,9 +33,7 @@ export default function ProductCard({ cardData }: ProductCardProps) {
     </Container>
   );
 }
-const Container = styled.div`
-  padding: 0 1rem;
-`;
+const Container = styled.div``;
 
 const ImageBox = styled.img`
   width: 100%;

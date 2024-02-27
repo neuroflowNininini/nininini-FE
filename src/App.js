@@ -3,16 +3,11 @@ import '~/styles/swiper.css';
 import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
-import NewPage from './view/pages/category/NewPage';
-import BestPage from './view/pages/category/BestPage';
-import SalePage from './view/pages/category/SalePage';
-import NailPage from './view/pages/category/NailPage';
-import PediPage from './view/pages/category/PediPage';
-import EtcPage from './view/pages/category/EtcPage';
 import ProdDetail from './view/product/ProdDetail';
 import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
 import { SignUpPage } from './pages/SignUpPage';
+import { CategoryPage } from './pages/CategoryPage';
 import Notice from './view/pages/Notice';
 import SearchResult from './view/pages/SearchResult';
 import CartPage from './view/pages/CartPage';
@@ -52,6 +47,18 @@ const router = createBrowserRouter([
     children: [
       { path: '/terms/privacy', element: <TermsDetailPage termsType={'privacy'} /> },
       { path: '/terms/usage', element: <TermsDetailPage termsType={'usage'} /> },
+      {
+        path: paths.category(),
+        children: [
+          { path: 'new', element: <CategoryPage category={'new'} /> },
+          { path: 'best', element: <CategoryPage category={'best'} /> },
+          { path: 'seasonArt', element: <CategoryPage category={'seasonArt'} /> },
+          { path: 'sale', element: <CategoryPage category={'sale'} /> },
+          { path: 'nail', element: <CategoryPage category={'nail'} /> },
+          { path: 'pedi', element: <CategoryPage category={'pedi'} /> },
+          { path: 'etc', element: <CategoryPage category={'etc'} /> },
+        ],
+      },
     ],
   },
   { path: '*', element: <Root /> },
@@ -81,30 +88,6 @@ function Root() {
           <Route
             path="/cart"
             element={<CartPage />}
-          />
-          <Route
-            path={paths.category('new')}
-            element={<NewPage />}
-          />
-          <Route
-            path={paths.category('best')}
-            element={<BestPage />}
-          />
-          <Route
-            path={paths.category('sale')}
-            element={<SalePage />}
-          />
-          <Route
-            path={paths.category('nail')}
-            element={<NailPage />}
-          />
-          <Route
-            path={paths.category('pedi')}
-            element={<PediPage />}
-          />
-          <Route
-            path={paths.category('etc')}
-            element={<EtcPage />}
           />
           <Route
             path="/product/:id"
