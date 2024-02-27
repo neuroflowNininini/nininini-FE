@@ -1,1 +1,1 @@
-export type category = 'new' | 'best' | 'season-art' | 'sale' | 'nail' | 'pedi' | 'etc';
+export type Category = 'new' | 'best' | 'seasonArt' | 'sale' | 'nail' | 'pedi' | 'etc';
