@@ -18,10 +18,13 @@ export default function DefaultLayout() {
 
 const Layout = styled.div``;
 const Container = styled.div`
+  margin-top: 5rem;
   max-width: none;
+  padding: 0 2rem;
   ${media.md`
     max-width: ${deviceSizes.lg}px;
     margin: 0 auto;
+    margin-top: 5rem;
     position: relative;
   `}
 `;
