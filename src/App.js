@@ -17,19 +17,26 @@ import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import { paths } from './config/paths';
-import { DefaultLayout, FocusLayout, HomeLayout } from './components/layouts';
+import { DefaultLayout, FocusLayout, FullLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 import { LoginPage } from './pages/LoginPage';
 import { OAuthRedirectPage } from './pages/OAuthRedirectPage';
 import { AuthProvider } from './lib/contexts/AuthProvider';
 import GuestRoute from './routes/GuestRoute';
 import { TermsDetailPage } from './pages/TermsDetailPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
 
 const router = createBrowserRouter([
   {
     path: paths.home(),
-    element: <HomeLayout />,
-    children: [{ index: true, element: <HomePage /> }],
+    element: <FullLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: '/product/:id',
+        element: <ProductDetailPage />,
+      },
+    ],
   },
   {
     element: <FocusLayout />,
