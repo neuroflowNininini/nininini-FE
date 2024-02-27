@@ -73,7 +73,11 @@ export default function LoginPage() {
         <Icon src={appleIcon} />
         <span>Apple로 로그인</span>
       </AppleButton>
-      <NaverButton>
+      <NaverButton
+        onClick={() => {
+          window.location.href = CONSTANTS.NAVER_SIGNIN_URL;
+        }}
+      >
         <Icon src={naverIcon} />
         <span>네이버 로그인</span>
       </NaverButton>
