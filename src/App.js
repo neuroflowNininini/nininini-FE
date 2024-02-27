@@ -27,6 +27,7 @@ import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 import { LoginPage } from './pages/LoginPage';
 import { AuthProvider } from './lib/contexts/AuthProvider';
 import GuestRoute from './routes/GuestRoute';
+import { TermsDetailPage } from './pages/TermsDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -46,7 +47,13 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { element: <DefaultLayout />, children: [] },
+  {
+    element: <DefaultLayout />,
+    children: [
+      { path: '/terms/privacy', element: <TermsDetailPage termsType={'privacy'} /> },
+      { path: '/terms/usage', element: <TermsDetailPage termsType={'usage'} /> },
+    ],
+  },
   { path: '*', element: <Root /> },
 ]);
 
