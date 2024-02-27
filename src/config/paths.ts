@@ -1,8 +1,8 @@
-import { category } from '~/types/category';
+import { Category } from '~/types/category';
 
 export const paths = {
   home: () => `/`,
-  category: (category: category) => `/category/${category}`,
+  category: (category?: Category) => `/category/${category ?? ''}`,
   notice: () => `/notice`,
   event: () => `/event`,
   review: () => `/review`,
