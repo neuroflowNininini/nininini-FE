@@ -3,6 +3,7 @@ import { Heading } from '~/components/common/Heading';
 import { ProductCard } from '~/components/domain/ProductCard';
 import { Categories } from '~/constants/categories';
 import { bestDummy } from '~/shared/dummy.js';
+import { media } from '~/styles/breakpoints';
 import { Category } from '~/types/category';
 
 interface CategoryPageProps {
@@ -29,7 +30,19 @@ export default function CategoryPage({ category }: CategoryPageProps) {
 
 const ProductListWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Three columns with equal width */
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 1.5rem;
+  column-gap: 2rem;
+  ${media.md`
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 3rem;
+  `}
+  ${media.lg`
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 2rem;
+    column-gap: 3rem;
+  `}
+  row-gap: 3rem;
   overflow-y: auto;
   margin-top: 5rem;
 `;
