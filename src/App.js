@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         children: [
           { path: 'new', element: <CategoryPage category={'new'} /> },
           { path: 'best', element: <CategoryPage category={'best'} /> },
-          { path: 'season-art', element: <CategoryPage category={'season-art'} /> },
+          { path: 'seasonArt', element: <CategoryPage category={'seasonArt'} /> },
           { path: 'sale', element: <CategoryPage category={'sale'} /> },
           { path: 'nail', element: <CategoryPage category={'nail'} /> },
           { path: 'pedi', element: <CategoryPage category={'pedi'} /> },
