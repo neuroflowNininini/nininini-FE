@@ -14,7 +14,7 @@ export default function RowProductList({ dummy }: { dummy: any[] }) {
       <Swiper
         className={'swiper-container-products'}
         modules={[Pagination, Navigation, FreeMode]}
-        spaceBetween={0}
+        spaceBetween={20}
         slidesPerView={1.8}
         freeMode={true}
         navigation={true}
