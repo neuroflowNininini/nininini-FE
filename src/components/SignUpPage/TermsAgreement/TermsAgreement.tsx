@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CheckBoxInput from '~/components/common/CheckBoxInput/CheckBoxInput';
 import { ChevronToggle } from '~/components/common/ChevronToggle';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { TERMS_DETAIL } from '~/constants/terms_detail';
 import { SignUpTermsAgreement } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 
@@ -57,7 +58,9 @@ export default function TermsAgreement({ onNext }: TermsAgreementProps) {
               />
             }
             fontSize={'large'}
-          ></ChevronToggle>
+          >
+            <TermsTextBox>{TERMS_DETAIL['usage']['text']}</TermsTextBox>
+          </ChevronToggle>
         </BorderBox>
         <BorderBox>
           {/*TODO - 약관 내용 토글의 children으로 작성하기 */}
@@ -73,7 +76,9 @@ export default function TermsAgreement({ onNext }: TermsAgreementProps) {
               />
             }
             fontSize={'large'}
-          ></ChevronToggle>
+          >
+            <TermsTextBox>{TERMS_DETAIL['privacy']['text']}</TermsTextBox>
+          </ChevronToggle>
         </BorderBox>
       </FormItem>
       <FormItem>
@@ -160,4 +165,11 @@ const BorderBox = styled.div`
   .col-item {
     width: 50%;
   }
+`;
+
+const TermsTextBox = styled.div`
+  height: 20rem;
+  font-size: ${({ theme }) => theme.fontSize.small};
+  white-space: pre-wrap;
+  overflow-y: auto;
 `;

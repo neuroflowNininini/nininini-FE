@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
-import { TERMS_DETAIL } from './TermsDetail.const';
+import { TERMS_DETAIL } from '~/constants/terms_detail';
 
 interface TermsDetailProps {
   termsType: keyof typeof TERMS_DETAIL;
