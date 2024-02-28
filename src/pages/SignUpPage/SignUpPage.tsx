@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { postSignUp } from '~/api/signUp';
+import { postSignUp, postOAuthSignUp } from '~/api/signUp';
 import { BasicInfo } from '~/components/SignUpPage/BasicInfo';
 import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
@@ -11,13 +11,19 @@ import { CONSTANTS } from '~/constants';
 import { ReadAiMeasure } from '~/types/apis/aiMeasure';
 import { LoginRes } from '~/types/apis/login';
 import { SignUp } from '~/types/apis/signUp';
-import { setCookie } from '~/utils/cookie';
+import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
 
 export default function SignUpPage() {
   const [searchParams] = useSearchParams();
   const step = searchParams.get('step');
   const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState<SignUp>();
+  const onSuccess = (data: LoginRes) => {
+    setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+    setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
+    deleteCookie(CONSTANTS.SNS_KEY);
+    navigate(paths.signUp('complete'));
+  };
   return (
     <>
       {step === null && (
@@ -53,14 +59,19 @@ export default function SignUpPage() {
         <NailRegister
           onNext={(aiMeasure: ReadAiMeasure) => {
             if (!signUpData) return;
-            postSignUp({
-              body: aiMeasure ? { ...signUpData, aiMeasure } : signUpData,
-              onSuccess: (data: LoginRes) => {
-                setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
-                setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
-                navigate(paths.signUp('complete'));
-              },
-            });
+            let body = aiMeasure ? { ...signUpData, aiMeasure } : signUpData;
+            if (getCookie(CONSTANTS.SNS_KEY) !== null) {
+              body = { ...body, userId: getCookie(CONSTANTS.SNS_KEY)! };
+              postOAuthSignUp({
+                body,
+                onSuccess,
+              });
+            } else {
+              postSignUp({
+                body,
+                onSuccess,
+              });
+            }
           }}
         />
       )}
