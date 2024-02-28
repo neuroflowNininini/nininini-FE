@@ -6,29 +6,14 @@ import { SignUp } from '~/types/apis/signUp';
 
 export const postSignUp = async ({
   body,
-  onDuplicate,
   onSuccess,
 }: {
   body: SignUp;
-  onDuplicate: () => void;
   onSuccess: (data: LoginRes) => void;
 }) => {
-  try {
-    const { data } = await NinininiAxios.post(`/api/members/signup`, body);
-    onSuccess(data);
-    return;
-  } catch (e) {
-    if (isAxiosError<NinininiErrorResponse>(e) && e.response) {
-      const status = e.response.status;
-      switch (status) {
-        case 409:
-          if (e.response.data.exception.errorCode === 'DUP_SIGNUP') {
-            onDuplicate();
-          }
-          break;
-      }
-    }
-  }
+  const { data } = await NinininiAxios.post(`/api/members/signup`, body);
+  onSuccess(data);
+  return;
 };
 
 export const postCheckDuplicateId = async ({
@@ -54,4 +39,16 @@ export const postCheckDuplicateId = async ({
       }
     }
   }
+};
+
+export const postOAuthSignUp = async ({
+  body,
+  onSuccess,
+}: {
+  body: SignUp;
+  onSuccess: (data: LoginRes) => void;
+}) => {
+  const { data } = await NinininiAxios.post(`/api/members/sns`, body);
+  onSuccess(data);
+  return;
 };

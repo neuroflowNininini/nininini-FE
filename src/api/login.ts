@@ -4,6 +4,7 @@ import { paths } from '~/config/paths';
 import { CONSTANTS } from '~/constants';
 import { NinininiErrorResponse } from '~/types/apiResponse';
 import { Login } from '~/types/apis/login';
+import { OAuthPlatform } from '~/types/oAuth';
 import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
 
 export const postLogin = async (body: Login) => {
@@ -70,4 +71,18 @@ export const postReIssueAccessToken = async () => {
       }
     }
   }
+};
+
+export const postOAuthLogin = async ({
+  platform,
+  onSuccess,
+  code,
+}: {
+  platform: OAuthPlatform;
+  onSuccess: (userId?: string) => void;
+  code: string;
+}) => {
+  const { data } = await NinininiAxios.get(`/api/oauth/${platform}?code=${code}`);
+  onSuccess(data.userId);
+  return data;
 };
