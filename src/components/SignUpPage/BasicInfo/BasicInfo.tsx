@@ -77,7 +77,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
         step={2}
       />
       <FormWrap onSubmit={handleSubmit(onSubmit)}>
-        <InputRow>
+        <InputField>
           <Label htmlFor="userId">
             아이디 <span>*</span>
           </Label>
@@ -99,7 +99,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }}
               placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
               error={errors.userId}
-              showErrorMessage={false}
               message={idChecked ? '멋진 아이디네요. :)' : ''}
             />
             <ThemeButton
@@ -113,8 +112,8 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               중복확인
             </ThemeButton>
           </Row>
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="userPw">
             비밀번호 <span>*</span>
           </Label>
@@ -124,10 +123,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             register={{ ...register('userPw', BASIC_INFO_VALIDATION.userPw) }}
             placeholder="5자 ~ 20자의 영문, 특수문자, 숫자 (각 필수)"
             error={errors.userPw}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="pwConfirm">
             비밀번호 확인 <span>*</span>
           </Label>
@@ -142,9 +140,8 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }),
             }}
             error={errors.pwConfirm}
-            showErrorMessage={false}
           />
-        </InputRow>
+        </InputField>
         {(errors.userId || errors.userPw || errors.pwConfirm) && (
           <ErrorMessages>
             {errors.userId && <span>{errors.userId.message}</span>}
@@ -153,7 +150,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           </ErrorMessages>
         )}
         <Spacer />
-        <InputRow>
+        <InputField>
           <Label htmlFor="name">
             이름 <span>*</span>
           </Label>
@@ -161,10 +158,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="name"
             register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
             error={errors.name}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="phoneNumber">
             연락처 <span>*</span>
           </Label>
@@ -176,7 +172,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }}
               placeholder="- 없이 숫자만 입력"
               error={errors.phoneNumber}
-              showErrorMessage={false}
             />
             <ThemeButton
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
@@ -202,14 +197,13 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 placeholder="인증번호 입력"
                 error={errors.phoneNoConfirm}
                 message={'문자를 받지 못했다면 재전송 버튼을 클릭해주세요.'}
-                showErrorMessage={false}
               >
                 <Timer totalSeconds={remainSeconds} />
               </Input>
             </Row>
           )}
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="email">
             이메일 <span>*</span>
           </Label>
@@ -217,10 +211,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="email"
             register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
             error={errors.email}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label>
             생년월일 및 성별 <span>*</span>
           </Label>
@@ -230,7 +223,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 id="birth"
                 register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
                 error={errors.birth}
-                showErrorMessage={false}
                 placeholder="주민번호 앞 6자리"
                 style={{ width: '15rem' }}
               />
@@ -242,13 +234,12 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 id="sex"
                 register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
                 error={errors.sex}
-                showErrorMessage={false}
                 style={{ width: '5rem' }}
               />
             </BirthSexRow>
             <PwSymbol>••••••</PwSymbol>
           </Row>
-        </InputRow>
+        </InputField>
         {(errors.name || errors.phoneNumber || errors.email || errors.birth || errors.sex) && (
           <ErrorMessages>
             {errors.name && <span>{errors.name.message}</span>}
@@ -292,7 +283,7 @@ const FormWrap = styled.form`
   gap: 1.2rem;
 `;
 
-const InputRow = styled.div`
+const InputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
