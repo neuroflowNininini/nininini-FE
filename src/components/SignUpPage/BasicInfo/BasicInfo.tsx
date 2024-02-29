@@ -5,6 +5,10 @@ import { postCheckDuplicateId } from '~/api/signUp';
 import Divider from '~/components/common/Divider';
 import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { Timer } from '~/components/common/Timer';
+import { CONSTANTS } from '~/constants';
+import { useCertifyPhoneNumber } from '~/hooks/useCertifyPhoneNumber';
+import { useTimer } from '~/hooks/useTimer';
 import { SignUpBasicInfo } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 import { BASIC_INFO_VALIDATION } from './validation.const';
@@ -17,6 +21,7 @@ export type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & {
   birth: string;
   sex: string;
   pwConfirm: string;
+  phoneNoConfirm: string;
 };
 export default function BasicInfo({ onNext }: BasicInfoProps) {
   const {
@@ -37,6 +42,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     control,
     name: 'userPw',
   });
+
+  const { isSmsSent, handleGetCertifyNumber } = useCertifyPhoneNumber();
+
+  const { remainSeconds, startTimer } = useTimer(CONSTANTS.CERTIFY_VALID_SECONDS);
 
   const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -159,15 +168,46 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           <Label htmlFor="phoneNumber">
             연락처 <span>*</span>
           </Label>
-          <Input
-            id="phoneNumber"
-            register={{
-              ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
-            }}
-            placeholder="- 없이 숫자만 입력"
-            error={errors.phoneNumber}
-            showErrorMessage={false}
-          />
+          <Row>
+            <Input
+              id="phoneNumber"
+              register={{
+                ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
+              }}
+              placeholder="- 없이 숫자만 입력"
+              error={errors.phoneNumber}
+              showErrorMessage={false}
+            />
+            <ThemeButton
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                handleGetCertifyNumber(e);
+                startTimer();
+              }}
+              variant="reversed"
+              width="15rem"
+              height="100%"
+              fontSize={'smallmedium'}
+              style={{ marginLeft: '3px', padding: '1rem 0' }}
+            >
+              {!isSmsSent ? '인증번호 발급' : '재전송'}
+            </ThemeButton>
+          </Row>
+          {isSmsSent && remainSeconds > 0 && (
+            <Row>
+              <Input
+                id="phoneNoConfirm"
+                register={{
+                  ...register('phoneNoConfirm', { required: true }),
+                }}
+                placeholder="인증번호 입력"
+                error={errors.phoneNoConfirm}
+                message={'문자를 받지 못했다면 재전송 버튼을 클릭해주세요.'}
+                showErrorMessage={false}
+              >
+                <Timer totalSeconds={remainSeconds} />
+              </Input>
+            </Row>
+          )}
         </InputRow>
         <InputRow>
           <Label htmlFor="email">
