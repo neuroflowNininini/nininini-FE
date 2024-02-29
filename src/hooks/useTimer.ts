@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 
 export const useTimer = (totalSeconds: number) => {
   const [remainSeconds, setRemainSeconds] = useState(totalSeconds);
-  const [timerMM, setTimerMM] = useState<string>(Math.floor(remainSeconds / 60).toString());
-  const [timerSS, setTimerSS] = useState<string>((remainSeconds % 60).toString());
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
-    setTimerMM(Math.floor(remainSeconds / 60).toString());
-    setTimerSS((remainSeconds % 60).toString());
+    if (!start) return;
 
     const timerId = setInterval(() => {
       setRemainSeconds((remainSeconds: number) => remainSeconds - 1);
@@ -15,9 +13,15 @@ export const useTimer = (totalSeconds: number) => {
 
     if (remainSeconds === 0) {
       clearInterval(timerId);
+      setStart(false);
     }
     return () => clearInterval(timerId);
-  }, [remainSeconds]);
+  }, [remainSeconds, start]);
 
-  return { remainSeconds, timerMM, timerSS };
+  const startTimer = () => {
+    setStart(true);
+    setRemainSeconds(totalSeconds);
+  };
+
+  return { remainSeconds, startTimer };
 };

@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { useTimer } from '~/hooks/useTimer';
 
 interface TimerProps {
   totalSeconds: number;
 }
 
 export default function Timer({ totalSeconds }: TimerProps) {
-  const { timerMM, timerSS } = useTimer(totalSeconds);
-  return <TimerText>{`${timerMM.padStart(2, '0')} : ${timerSS.padStart(2, '0')}`}</TimerText>;
+  return (
+    <TimerText>{`${Math.floor(totalSeconds / 60)
+      .toString()
+      .padStart(2, '0')} : ${(totalSeconds % 60).toString().padStart(2, '0')}`}</TimerText>
+  );
 }
 
 const TimerText = styled.div`
