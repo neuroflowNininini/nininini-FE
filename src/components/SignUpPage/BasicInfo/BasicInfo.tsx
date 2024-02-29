@@ -168,7 +168,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             <Input
               id="phoneNumber"
               register={{
-                ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
+                ...register('phoneNumber', BASIC_INFO_VALIDATION.phoneNumber),
               }}
               placeholder="- 없이 숫자만 입력"
               error={errors.phoneNumber}
