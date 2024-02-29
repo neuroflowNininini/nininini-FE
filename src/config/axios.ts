@@ -53,6 +53,12 @@ NinininiAxios.interceptors.response.use(
             throw Error(e);
           }
         }
+        break;
+      case 409:
+        if (errorCode === 'DUP_SIGNUP') {
+          alert('이미 가입된 회원입니다.');
+        }
+        break;
     }
 
     return Promise.reject(error);

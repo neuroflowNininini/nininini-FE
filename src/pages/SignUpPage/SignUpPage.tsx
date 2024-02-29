@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { postSignUp } from '~/api/signUp';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { postSignUp, postOAuthSignUp } from '~/api/signUp';
 import { BasicInfo } from '~/components/SignUpPage/BasicInfo';
 import { InterestTags } from '~/components/SignUpPage/InterestTags';
 import { NailRegister } from '~/components/SignUpPage/NailRegister';
@@ -10,16 +11,22 @@ import { CONSTANTS } from '~/constants';
 import { ReadAiMeasure } from '~/types/apis/aiMeasure';
 import { LoginRes } from '~/types/apis/login';
 import { SignUp } from '~/types/apis/signUp';
-import { setCookie } from '~/utils/cookie';
-
-type Step = 'agreement' | 'basicInfo' | 'interestTags' | 'nailRegister' | 'complete';
+import { deleteCookie, getCookie, setCookie } from '~/utils/cookie';
 
 export default function SignUpPage() {
-  const [step, setStep] = useState<Step>('agreement');
+  const [searchParams] = useSearchParams();
+  const step = searchParams.get('step');
+  const navigate = useNavigate();
   const [signUpData, setSignUpData] = useState<SignUp>();
+  const onSuccess = (data: LoginRes) => {
+    setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+    setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
+    deleteCookie(CONSTANTS.SNS_KEY);
+    navigate(paths.signUp('complete'));
+  };
   return (
     <>
-      {step === 'agreement' && (
+      {step === null && (
         <TermsAgreement
           onNext={({ agreeSms, agreeEmail }) => {
             setSignUpData((prev: SignUp) => ({
@@ -27,7 +34,7 @@ export default function SignUpPage() {
               agreeSms,
               agreeEmail,
             }));
-            setStep('basicInfo');
+            navigate(paths.signUp('basicInfo'));
           }}
         />
       )}
@@ -35,14 +42,14 @@ export default function SignUpPage() {
         <BasicInfo
           onNext={(basicInfo) => {
             setSignUpData((prev: SignUp) => ({ ...prev, ...basicInfo }));
-            setStep('interestTags');
+            navigate(paths.signUp('interestTags'));
           }}
         />
       )}
       {step === 'interestTags' && (
         <InterestTags
           onNext={(data) => {
-            setStep('nailRegister');
+            navigate(paths.signUp('nailRegister'));
             if (!data) return;
             setSignUpData((prev: SignUp) => ({ ...prev, tags: data.tags }));
           }}
@@ -52,17 +59,19 @@ export default function SignUpPage() {
         <NailRegister
           onNext={(aiMeasure: ReadAiMeasure) => {
             if (!signUpData) return;
-            postSignUp({
-              body: aiMeasure ? { ...signUpData, aiMeasure } : signUpData,
-              onDuplicate: () => {
-                alert('이미 가입한 회원입니다.');
-              },
-              onSuccess: (data: LoginRes) => {
-                setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
-                setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
-                window.location.href = paths.home();
-              },
-            });
+            let body = aiMeasure ? { ...signUpData, aiMeasure } : signUpData;
+            if (getCookie(CONSTANTS.SNS_KEY) !== null) {
+              body = { ...body, userId: getCookie(CONSTANTS.SNS_KEY)! };
+              postOAuthSignUp({
+                body,
+                onSuccess,
+              });
+            } else {
+              postSignUp({
+                body,
+                onSuccess,
+              });
+            }
           }}
         />
       )}

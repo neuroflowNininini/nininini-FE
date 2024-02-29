@@ -1,4 +1,5 @@
 import { Category } from '~/types/category';
+import { SignUpStep } from '~/types/signUp';
 
 export const paths = {
   home: () => `/`,
@@ -9,6 +10,7 @@ export const paths = {
   faq: () => `/faq`,
   myPage: () => `/mypage`,
   cart: () => `/cart`,
-  signUp: () => `/sign-up`,
+  signUp: (step?: SignUpStep) => `/sign-up${step ? `?step=${step}` : ''}`,
   logIn: () => `/login`,
+  oAuthRedirect: () => `/oauth/:platform`,
 };

@@ -6,6 +6,7 @@ import Divider from '~/components/common/Divider';
 import { Heading } from '~/components/common/Heading';
 import { Input } from '~/components/common/Input';
 import { paths } from '~/config/paths';
+import { CONSTANTS } from '~/constants';
 import appleIcon from '~/shared/login_icons/icon_apple.png';
 import kakaoIcon from '~/shared/login_icons/kakao.png';
 import naverIcon from '~/shared/login_icons/naver.svg';
@@ -60,7 +61,11 @@ export default function LoginPage() {
         <TextButton>비밀번호 찾기</TextButton>
       </TextButtonsWrap>
       <Divider color={theme.colors.gray[200]} />
-      <KakaoButton>
+      <KakaoButton
+        onClick={() => {
+          window.location.href = CONSTANTS.KAKAO_SIGNIN_URL;
+        }}
+      >
         <Icon src={kakaoIcon} />
         <span>카카오로 3초만에 시작하기</span>
       </KakaoButton>
@@ -68,7 +73,11 @@ export default function LoginPage() {
         <Icon src={appleIcon} />
         <span>Apple로 로그인</span>
       </AppleButton>
-      <NaverButton>
+      <NaverButton
+        onClick={() => {
+          window.location.href = CONSTANTS.NAVER_SIGNIN_URL;
+        }}
+      >
         <Icon src={naverIcon} />
         <span>네이버 로그인</span>
       </NaverButton>
