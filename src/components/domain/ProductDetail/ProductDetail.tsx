@@ -80,6 +80,9 @@ const Container = styled.div`
     grid-template-columns: 40% 60%;
     margin: 0;
   `}
+  ${PRODUCT_DETAIL_BREAKPOINT`
+    margin-top: -3rem;
+  `}
 `;
 const ThumbnailSection = styled.section`
   margin: 0 -1.5rem;
