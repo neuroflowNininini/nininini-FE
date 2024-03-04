@@ -115,6 +115,9 @@ const PcGuideSection = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const PcMessage = styled.div`
