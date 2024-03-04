@@ -1,16 +1,21 @@
 import styled, { CSSProperties } from 'styled-components';
 import theme from '~/styles/theme';
 
+type Theme = typeof theme;
+type ColorShade = keyof Theme['colors'][keyof Theme['colors']];
+
 interface TextProps {
   children: string;
+  color?: `${keyof Omit<Theme['colors'], 'theme'>}[${ColorShade}]` | 'themeColor';
   fontSize?: keyof typeof theme.fontSize;
   isBold?: boolean;
   className?: string;
   style?: CSSProperties;
 }
-export default function Text({ children, fontSize, isBold, className, style }: TextProps) {
+export default function Text({ color, children, fontSize, isBold, className, style }: TextProps) {
   return (
     <TextBox
+      color={color}
       fontSize={fontSize}
       isBold={isBold}
       className={className}
@@ -25,4 +30,8 @@ const TextBox = styled.div<Omit<TextProps, 'children'>>`
   font-size: ${({ theme, fontSize }) =>
     fontSize ? theme.fontSize[fontSize] : theme.fontSize.medium};
   font-weight: ${({ isBold }) => (isBold ? 700 : 400)};
+  color: ${({ theme, color }) => {
+    if (color === 'themeColor') return theme.colors.theme;
+    return color ? theme.colors[color] : theme.colors.gray['900'];
+  }};
 `;

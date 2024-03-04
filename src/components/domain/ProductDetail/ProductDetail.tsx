@@ -82,6 +82,16 @@ export default function ProductDetail({ productData }: { productData: any }) {
             />
           </TagButtonsContainer>
         </ProductDescriptionGrid>
+        <ProductPriceRow>
+          <Text>총 상품 금액 (수량)</Text>
+          <ProductPrice>
+            <Text
+              isBold
+              color={'themeColor'}
+            >{`${productData.price * count}`}</Text>
+            <Text color={'themeColor'}>{`(${count}개)`}</Text>
+          </ProductPrice>
+        </ProductPriceRow>
       </DetailSection>
     </Container>
   );
@@ -144,4 +154,16 @@ const TagButtonsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+`;
+
+const ProductPriceRow = styled.div`
+  margin-top: 2rem;
+  align-self: flex-end;
+  display: flex;
+  gap: 3rem;
+`;
+
+const ProductPrice = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
