@@ -1,43 +1,43 @@
-import { IoIosCheckboxOutline, IoIosCheckbox } from 'react-icons/io';
 import styled from 'styled-components';
 import theme from '~/styles/theme';
+import { Tag } from '~/types/tag';
 
 interface CheckBoxTagsProps {
-  id: string;
-  text: string;
   boxPadding?: string;
   fontSize?: keyof typeof theme.fontSize;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isChecked: boolean;
+  onChange: (tag_id: number) => void;
+  checkedStatus: { [tag_id: number]: boolean };
+  tagsData: Tag[];
 }
 
-export default function CheckBoxTag({
-  id,
-  text,
+export default function CheckBoxTags({
   boxPadding = '.6rem',
   fontSize = 'smallmedium',
   onChange,
-  isChecked,
+  checkedStatus,
+  tagsData,
 }: CheckBoxTagsProps) {
   return (
-    <Container>
-      <input
-        id={id}
-        type="checkbox"
-        onChange={(e) => {
-          onChange(e);
-        }}
-      />
-      <CheckBox htmlFor={id}>
-        <Tag
-          $ischecked={isChecked}
-          $boxPadding={boxPadding}
-          $fontSize={fontSize}
-        >
-          {text}
-        </Tag>
-      </CheckBox>
-    </Container>
+    <>
+      {tagsData.map(({ tag_id, tag }) => (
+        <Container key={tag_id}>
+          <input
+            id={tag_id.toString()}
+            type="checkbox"
+            onChange={() => onChange(tag_id)}
+          />
+          <CheckBox htmlFor={tag_id.toString()}>
+            <TagBox
+              $ischecked={checkedStatus[tag_id]}
+              $boxPadding={boxPadding}
+              $fontSize={fontSize}
+            >
+              {tag}
+            </TagBox>
+          </CheckBox>
+        </Container>
+      ))}
+    </>
   );
 }
 
@@ -54,7 +54,7 @@ const CheckBox = styled.label`
   gap: 1rem;
 `;
 
-const Tag = styled.div<{ $ischecked: boolean; $boxPadding: string; $fontSize: string }>`
+const TagBox = styled.div<{ $ischecked: boolean; $boxPadding: string; $fontSize: string }>`
   border: 1px solid ${({ theme }) => theme.colors.gray['900']};
   border-radius: 1rem;
   background-color: ${({ $ischecked, theme }) =>
