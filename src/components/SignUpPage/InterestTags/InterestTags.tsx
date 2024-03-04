@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getInterestTags } from '~/api/interestTags';
-import { CheckBoxTag } from '~/components/common/CheckBoxTag';
+import { TagButtons } from '~/components/common/TagButtons';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { useCheckBox } from '~/hooks/useCheckBox';
 import { SignUpInterestTags } from '~/types/apis/signUp';
+import { Tag } from '~/types/tag';
 import { SignUpHeader } from '../SignUpHeader';
 
 interface InterstTagsProps {
@@ -11,7 +13,7 @@ interface InterstTagsProps {
 }
 
 export default function InterestTags({ onNext }: InterstTagsProps) {
-  const [tagsData, setTagsData] = useState<{ id: number; tag_id: number; tag: string }[]>();
+  const [tagsData, setTagsData] = useState<Tag[]>([]);
 
   useEffect(() => {
     const updateTags = async () => {
@@ -24,18 +26,11 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
   }, []);
 
   const handleContinue = () => {
-    const tags = Object.keys(checkedStatus)
-      .map(Number)
-      .filter((id) => checkedStatus[id]);
-    onNext({ tags });
+    onNext({ tags: checkedIds });
   };
 
-  const [checkedStatus, setCheckedStatus] = useState(
-    tagsData?.reduce((acc, cur) => {
-      acc[cur['tag_id']] = false;
-      return acc;
-    }, {}) ?? {},
-  );
+  /*FIXME - 데이터 undefined 처리 - suspense 걸어주기 */
+  const { checkedIds, onChangeTag } = useCheckBox();
 
   return (
     <Container>
@@ -45,18 +40,13 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
       />
       <Title>{'관심가는 디자인을 선택해주세요\n비슷한 네일을 추천해드려요!'}</Title>
       <CheckBoxWrap>
-        {tagsData?.map(({ tag_id, tag }) => (
-          <CheckBoxTag
-            key={tag_id}
-            id={tag_id.toString()}
-            text={tag}
-            fontSize={'small'}
-            isChecked={checkedStatus[tag_id]}
-            onChange={() => {
-              setCheckedStatus((prev) => ({ ...prev, [tag_id]: !prev[tag_id] }));
-            }}
-          />
-        ))}
+        <TagButtons
+          fontSize={'small'}
+          selectedIds={checkedIds}
+          onChange={onChangeTag}
+          /*FIXME - 데이터 undefined 처리 - suspense 걸어주기 */
+          tagsData={tagsData}
+        />
       </CheckBoxWrap>
       <ButtonsWrap>
         <ThemeButton onClick={handleContinue}>다음</ThemeButton>

@@ -38,8 +38,8 @@ export default function HomePage() {
           <ImageBox src={isMobile ? c2 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
       </Swiper>
+      <HomeMenu />
       <Layout>
-        <HomeMenu />
         <RowContainer>
           <div>
             <TitleWrap>이 달의 신상품</TitleWrap>
@@ -59,6 +59,7 @@ const Layout = styled.div`
   max-width: ${deviceSizes.xl}px;
   margin: 0 auto;
   padding-bottom: 10rem;
+  padding: 0 1rem;
 `;
 
 const ImageBox = styled.img`

@@ -1,5 +1,5 @@
 import DefaultLayout from './DefaultLayout';
 import FocusLayout from './FocusLayout';
-import HomeLayout from './HomeLayout';
+import FullLayout from './FullLayout';
 
-export { DefaultLayout, HomeLayout, FocusLayout };
+export { DefaultLayout, FullLayout, FocusLayout };

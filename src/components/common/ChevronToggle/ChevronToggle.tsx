@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { GoChevronDown, GoChevronUp } from 'react-icons/go';
 import styled from 'styled-components';
 import theme from '~/styles/theme';
+import { Color, FontSize } from '~/types/typography';
 
 interface ChevronToggleProps {
   label: React.ReactNode;
   children?: React.ReactNode;
   width?: string;
-  fontSize?: keyof typeof theme.fontSize;
-  fontColor?: string;
-  iconColor?: string;
+  fontSize?: FontSize;
+  fontColor?: Color;
+  iconColor?: Color;
 }
 
 export default function ChevronToggle({
@@ -17,8 +18,8 @@ export default function ChevronToggle({
   children,
   width = '100%',
   fontSize = 'medium',
-  fontColor = theme.colors.gray['900'],
-  iconColor = theme.colors.gray['400'],
+  fontColor,
+  iconColor,
 }: ChevronToggleProps) {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggleClick = () => {
@@ -37,13 +38,13 @@ export default function ChevronToggle({
           <GoChevronDown
             onClick={handleToggleClick}
             size={theme.fontSize[fontSize]}
-            color={iconColor}
+            color={iconColor ? theme.colors[iconColor] : theme.colors.gray['400']}
           />
         ) : (
           <GoChevronUp
             onClick={handleToggleClick}
             size={theme.fontSize[fontSize]}
-            color={iconColor}
+            color={iconColor ? theme.colors[iconColor] : theme.colors.gray['400']}
           />
         )}
       </LabelToggleWrap>
@@ -63,7 +64,8 @@ const LabelToggleWrap = styled.div`
 
 const Label = styled.div<Pick<ChevronToggleProps, 'fontSize' | 'fontColor'>>`
   font-size: ${({ theme, fontSize }) => theme.fontSize[fontSize!]};
-  color: ${({ fontColor }) => fontColor};
+  color: ${({ theme, fontColor }) =>
+    fontColor ? theme.colors[fontColor] : theme.colors.gray['900']};
 `;
 
 const ContentsWrap = styled.div`

@@ -1,13 +1,14 @@
 import { IoIosCheckboxOutline, IoIosCheckbox } from 'react-icons/io';
 import styled from 'styled-components';
 import theme from '~/styles/theme';
+import { FontSize } from '~/types/typography';
 
 interface CheckBoxInputProps {
   id: string;
   text: string;
   /** 체크박스 svg 사이즈 */
   boxSize?: string;
-  fontSize?: keyof typeof theme.fontSize;
+  fontSize?: FontSize;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isChecked: boolean;
 }

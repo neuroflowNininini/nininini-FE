@@ -1,5 +1,5 @@
 import styled, { CSSProperties } from 'styled-components';
-import theme from '~/styles/theme';
+import { FontSize } from '~/types/typography';
 
 interface ThemeButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children: string;
@@ -7,7 +7,7 @@ interface ThemeButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   variant?: 'default' | 'reversed';
   width?: string;
   height?: string;
-  fontSize?: keyof typeof theme.fontSize;
+  fontSize?: FontSize;
   style?: CSSProperties;
 }
 
