@@ -2,21 +2,22 @@ import styled from 'styled-components';
 import theme from '~/styles/theme';
 import { Tag } from '~/types/tag';
 
-interface CheckBoxTagsProps {
+interface TagButtonsProps {
   boxPadding?: string;
   fontSize?: keyof typeof theme.fontSize;
+  defaultTagId?: number;
   onChange: (tag_id: number) => void;
-  checkedStatus: { [tag_id: number]: boolean };
+  selectedIds: number[];
   tagsData: Tag[];
 }
 
-export default function CheckBoxTags({
+export default function TagButtons({
   boxPadding = '.6rem',
   fontSize = 'smallmedium',
   onChange,
-  checkedStatus,
+  selectedIds,
   tagsData,
-}: CheckBoxTagsProps) {
+}: TagButtonsProps) {
   return (
     <>
       {tagsData.map(({ tag_id, tag }) => (
@@ -28,7 +29,7 @@ export default function CheckBoxTags({
           />
           <CheckBox htmlFor={tag_id.toString()}>
             <TagBox
-              $ischecked={checkedStatus[tag_id]}
+              $ischecked={selectedIds.includes(tag_id)}
               $boxPadding={boxPadding}
               $fontSize={fontSize}
             >

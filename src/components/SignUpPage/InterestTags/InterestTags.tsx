@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getInterestTags } from '~/api/interestTags';
-import { CheckBoxTags } from '~/components/common/CheckBoxTags';
+import { TagButtons } from '~/components/common/TagButtons';
 import { ThemeButton } from '~/components/common/ThemeButton';
-import { useCheckBoxTags } from '~/hooks/useCheckBoxTags';
+import { useCheckBox } from '~/hooks/useCheckBox';
 import { SignUpInterestTags } from '~/types/apis/signUp';
 import { Tag } from '~/types/tag';
 import { SignUpHeader } from '../SignUpHeader';
@@ -26,14 +26,11 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
   }, []);
 
   const handleContinue = () => {
-    const tags = Object.keys(checkedStatus)
-      .map(Number)
-      .filter((id) => checkedStatus[id]);
-    onNext({ tags });
+    onNext({ tags: checkedIds });
   };
 
   /*FIXME - 데이터 undefined 처리 - suspense 걸어주기 */
-  const { checkedStatus, onChangeTag } = useCheckBoxTags(tagsData);
+  const { checkedIds, onChangeTag } = useCheckBox();
 
   return (
     <Container>
@@ -43,9 +40,9 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
       />
       <Title>{'관심가는 디자인을 선택해주세요\n비슷한 네일을 추천해드려요!'}</Title>
       <CheckBoxWrap>
-        <CheckBoxTags
+        <TagButtons
           fontSize={'small'}
-          checkedStatus={checkedStatus}
+          selectedIds={checkedIds}
           onChange={onChangeTag}
           /*FIXME - 데이터 undefined 처리 - suspense 걸어주기 */
           tagsData={tagsData}
