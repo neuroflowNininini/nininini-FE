@@ -30,13 +30,7 @@ const router = createBrowserRouter([
   {
     path: paths.home(),
     element: <FullLayout />,
-    children: [
-      { index: true, element: <HomePage /> },
-      {
-        path: '/product/:id',
-        element: <ProductDetailPage />,
-      },
-    ],
+    children: [{ index: true, element: <HomePage /> }],
   },
   {
     element: <FocusLayout />,
@@ -68,6 +62,10 @@ const router = createBrowserRouter([
         ],
       },
       { path: paths.oAuthRedirect(), element: <OAuthRedirectPage /> },
+      {
+        path: '/product/:id',
+        element: <ProductDetailPage />,
+      },
     ],
   },
   { path: '*', element: <Root /> },
