@@ -12,6 +12,7 @@ import { ThemeButton } from '~/components/common/ThemeButton';
 import { useNumberCounter } from '~/hooks/useNumberCounter';
 import { useRadioButton } from '~/hooks/useRadioButton';
 import { media } from '~/styles/breakpoints';
+import { formatNumberWithCommas } from '~/utils/formatNumber';
 
 /*FIXME - 제품 type 지정해주기 */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -57,7 +58,7 @@ export default function ProductDetail({ productData }: { productData: any }) {
           >
             {productData.name}
           </Text>
-          <Text>{`${productData.price}원`}</Text>
+          <Text>{`${formatNumberWithCommas(productData.price)}원`}</Text>
         </ProductHeading>
         <ProductDescriptionGrid>
           <Text
@@ -90,7 +91,7 @@ export default function ProductDetail({ productData }: { productData: any }) {
             <Text
               isBold
               color={'themeColor'}
-            >{`${productData.price * count}`}</Text>
+            >{`${formatNumberWithCommas(productData.price * count)}`}</Text>
             <Text color={'themeColor'}>{`(${count}개)`}</Text>
           </ProductPrice>
         </ProductPriceRow>
