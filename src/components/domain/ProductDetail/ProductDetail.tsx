@@ -5,8 +5,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { NumberCounter } from '~/components/common/NumberCounter';
+import { TagButtons } from '~/components/common/TagButtons';
 import { Text } from '~/components/common/Text';
 import { useNumberCounter } from '~/hooks/useNumberCounter';
+import { useRadioButton } from '~/hooks/useRadioButton';
 import { media } from '~/styles/breakpoints';
 
 /*FIXME - 제품 type 지정해주기 */
@@ -14,6 +16,11 @@ import { media } from '~/styles/breakpoints';
 
 export default function ProductDetail({ productData }: { productData: any }) {
   const { count, onDecrease, onIncrease } = useNumberCounter();
+  const DUMMY_SIZE = [
+    { tag_id: 0, tag: '일반 size' },
+    { tag_id: 1, tag: '맞춤 size' },
+  ];
+  const { selectedId, onChangeRadioButton } = useRadioButton(DUMMY_SIZE[0].tag_id);
   return (
     <Container>
       <ThumbnailSection>
@@ -66,6 +73,14 @@ export default function ProductDetail({ productData }: { productData: any }) {
             onDecrease={onDecrease}
             onIncrease={onIncrease}
           />
+          <Text isBold>사이즈</Text>
+          <TagButtonsContainer>
+            <TagButtons
+              tagsData={DUMMY_SIZE}
+              selectedIds={[selectedId]}
+              onChange={onChangeRadioButton}
+            />
+          </TagButtonsContainer>
         </ProductDescriptionGrid>
       </DetailSection>
     </Container>
@@ -117,10 +132,16 @@ const ProductHeading = styled.div`
 const ProductDescriptionGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 4fr;
-  row-gap: 2rem;
+  row-gap: 2.5rem;
   align-items: center;
 
   .position-start {
     align-self: start;
   }
+`;
+
+const TagButtonsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
 `;
