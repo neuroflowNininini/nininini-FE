@@ -4,9 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { MobileFixedHolder } from '~/components/common/MobileFixedHolder';
 import { NumberCounter } from '~/components/common/NumberCounter';
 import { TagButtons } from '~/components/common/TagButtons';
 import { Text } from '~/components/common/Text';
+import { ThemeButton } from '~/components/common/ThemeButton';
 import { useNumberCounter } from '~/hooks/useNumberCounter';
 import { useRadioButton } from '~/hooks/useRadioButton';
 import { media } from '~/styles/breakpoints';
@@ -55,7 +57,7 @@ export default function ProductDetail({ productData }: { productData: any }) {
           >
             {productData.name}
           </Text>
-          <Text>{productData.cost}</Text>
+          <Text>{`${productData.price}원`}</Text>
         </ProductHeading>
         <ProductDescriptionGrid>
           <Text
@@ -92,6 +94,15 @@ export default function ProductDetail({ productData }: { productData: any }) {
             <Text color={'themeColor'}>{`(${count}개)`}</Text>
           </ProductPrice>
         </ProductPriceRow>
+        <MobileFixedHolder>
+          <ThemeButton
+            variant={'reversed'}
+            style={{ width: '45%' }}
+          >
+            장바구니
+          </ThemeButton>
+          <ThemeButton>바로 구매</ThemeButton>
+        </MobileFixedHolder>
       </DetailSection>
     </Container>
   );
@@ -127,7 +138,7 @@ const DetailSection = styled.section`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  margin-left: 2rem;
+  margin: 0 2rem;
   ${PRODUCT_DETAIL_BREAKPOINT`
     margin-left: 4rem;
   `}
@@ -161,6 +172,7 @@ const ProductPriceRow = styled.div`
   align-self: flex-end;
   display: flex;
   gap: 3rem;
+  flex-grow: 1;
 `;
 
 const ProductPrice = styled.div`
