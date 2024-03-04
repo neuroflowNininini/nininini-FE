@@ -1,10 +1,6 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { Pagination, Autoplay } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { ProductDetail } from '~/components/domain/ProductDetail';
 import { totalDummy } from '~/shared/dummy.js';
 
 export default function ProductDetailPage() {
@@ -14,34 +10,7 @@ export default function ProductDetailPage() {
 
   return (
     <>
-      <Swiper
-        id="hometop"
-        pagination={true}
-        modules={[Pagination, Autoplay]}
-        spaceBetween={0}
-        rewind={true}
-        autoplay={{
-          delay: 6000,
-          disableOnInteraction: false,
-        }}
-        slidesPerView={1}
-      >
-        <SwiperSlide>
-          <ImageBox src={product.pics[0]} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ImageBox src={product.pics[1]} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ImageBox src={product.pics[2]} />
-        </SwiperSlide>
-      </Swiper>
+      <ProductDetail productData={product} />
     </>
   );
 }
-
-const ImageBox = styled.img`
-  width: 100%;
-  margin: 0 auto;
-  object-fit: cover;
-`;
