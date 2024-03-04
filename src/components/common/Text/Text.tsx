@@ -1,13 +1,10 @@
 import styled, { CSSProperties } from 'styled-components';
-import theme from '~/styles/theme';
-
-type Theme = typeof theme;
-type ColorShade = keyof Theme['colors'][keyof Theme['colors']];
+import { Color, FontSize } from '~/types/typography';
 
 interface TextProps {
   children: string;
-  color?: `${keyof Omit<Theme['colors'], 'theme'>}[${ColorShade}]` | 'themeColor';
-  fontSize?: keyof typeof theme.fontSize;
+  color?: Color;
+  fontSize?: FontSize;
   isBold?: boolean;
   className?: string;
   style?: CSSProperties;
