@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
+import { paths } from '~/config/paths';
+import { useMainCategories } from '~/hooks/api/useMainCategories';
 import { media } from '~/styles/breakpoints';
-import { MainItems, OtherItems } from './HeaderMenu.const';
+import { OtherItems } from './HeaderMenu.const';
 
 export default function HeaderMenu() {
+  const { mainCategories } = useMainCategories();
   return (
     <MenuContainer>
       <MenuBox>
-        {MainItems.map(({ label, path }, index) => (
+        {mainCategories.map(({ category: label, category_id }, index) => (
           <Link
             key={label + index}
-            to={path}
+            to={paths.category(category_id)}
           >
             <MainItem>{label}</MainItem>
           </Link>

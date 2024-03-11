@@ -3,7 +3,7 @@ import { SignUpStep } from '~/types/signUp';
 
 export const paths = {
   home: () => `/`,
-  category: (category?: Category) => `/category/${category ?? ''}`,
+  category: (categoryId: number) => `/category/${categoryId}`,
   notice: () => `/notice`,
   event: () => `/event`,
   review: () => `/review`,

@@ -10,6 +10,8 @@ import { Category } from '~/types/category';
 interface CategoryPageProps {
   category: Category;
 }
+
+/* FIXME - 카테고리 서버 데이터로 label 대체 후 category props 제거 */
 export default function CategoryPage({ category }: CategoryPageProps) {
   return (
     <Container>

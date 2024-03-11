@@ -50,16 +50,8 @@ const router = createBrowserRouter([
       { path: '/terms/privacy', element: <TermsDetailPage termsType={'privacy'} /> },
       { path: '/terms/usage', element: <TermsDetailPage termsType={'usage'} /> },
       {
-        path: paths.category(),
-        children: [
-          { path: 'new', element: <CategoryPage category={'new'} /> },
-          { path: 'best', element: <CategoryPage category={'best'} /> },
-          { path: 'seasonArt', element: <CategoryPage category={'seasonArt'} /> },
-          { path: 'sale', element: <CategoryPage category={'sale'} /> },
-          { path: 'nail', element: <CategoryPage category={'nail'} /> },
-          { path: 'pedi', element: <CategoryPage category={'pedi'} /> },
-          { path: 'etc', element: <CategoryPage category={'etc'} /> },
-        ],
+        path: '/category/:id',
+        element: <CategoryPage />,
       },
       { path: paths.oAuthRedirect(), element: <OAuthRedirectPage /> },
       {
