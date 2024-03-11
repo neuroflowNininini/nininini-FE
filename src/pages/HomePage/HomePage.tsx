@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { HomeMenu } from '~/components/HomePage/HomeMenu';
 import { RowProductList } from '~/components/HomePage/RowProductList';
-import { useDeviceDetect } from '~/hooks/useDeviceDetect';
+import { useDeviceSizeDetect } from '~/hooks/useDeviceSizeDetect';
 import { bestDummy, newDummy } from '~/shared/dummy.js';
 import c2 from '~/shared/pics/home_swiper/home2.png';
 import f3 from '~/shared/pics/home_swiper/home3.png';
@@ -13,7 +13,7 @@ import e4 from '~/shared/pics/nail/E/E4.jpg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 
 export default function HomePage() {
-  const { isMobile } = useDeviceDetect();
+  const { isMobileSize } = useDeviceSizeDetect();
   return (
     <>
       <Swiper
@@ -29,16 +29,16 @@ export default function HomePage() {
         slidesPerView={1}
       >
         <SwiperSlide>
-          <ImageBox src={isMobile ? e4 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobileSize ? e4 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobile ? f3 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobileSize ? f3 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobile ? c2 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobileSize ? c2 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
       </Swiper>
-      <HomeMenu />
+      {isMobileSize && <HomeMenu />}
       <Layout>
         <RowContainer>
           <div>
