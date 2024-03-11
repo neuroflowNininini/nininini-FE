@@ -27,7 +27,7 @@ export default function ProductDetailPage() {
       label: `리뷰 (${50})`,
     },
   ] as const;
-  const { tab: currentTab, selectTab, isTransitionPending } = useTabTransition(TABS);
+  const { currentTab, selectTab, isTransitionPending } = useTabTransition(TABS);
 
   const productDetail = useMemo(() => <ProductDetail productData={product} />, [product]);
   return (
