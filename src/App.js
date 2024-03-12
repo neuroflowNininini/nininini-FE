@@ -3,7 +3,6 @@ import '~/styles/swiper.css';
 import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
-import ProdDetail from './view/product/ProdDetail';
 import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
 import { SignUpPage } from './pages/SignUpPage';
@@ -94,10 +93,6 @@ function Root() {
           <Route
             path="/cart"
             element={<CartPage />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProdDetail />}
           />
           <Route
             path="/checkout"
