@@ -11,7 +11,7 @@ export default function ReviewStatistics() {
         <Text>구매자 총 평점</Text>
         <Rate>4.9</Rate>
         <StarRate
-          rate={4}
+          rate={4.9}
           size={20}
         />
       </Column>
