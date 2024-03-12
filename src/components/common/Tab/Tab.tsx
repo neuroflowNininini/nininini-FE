@@ -22,7 +22,7 @@ export default function Tab<T>({ tabs, currentTab, selectTab, isPending }: TabPr
           >
             <Text
               isBold={isPending || tab === currentTab}
-              color={isPending ? 'gray[300]' : 'gray[900]'}
+              color={isPending ? 'gray.300' : 'gray.900'}
             >
               {label}
             </Text>
