@@ -1,4 +1,3 @@
-import { Category } from '~/types/category';
 import { SignUpStep } from '~/types/signUp';
 
 export const paths = {
