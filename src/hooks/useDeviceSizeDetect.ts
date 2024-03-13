@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { deviceSizes } from '~/styles/breakpoints';
 
-export const useDeviceSizeDetect = () => {
-  const [isMobileSize, setIsMobileSize] = useState(
-    Math.min(window.innerWidth, window.innerHeight) < deviceSizes.md,
+export const useDeviceSizeDetect = (size: keyof typeof deviceSizes = 'md') => {
+  const [withinTargetSize, setWithinTargetSize] = useState(
+    Math.min(window.innerWidth, window.innerHeight) < deviceSizes[size],
   );
+
   useEffect(() => {
     const detectBrowserSize = () => {
-      if (Math.min(window.innerWidth, window.innerHeight) < deviceSizes.md) {
-        setIsMobileSize(true);
+      if (Math.min(window.innerWidth, window.innerHeight) < deviceSizes[size]) {
+        setWithinTargetSize(true);
       } else {
-        setIsMobileSize(false);
+        setWithinTargetSize(false);
       }
     };
     window.addEventListener('resize', detectBrowserSize);
     return () => window.removeEventListener('resize', detectBrowserSize);
   }, []);
 
-  return { isMobileSize };
+  return [withinTargetSize];
 };

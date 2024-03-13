@@ -15,7 +15,8 @@ import e4 from '~/shared/pics/nail/E/E4.jpg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 
 export default function HomePage() {
-  const { isMobileSize } = useDeviceSizeDetect();
+  const [isMobile] = useDeviceSizeDetect('md');
+  const [isTablet] = useDeviceSizeDetect('lg');
   const { isLoggedIn } = useAuth();
   return (
     <div>
@@ -33,16 +34,16 @@ export default function HomePage() {
         slidesPerView={1}
       >
         <SwiperSlide>
-          <ImageBox src={isMobileSize ? e4 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobile ? e4 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobileSize ? f3 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobile ? f3 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
         <SwiperSlide>
-          <ImageBox src={isMobileSize ? c2 : 'https://picsum.photos/500/300'} />
+          <ImageBox src={isMobile ? c2 : 'https://picsum.photos/500/300'} />
         </SwiperSlide>
       </Swiper>
-      {isMobileSize && <HomeMenu />}
+      {isTablet && <HomeMenu />}
       <Layout>
         <RowContainer>
           <div>

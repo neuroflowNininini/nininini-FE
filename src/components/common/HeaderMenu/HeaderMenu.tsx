@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Divider from '~/components/common/Divider';
 import { paths } from '~/config/paths';
-import { MenuCategory } from '~/hooks/api/useMenuCategories';
+import { useMenuCategories } from '~/hooks/api/useMenuCategories';
 import { media } from '~/styles/breakpoints';
 import { OtherItems } from './HeaderMenu.const';
 
-interface HeaderMenuProps {
-  menuCategories: MenuCategory[];
-}
-export default function HeaderMenu({ menuCategories }: HeaderMenuProps) {
+export default function HeaderMenu() {
+  const { menuCategories } = useMenuCategories();
   return (
     <MenuContainer>
       <MenuBox>
