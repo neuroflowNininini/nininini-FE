@@ -8,10 +8,9 @@ const getCategories = async (): Promise<{ categoryId: number; category: string }
   return categories;
 };
 
+export type MenuCategory = { categoryId: number; category: string };
 export const useMenuCategories = () => {
-  const [menuCategories, setMenuCategories] = useState<{ categoryId: number; category: string }[]>(
-    [],
-  );
+  const [menuCategories, setMenuCategories] = useState<MenuCategory[]>([]);
 
   useEffect(() => {
     const updateData = async () => {

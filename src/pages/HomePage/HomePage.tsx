@@ -3,9 +3,11 @@ import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import Header from '~/components/common/Header';
 import { HomeMenu } from '~/components/HomePage/HomeMenu';
 import { RowProductList } from '~/components/HomePage/RowProductList';
 import { useDeviceSizeDetect } from '~/hooks/useDeviceSizeDetect';
+import { useAuth } from '~/lib/contexts/AuthProvider';
 import { bestDummy, newDummy } from '~/shared/dummy.js';
 import c2 from '~/shared/pics/home_swiper/home2.png';
 import f3 from '~/shared/pics/home_swiper/home3.png';
@@ -14,8 +16,10 @@ import { deviceSizes, media } from '~/styles/breakpoints';
 
 export default function HomePage() {
   const { isMobileSize } = useDeviceSizeDetect();
+  const { isLoggedIn } = useAuth();
   return (
-    <>
+    <div>
+      <Header isLoggedIn={isLoggedIn} />
       <Swiper
         className="swiper-container-hero"
         pagination={true}
@@ -51,7 +55,7 @@ export default function HomePage() {
           </div>
         </RowContainer>
       </Layout>
-    </>
+    </div>
   );
 }
 

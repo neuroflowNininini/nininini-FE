@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { postLogout } from '~/api/login';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
+import { useMenuCategories } from '~/hooks/api/useMenuCategories';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import theme from '~/styles/theme';
@@ -50,6 +51,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
     await postLogout();
   };
 
+  const { menuCategories } = useMenuCategories();
   return (
     <HeaderEl isScrolled={isScrolled}>
       <HeaderContainer>
@@ -63,7 +65,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           <StyledLogo />
         </Link>
         <DesktopMenu>
-          <HeaderMenu />
+          <HeaderMenu menuCategories={menuCategories} />
         </DesktopMenu>
         <Element2>
           <button>

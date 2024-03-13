@@ -29,8 +29,7 @@ import { ProductDetailPage } from './pages/ProductDetailPage';
 const router = createBrowserRouter([
   {
     path: paths.home(),
-    element: <FullLayout />,
-    children: [{ index: true, element: <HomePage /> }],
+    element: <HomePage />,
   },
   {
     element: <FocusLayout />,
