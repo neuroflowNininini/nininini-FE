@@ -70,8 +70,8 @@ const ModalContainer = styled.div<Pick<ModalProps, 'width' | 'height'>>`
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
   overflow-y: auto;
-  width: ${({ width }) => width ?? '50vw'};
-  height: ${({ height }) => height ?? '30vh'};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   background-color: #ffffff;
   border-radius: 2rem;
   z-index: 10000;
