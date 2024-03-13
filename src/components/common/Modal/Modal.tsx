@@ -1,6 +1,8 @@
 import { IoClose } from 'react-icons/io5';
 import { styled } from 'styled-components';
+import { useDeviceDetect } from '~/hooks/useDeviceDetect';
 import theme from '~/styles/theme';
+import { FullScreenModal } from '../FullScreenModal';
 import { Text } from '../Text';
 
 interface ModalProps {
@@ -10,7 +12,19 @@ interface ModalProps {
   title?: string;
   children: React.ReactNode;
 }
+
 export default function Modal({ onClose, width, height, title, children }: ModalProps) {
+  const { isMobile } = useDeviceDetect();
+  if (isMobile) {
+    return (
+      <FullScreenModal
+        onClose={onClose}
+        title={title}
+      >
+        {children}
+      </FullScreenModal>
+    );
+  }
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContainer
@@ -64,16 +78,17 @@ const ModalContainer = styled.div<Pick<ModalProps, 'width' | 'height'>>`
   padding: 1.5rem;
 `;
 
+const ContentContainer = styled.div`
+  padding: 1rem;
+`;
+
 const Header = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: flex-start;
 `;
+
 const CloseButton = styled.button`
   margin-left: auto;
-`;
-
-const ContentContainer = styled.div`
-  padding: rem;
 `;

@@ -23,7 +23,6 @@ export default function ReviewListItem({
   content,
 }: ReviewListItemProps) {
   const { isOpen, openModal, closeModal } = useModal();
-  const { isMobile } = useDeviceDetect();
   return (
     <>
       <Container>
@@ -51,21 +50,13 @@ export default function ReviewListItem({
             ))}
           </ImagesContainer>
         )}
-        {images.length > 0 && isOpen && !isMobile && (
+        {images.length > 0 && isOpen && (
           <Modal
             onClose={closeModal}
             title="상세 이미지"
           >
             hi
           </Modal>
-        )}
-        {images.length > 0 && isOpen && isMobile && (
-          <FullScreenModal
-            onClose={closeModal}
-            title="상세 이미지"
-          >
-            hi
-          </FullScreenModal>
         )}
         <Text>{content}</Text>
       </Container>
