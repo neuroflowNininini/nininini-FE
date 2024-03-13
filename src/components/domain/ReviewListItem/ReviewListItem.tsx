@@ -1,6 +1,10 @@
 import { styled } from 'styled-components';
+import { FullScreenModal } from '~/components/common/FullScreenModal';
+import { Modal } from '~/components/common/Modal';
 import StarRate from '~/components/common/StarRate/StarRate';
 import { Text } from '~/components/common/Text';
+import { useDeviceDetect } from '~/hooks/useDeviceDetect';
+import { useModal } from '~/hooks/useModal';
 
 /*FIXME - 데이터 타입 인터페이스 확정 후 수정하기 */
 interface ReviewListItemProps {
@@ -18,31 +22,45 @@ export default function ReviewListItem({
   images,
   content,
 }: ReviewListItemProps) {
+  const { isOpen, openModal, closeModal } = useModal();
+  const { isMobile } = useDeviceDetect();
   return (
-    <Container>
-      <Heading>
-        <HeadingMain>
-          <StarRate rate={rate} />
-          <Text isBold>{rate.toFixed(1)}</Text>
-          <Text style={{ marginLeft: '1rem' }}>{nickname}</Text>
-        </HeadingMain>
-        <Text
-          fontSize="small"
-          color={'gray.400'}
+    <>
+      <Container>
+        <Heading>
+          <HeadingMain>
+            <StarRate rate={rate} />
+            <Text isBold>{rate.toFixed(1)}</Text>
+            <Text style={{ marginLeft: '1rem' }}>{nickname}</Text>
+          </HeadingMain>
+          <Text
+            fontSize="small"
+            color={'gray.400'}
+          >
+            {date}
+          </Text>
+        </Heading>
+        <ImagesContainer>
+          {images.map((image, index) => (
+            <Image
+              key={index}
+              src={image}
+              onClick={openModal}
+            />
+          ))}
+        </ImagesContainer>
+        <Text>{content}</Text>
+      </Container>
+      {isOpen && !isMobile && <Modal onClose={closeModal}>hi</Modal>}
+      {isOpen && isMobile && (
+        <FullScreenModal
+          onClose={closeModal}
+          title="리뷰 자세히 보기"
         >
-          {date}
-        </Text>
-      </Heading>
-      <ImagesContainer>
-        {images.map((image, index) => (
-          <Image
-            key={index}
-            src={image}
-          />
-        ))}
-      </ImagesContainer>
-      <Text>{content}</Text>
-    </Container>
+          hi
+        </FullScreenModal>
+      )}
+    </>
   );
 }
 
