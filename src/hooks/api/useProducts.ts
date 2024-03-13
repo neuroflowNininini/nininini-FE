@@ -30,7 +30,7 @@ export const useProducts = ({
       setData(data);
     };
     updateData();
-  }, []);
+  }, [categoryId]);
 
   return [data];
 };
