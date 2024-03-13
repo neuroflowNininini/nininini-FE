@@ -17,7 +17,7 @@ import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import { paths } from './config/paths';
-import { DefaultLayout, FocusLayout, FullLayout } from './components/layouts';
+import { DefaultLayout, FocusLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 import { LoginPage } from './pages/LoginPage';
 import { OAuthRedirectPage } from './pages/OAuthRedirectPage';

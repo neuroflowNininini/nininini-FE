@@ -25,21 +25,21 @@ export default function RowProductList({ dummy }: { dummy: any[] }) {
           },
         }}
       >
-        <SwiperSlide>
-          <ProductCard cardData={dummy[0]} />
+        {/* <SwiperSlide>
+          <ProductCard productData={dummy[0]} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard cardData={dummy[1]} />
+          <ProductCard productData={dummy[1]} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard cardData={dummy[2]} />
+          <ProductCard productData={dummy[2]} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard cardData={dummy[3]} />
+          <ProductCard productData={dummy[3]} />
         </SwiperSlide>
         <SwiperSlide>
-          <ProductCard cardData={dummy[4]} />
-        </SwiperSlide>
+          <ProductCard productData={dummy[4]} />
+        </SwiperSlide> */}
       </Swiper>
     </>
   );

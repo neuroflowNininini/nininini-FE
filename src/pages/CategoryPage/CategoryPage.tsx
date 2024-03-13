@@ -1,33 +1,27 @@
+import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Heading } from '~/components/common/Heading';
-import { ThemeButton } from '~/components/common/ThemeButton';
 import { ProductCard } from '~/components/domain/ProductCard';
-import { Categories } from '~/constants/categories';
-import { bestDummy } from '~/shared/dummy.js';
+import { useProducts } from '~/hooks/api/useProducts';
 import { media } from '~/styles/breakpoints';
-import { Category } from '~/types/category';
 
-interface CategoryPageProps {
-  category: Category;
-}
-
-/* FIXME - 카테고리 서버 데이터로 label 대체 후 category props 제거 */
-export default function CategoryPage({ category }: CategoryPageProps) {
+export default function CategoryPage() {
+  const { id: categoryId } = useParams();
+  const [products] = useProducts({ size: 24, pageNum: 1, categoryId });
   return (
     <Container>
-      <Heading position={'center'}>{Categories[category]['label']}</Heading>
+      <Heading position={'center'}>{products?.category}</Heading>
       <ProductListWrap>
-        {bestDummy &&
-          bestDummy.map((prod, index) => {
+        {products?.products &&
+          products?.products.map((item) => {
             return (
               <ProductCard
-                cardData={prod}
-                key={index + prod.id}
+                productData={item}
+                key={item.prodId}
               />
             );
           })}
       </ProductListWrap>
-      <ThemeButton style={{ position: 'fixed', bottom: 0, left: 0 }}>dk</ThemeButton>
     </Container>
   );
 }
