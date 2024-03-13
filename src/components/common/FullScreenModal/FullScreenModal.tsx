@@ -16,7 +16,12 @@ export default function FullScreenModal({ onClose, title, children }: FullScreen
       }}
     >
       <Header>
-        <Text isBold>{title}</Text>
+        <Text
+          isBold
+          style={{ marginLeft: 'auto' }}
+        >
+          {title}
+        </Text>
         <CloseButton onClick={onClose}>
           <IoClose size={'3rem'} />
         </CloseButton>
@@ -34,7 +39,6 @@ const ModalContainer = styled.div`
   height: 100%;
   background-color: ${({ theme }) => theme.colors.white['100']};
   z-index: 10000;
-  overflow: hidden;
 `;
 
 const CloseButton = styled.button`

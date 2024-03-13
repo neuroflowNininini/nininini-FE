@@ -1,14 +1,16 @@
 import { IoClose } from 'react-icons/io5';
 import { styled } from 'styled-components';
 import theme from '~/styles/theme';
+import { Text } from '../Text';
 
 interface ModalProps {
   onClose: () => void;
   width?: string;
   height?: string;
+  title?: string;
   children: React.ReactNode;
 }
-export default function Modal({ onClose, width, height, children }: ModalProps) {
+export default function Modal({ onClose, width, height, title, children }: ModalProps) {
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContainer
@@ -18,13 +20,21 @@ export default function Modal({ onClose, width, height, children }: ModalProps) 
           e.stopPropagation();
         }}
       >
-        {children}
-        <CloseButton onClick={onClose}>
-          <IoClose
-            size={'3rem'}
-            color={theme.colors.gray['300']}
-          />
-        </CloseButton>
+        <Header>
+          <Text
+            isBold
+            style={{ marginLeft: 'auto' }}
+          >
+            {title}
+          </Text>
+          <CloseButton onClick={onClose}>
+            <IoClose
+              size={'3rem'}
+              color={theme.colors.gray['300']}
+            />
+          </CloseButton>
+        </Header>
+        <ContentContainer>{children}</ContentContainer>
       </ModalContainer>
     </ModalOverlay>
   );
@@ -50,12 +60,20 @@ const ModalContainer = styled.div<Pick<ModalProps, 'width' | 'height'>>`
   height: ${({ height }) => height ?? '30vh'};
   background-color: #ffffff;
   border-radius: 2rem;
-  padding: 6rem;
   z-index: 10000;
+  padding: 1.5rem;
 `;
 
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+`;
 const CloseButton = styled.button`
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
+  margin-left: auto;
+`;
+
+const ContentContainer = styled.div`
+  padding: rem;
 `;

@@ -40,26 +40,35 @@ export default function ReviewListItem({
             {date}
           </Text>
         </Heading>
-        <ImagesContainer>
-          {images.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              onClick={openModal}
-            />
-          ))}
-        </ImagesContainer>
+        {images.length > 0 && (
+          <ImagesContainer>
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                onClick={openModal}
+              />
+            ))}
+          </ImagesContainer>
+        )}
+        {images.length > 0 && isOpen && !isMobile && (
+          <Modal
+            onClose={closeModal}
+            title="상세 이미지"
+          >
+            hi
+          </Modal>
+        )}
+        {images.length > 0 && isOpen && isMobile && (
+          <FullScreenModal
+            onClose={closeModal}
+            title="상세 이미지"
+          >
+            hi
+          </FullScreenModal>
+        )}
         <Text>{content}</Text>
       </Container>
-      {isOpen && !isMobile && <Modal onClose={closeModal}>hi</Modal>}
-      {isOpen && isMobile && (
-        <FullScreenModal
-          onClose={closeModal}
-          title="리뷰 자세히 보기"
-        >
-          hi
-        </FullScreenModal>
-      )}
     </>
   );
 }
