@@ -7,6 +7,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { styled } from 'styled-components';
 export default function ReviewBarChart({ ratiosData }: { ratiosData: number[] }) {
   const labels = ['5점', '4점', '3점', '2점', '1점'];
   const options = {
@@ -44,11 +45,15 @@ export default function ReviewBarChart({ ratiosData }: { ratiosData: number[] })
   };
 
   return (
-    <div>
+    <ChartContainer>
       <Bar
         options={options}
         data={dataset}
       />
-    </div>
+    </ChartContainer>
   );
 }
+
+const ChartContainer = styled.div`
+  width: 100%;
+`;
