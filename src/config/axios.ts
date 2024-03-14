@@ -29,6 +29,9 @@ NinininiAxios.interceptors.request.use(
 NinininiAxios.interceptors.response.use(
   (response) => response,
   async (error) => {
+    if (!error.response.data.exception) {
+      throw Error('Server Error - no exception code defined');
+    }
     const { errorCode }: { errorCode: ErrorCode } = error.response.data.exception;
 
     switch (error.response.status) {

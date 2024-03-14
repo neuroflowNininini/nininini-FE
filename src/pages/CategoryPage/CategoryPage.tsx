@@ -1,31 +1,35 @@
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Heading } from '~/components/common/Heading';
-import { ThemeButton } from '~/components/common/ThemeButton';
+import { Pagination } from '~/components/common/Pagination';
 import { ProductCard } from '~/components/domain/ProductCard';
-import { Categories } from '~/constants/categories';
-import { bestDummy } from '~/shared/dummy.js';
+import { useProducts } from '~/hooks/api/useProducts';
 import { media } from '~/styles/breakpoints';
-import { Category } from '~/types/category';
 
-interface CategoryPageProps {
-  category: Category;
-}
-export default function CategoryPage({ category }: CategoryPageProps) {
+export default function CategoryPage() {
+  const { id: categoryId } = useParams();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useProducts({ size: 24, pageNum: currentPage, categoryId });
   return (
     <Container>
-      <Heading position={'center'}>{Categories[category]['label']}</Heading>
+      <Heading position={'center'}>{data.category}</Heading>
       <ProductListWrap>
-        {bestDummy &&
-          bestDummy.map((prod, index) => {
+        {data.products &&
+          data.products.map((item) => {
             return (
               <ProductCard
-                cardData={prod}
-                key={index + prod.id}
+                productData={item}
+                key={item.prodId}
               />
             );
           })}
       </ProductListWrap>
-      <ThemeButton style={{ position: 'fixed', bottom: 0, left: 0 }}>dk</ThemeButton>
+      <Pagination
+        maxPage={data.maxPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Container>
   );
 }

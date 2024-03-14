@@ -45,6 +45,10 @@ const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color : transparent;
   }
 
+  button:disabled, a:disabled {
+    cursor: not-allowed;
+  }
+
   input {
     outline: none;
     border: none;

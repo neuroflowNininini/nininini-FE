@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { postLogout } from '~/api/login';
 import Search from '~/components/common/Search';
 import { paths } from '~/config/paths';
+import { useDeviceSizeDetect } from '~/hooks/useDeviceSizeDetect';
 import { ReactComponent as Logo } from '~/shared/logo_nininini.svg';
 import { deviceSizes, media } from '~/styles/breakpoints';
 import theme from '~/styles/theme';
@@ -50,6 +51,8 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
     await postLogout();
   };
 
+  const [isSmallerThanHeaderBreakpoint] = useDeviceSizeDetect(HEADER_BREAKPOINT);
+
   return (
     <HeaderEl isScrolled={isScrolled}>
       <HeaderContainer>
@@ -62,9 +65,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
         <Link to={paths.home()}>
           <StyledLogo />
         </Link>
-        <DesktopMenu>
-          <HeaderMenu />
-        </DesktopMenu>
+        {!isSmallerThanHeaderBreakpoint && <HeaderMenu />}
         <Element2>
           <button>
             <PiMagnifyingGlass
@@ -111,7 +112,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   );
 }
 
-const HEADER_BREAKPOINT = media.lg;
+const HEADER_BREAKPOINT: keyof typeof deviceSizes = 'lg';
 
 const HeaderEl = styled.header<{ isScrolled: boolean }>`
   z-index: 9999;
@@ -122,7 +123,7 @@ const HeaderEl = styled.header<{ isScrolled: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${HEADER_BREAKPOINT`
+  ${media[HEADER_BREAKPOINT]`
     padding-left: 3rem;
   `}
 `;
@@ -137,7 +138,7 @@ const HeaderContainer = styled.div`
 
 const StyledLogo = styled(Logo)`
   width: 15rem;
-  ${HEADER_BREAKPOINT`
+  ${media[HEADER_BREAKPOINT]`
     width: 10rem;
   `}
 `;
@@ -145,7 +146,7 @@ const StyledLogo = styled(Logo)`
 const Element = styled.div`
   flex: 1;
   display: flex;
-  ${HEADER_BREAKPOINT`
+  ${media[HEADER_BREAKPOINT]`
     display: none;
   `}
 `;
@@ -161,7 +162,7 @@ const Element2 = styled.div`
 
 const TextMenuBox = styled.div`
   display: none;
-  ${HEADER_BREAKPOINT`
+  ${media[HEADER_BREAKPOINT]`
     display: flex;
     align-items: center;
     margin-left: 1rem;
@@ -175,7 +176,7 @@ const TextMenuItem = styled.button`
 
 const DesktopMenu = styled.div`
   display: none;
-  ${HEADER_BREAKPOINT`
+  ${media[HEADER_BREAKPOINT]`
     display: block;
   `}
 `;

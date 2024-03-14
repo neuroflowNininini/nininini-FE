@@ -2,7 +2,7 @@ import styled, { CSSProperties } from 'styled-components';
 import { Color, FontSize } from '~/types/typography';
 
 interface TextProps {
-  children: string;
+  children: React.ReactNode;
   color?: Color;
   fontSize?: FontSize;
   isBold?: boolean;

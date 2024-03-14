@@ -2,30 +2,30 @@ import { Link } from 'react-router-dom';
 import { BsBag } from 'react-icons/bs';
 import styled from 'styled-components';
 import { media } from '~/styles/breakpoints';
+import { ProductListItem } from '~/types/apis/product';
 import { clickAddCart } from '~/view/cart/CartFunc.js';
-
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-/*FIXME - API 명세 확정 후 임시 any 타입 변경하기 */
 interface ProductCardProps {
-  cardData: any;
+  productData: ProductListItem;
 }
 
-export default function ProductCard({ cardData }: ProductCardProps) {
+export default function ProductCard({
+  productData: { prodId, prodName, thumbnails, price },
+}: ProductCardProps) {
   return (
     <Container>
-      <Link to={`/product/${cardData.id}`}>
-        <ImageBox src={cardData.pics[0]} />
+      <Link to={`/product/${prodId}`}>
+        <ImageBox src={thumbnails[0]} />
       </Link>
       <InfoBox>
         <TextSection>
-          <Link to={`/product/${cardData.id}`}>
-            <Title>{cardData.name}</Title>
+          <Link to={`/product/${prodId}`}>
+            <Title>{prodName}</Title>
           </Link>
-          <Description>{cardData.cost}원</Description>
+          <Description>{price}원</Description>
         </TextSection>
         <BsBag
           className={'bag-icon'}
-          onClick={() => clickAddCart(cardData.id, 1)}
+          onClick={() => clickAddCart(prodId, 1)}
           size="20"
           color="black"
         />

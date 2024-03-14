@@ -17,10 +17,8 @@ export default function InterestTags({ onNext }: InterstTagsProps) {
 
   useEffect(() => {
     const updateTags = async () => {
-      const {
-        data: { tags },
-      } = await getInterestTags();
-      setTagsData(tags);
+      const data = await getInterestTags();
+      setTagsData(data);
     };
     updateTags();
   }, []);
