@@ -38,7 +38,7 @@ export default function ProductDetailPage() {
         currentTab={currentTab}
         isPending={isTransitionPending}
       />
-      {currentTab === 'details' && <DetailsSection />}
+      {currentTab === 'details' && <DetailsSection detailImage={data.detailImg} />}
       {currentTab === 'howTo' && <HowToSection />}
       {currentTab === 'reviews' && <ReviewsSection productId={productId!} />}
     </Container>
