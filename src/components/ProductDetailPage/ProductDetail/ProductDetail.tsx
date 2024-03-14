@@ -95,7 +95,7 @@ export default function ProductDetail({ productData }: { productData: Product })
   );
 }
 
-const PRODUCT_DETAIL_BREAKPOINT = media.sm;
+const PRODUCT_DETAIL_BREAKPOINT = media.md;
 
 const Container = styled.div`
   ${PRODUCT_DETAIL_BREAKPOINT`
