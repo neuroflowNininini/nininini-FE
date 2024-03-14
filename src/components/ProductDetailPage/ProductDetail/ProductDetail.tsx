@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Pagination, Autoplay } from 'swiper';
+import { Pagination, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -9,45 +9,32 @@ import { NumberCounter } from '~/components/common/NumberCounter';
 import { TagButtons } from '~/components/common/TagButtons';
 import { Text } from '~/components/common/Text';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { AI_SIZE_OPTIONS } from '~/constants/ai_size_options';
 import { useNumberCounter } from '~/hooks/useNumberCounter';
 import { useRadioButton } from '~/hooks/useRadioButton';
 import { media } from '~/styles/breakpoints';
+import { Product } from '~/types/apis/product';
 import { formatNumberWithCommas } from '~/utils/formatNumber';
 
-/*FIXME - 제품 type 지정해주기 */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-export default function ProductDetail({ productData }: { productData: any }) {
+export default function ProductDetail({ productData }: { productData: Product }) {
   const { count, onDecrease, onIncrease } = useNumberCounter();
-  const DUMMY_SIZE = [
-    { tag_id: 0, tag: '일반 size' },
-    { tag_id: 1, tag: '맞춤 size' },
-  ];
-  const { selectedId, onChangeRadioButton } = useRadioButton(DUMMY_SIZE[0].tag_id);
+  const { selectedId, onChangeRadioButton } = useRadioButton(AI_SIZE_OPTIONS[0].tag_id);
   return (
     <Container>
       <ThumbnailSection>
         <Swiper
-          id="hometop"
           pagination={true}
-          modules={[Pagination, Autoplay]}
+          navigation={true}
+          modules={[Pagination, Navigation]}
           spaceBetween={0}
-          rewind={true}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false,
-          }}
           slidesPerView={1}
         >
-          <SwiperSlide>
-            <ImageBox src={productData.pics[0]} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ImageBox src={productData.pics[1]} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ImageBox src={productData.pics[2]} />
-          </SwiperSlide>
+          {productData.thumbnails.length > 0 &&
+            productData.thumbnails.map((image, index) => (
+              <SwiperSlide key={index}>
+                <ImageBox src={image} />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </ThumbnailSection>
       <DetailSection>
@@ -56,19 +43,14 @@ export default function ProductDetail({ productData }: { productData: any }) {
             fontSize={'large'}
             isBold
           >
-            {productData.name}
+            {productData.prodName}
           </Text>
           <Text>{`${formatNumberWithCommas(productData.price)}원`}</Text>
         </ProductHeading>
         <ProductDescriptionGrid>
-          <Text
-            className="position-start"
-            isBold
-          >
-            배송
-          </Text>
+          <Text isBold>배송</Text>
           <Text style={{ whiteSpace: 'pre-wrap' }}>
-            {'기본 2,500원 (50,000원 이상 구매 시 무료)\n제주 및 특수 도서 산간 지역 3,000원 추가'}
+            {'기본 3,000원 (30,000원 이상 구매 시 무료)'}
           </Text>
           <Text isBold>수량</Text>
           <NumberCounter
@@ -76,14 +58,18 @@ export default function ProductDetail({ productData }: { productData: any }) {
             onDecrease={onDecrease}
             onIncrease={onIncrease}
           />
-          <Text isBold>사이즈</Text>
-          <TagButtonsContainer>
-            <TagButtons
-              tagsData={DUMMY_SIZE}
-              selectedIds={[selectedId]}
-              onChange={onChangeRadioButton}
-            />
-          </TagButtonsContainer>
+          {productData.aiSizeAvail && (
+            <>
+              <Text isBold>사이즈</Text>
+              <TagButtonsContainer>
+                <TagButtons
+                  tagsData={AI_SIZE_OPTIONS}
+                  selectedIds={[selectedId]}
+                  onChange={onChangeRadioButton}
+                />
+              </TagButtonsContainer>
+            </>
+          )}
         </ProductDescriptionGrid>
         <ProductPriceRow>
           <Text>총 상품 금액 (수량)</Text>
@@ -109,7 +95,7 @@ export default function ProductDetail({ productData }: { productData: any }) {
   );
 }
 
-const PRODUCT_DETAIL_BREAKPOINT = media.sm;
+const PRODUCT_DETAIL_BREAKPOINT = media.md;
 
 const Container = styled.div`
   ${PRODUCT_DETAIL_BREAKPOINT`
@@ -129,7 +115,6 @@ const ThumbnailSection = styled.section`
 const ImageBox = styled.img`
   width: 100%;
   object-fit: cover;
-  aspect-ratio: 1 / 1; /*NOTE - 이미지 자체가 1:1로 제작되면 지우기 (의도치 않은 잘림 현상 방지 위해) */
 `;
 
 const DetailSection = styled.section`

@@ -72,6 +72,8 @@ const ModalContainer = styled.div<Pick<ModalProps, 'width' | 'height'>>`
   overflow-y: auto;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  max-width: 90vw;
+  max-height: 90vh;
   background-color: #ffffff;
   border-radius: 2rem;
   z-index: 10000;

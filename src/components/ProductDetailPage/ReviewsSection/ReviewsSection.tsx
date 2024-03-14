@@ -7,10 +7,13 @@ import ReviewListItem from '~/components/domain/ReviewListItem/ReviewListItem';
 import { useReviews } from '~/hooks/api/useReviews';
 import { ReviewStatistics } from '../ReviewStatistics';
 
-export default function ReviewsSection() {
-  const { id: productId } = useParams<{ id: string }>();
+interface ReviewsSectionProps {
+  productId: string;
+}
+
+export default function ReviewsSection({ productId }: ReviewsSectionProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useReviews({ productId: productId!, size: 5, pageNumber: currentPage });
+  const { data } = useReviews({ productId, size: 5, pageNumber: currentPage });
   return (
     <Container>
       <ReviewStatistics />

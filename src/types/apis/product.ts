@@ -1,4 +1,8 @@
 type MainCategory = 'nail' | 'pedi' | 'etc';
+type Option = {
+  id: number;
+  content: string;
+};
 
 export type ProductListItem = {
   prodId: number;
@@ -14,4 +18,12 @@ export type ReadProductList = {
   pageNum: number;
   category?: string;
   products: ProductListItem[];
+};
+
+export type Product = ProductListItem & {
+  detailImg: string;
+  aiSizeAvail: boolean;
+  tags: string[];
+  options: Option[];
+  reviewCnt: number;
 };
