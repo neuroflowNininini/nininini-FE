@@ -1,19 +1,22 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Heading } from '~/components/common/Heading';
+import { Pagination } from '~/components/common/Pagination';
 import { ProductCard } from '~/components/domain/ProductCard';
 import { useProducts } from '~/hooks/api/useProducts';
 import { media } from '~/styles/breakpoints';
 
 export default function CategoryPage() {
   const { id: categoryId } = useParams();
-  const [products] = useProducts({ size: 24, pageNum: 1, categoryId });
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useProducts({ size: 24, pageNum: currentPage, categoryId });
   return (
     <Container>
-      <Heading position={'center'}>{products?.category}</Heading>
+      <Heading position={'center'}>{data.category}</Heading>
       <ProductListWrap>
-        {products?.products &&
-          products?.products.map((item) => {
+        {data.products &&
+          data.products.map((item) => {
             return (
               <ProductCard
                 productData={item}
@@ -22,6 +25,11 @@ export default function CategoryPage() {
             );
           })}
       </ProductListWrap>
+      <Pagination
+        maxPage={data.maxPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Container>
   );
 }
