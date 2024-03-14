@@ -11,7 +11,7 @@ interface ReviewListItemProps {
   rate: number;
   nickname: string;
   date: string;
-  images: string[];
+  image: string;
   content: string;
 }
 
@@ -19,7 +19,7 @@ export default function ReviewListItem({
   rate,
   nickname,
   date,
-  images,
+  image,
   content,
 }: ReviewListItemProps) {
   const { isOpen, openModal, closeModal } = useModal();
@@ -38,28 +38,18 @@ export default function ReviewListItem({
           {date}
         </Text>
       </Heading>
-      {images.length > 0 && (
-        <ImagesContainer>
-          {images.map((image, index) => (
-            <Image
-              key={index}
-              src={image}
-              onClick={openModal}
-            />
-          ))}
-        </ImagesContainer>
-      )}
-      {images.length > 0 && isOpen && (
+      <ImagesContainer>
+        <Image
+          src={image}
+          onClick={openModal}
+        />
+      </ImagesContainer>
+      {image && isOpen && (
         <Modal
           onClose={closeModal}
           title="상세 이미지"
         >
-          {images.map((image, index) => (
-            <LargeImage
-              src={image}
-              key={index}
-            />
-          ))}
+          <LargeImage src={image} />
         </Modal>
       )}
       <Text>{content}</Text>
