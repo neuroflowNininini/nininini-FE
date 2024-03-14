@@ -6,13 +6,12 @@ import { DetailsSection } from '~/components/ProductDetailPage/DetailsSection';
 import { HowToSection } from '~/components/ProductDetailPage/HowToSection';
 import { ProductDetail } from '~/components/ProductDetailPage/ProductDetail';
 import { ReviewsSection } from '~/components/ProductDetailPage/ReviewsSection';
+import useProductDetail from '~/hooks/api/useProductDetail';
 import { useTabTransition } from '~/hooks/useTabTransition';
-import { totalDummy } from '~/shared/dummy.js';
 
 export default function ProductDetailPage() {
-  const { id } = useParams();
-  /*FIXME - id로 개별 api 요청해서 정보 받아오기 */
-  const product = totalDummy.find((item) => item.id == id)!;
+  const { id: productId } = useParams<{ id: string }>();
+  const { data } = useProductDetail({ productId: productId! });
   const TABS = [
     {
       tab: 'details',
@@ -29,7 +28,7 @@ export default function ProductDetailPage() {
   ] as const;
   const { currentTab, selectTab, isTransitionPending } = useTabTransition(TABS);
 
-  const productDetail = useMemo(() => <ProductDetail productData={product} />, [product]);
+  const productDetail = useMemo(() => <ProductDetail productData={data} />, [data]);
   return (
     <Container>
       {productDetail}
@@ -41,7 +40,7 @@ export default function ProductDetailPage() {
       />
       {currentTab === 'details' && <DetailsSection />}
       {currentTab === 'howTo' && <HowToSection />}
-      {currentTab === 'reviews' && <ReviewsSection />}
+      {currentTab === 'reviews' && <ReviewsSection productId={productId!} />}
     </Container>
   );
 }
