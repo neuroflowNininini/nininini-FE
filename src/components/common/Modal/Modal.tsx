@@ -1,6 +1,6 @@
 import { IoClose } from 'react-icons/io5';
 import { styled } from 'styled-components';
-import { useDeviceDetect } from '~/hooks/useDeviceDetect';
+import { useDeviceSizeDetect } from '~/hooks/useDeviceSizeDetect';
 import theme from '~/styles/theme';
 import { FullScreenModal } from '../FullScreenModal';
 import { Text } from '../Text';
@@ -14,7 +14,7 @@ interface ModalProps {
 }
 
 export default function Modal({ onClose, width, height, title, children }: ModalProps) {
-  const { isMobile } = useDeviceDetect();
+  const [isMobile] = useDeviceSizeDetect('sm');
   if (isMobile) {
     return (
       <FullScreenModal
