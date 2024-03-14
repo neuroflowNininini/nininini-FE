@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { NinininiAxios } from '~/config/axios';
 import { ReadProductList } from '~/types/apis/product';
 
@@ -22,15 +22,8 @@ export const useProducts = ({
   pageNum: number;
   categoryId?: string;
 }) => {
-  const [data, setData] = useState<ReadProductList>();
-
-  useEffect(() => {
-    const updateData = async () => {
-      const data = await getProducts(size, pageNum, categoryId);
-      setData(data);
-    };
-    updateData();
-  }, [categoryId]);
-
-  return [data];
+  return useSuspenseQuery({
+    queryKey: [`products`, `${pageNum}_${categoryId}_products`],
+    queryFn: () => getProducts(size, pageNum, categoryId),
+  });
 };

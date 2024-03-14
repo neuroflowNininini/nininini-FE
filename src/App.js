@@ -25,6 +25,10 @@ import { AuthProvider } from './lib/contexts/AuthProvider';
 import GuestRoute from './routes/GuestRoute';
 import { TermsDetailPage } from './pages/TermsDetailPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Suspense } from 'react';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -64,13 +68,17 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <SwiperAd />
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </ThemeProvider>
+    <Suspense fallback={'로딩 중입니다.'}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <SwiperAd />
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </Suspense>
   );
 }
 
