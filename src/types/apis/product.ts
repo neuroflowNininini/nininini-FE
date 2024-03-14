@@ -25,4 +25,5 @@ export type Product = ProductListItem & {
   aiSizeAvail: boolean;
   tags: string[];
   options: Option[];
+  reviewCnt: number;
 };

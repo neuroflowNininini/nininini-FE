@@ -23,7 +23,7 @@ export default function ProductDetailPage() {
     },
     {
       tab: 'reviews',
-      label: `리뷰 (${50})`,
+      label: `리뷰 (${data.reviewCnt})`,
     },
   ] as const;
   const { currentTab, selectTab, isTransitionPending } = useTabTransition(TABS);
