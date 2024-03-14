@@ -29,6 +29,8 @@ const TextBox = styled.div<Omit<TextProps, 'children'>>`
   font-weight: ${({ isBold }) => (isBold ? 700 : 400)};
   color: ${({ theme, color }) => {
     if (color === 'themeColor') return theme.colors.theme;
-    return color ? theme.colors[color] : theme.colors.gray['900'];
+    return color
+      ? theme.colors[color.split('.')[0]][color.split('.')[1]]
+      : theme.colors.gray['900'];
   }};
 `;

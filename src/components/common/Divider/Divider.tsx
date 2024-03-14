@@ -34,7 +34,7 @@ export default function Divider({
 const Line = styled.hr<{ direction: DividerProps['direction']; color: string; length: string }>`
   border: none;
   background-color: ${({ theme, color }) =>
-    color ? theme.colors[color] : theme.colors.gray['300']};
+    color ? theme.colors[color.split('.')[0]][color.split('.')[1]] : theme.colors.gray['300']};
   ${({ direction, length }) =>
     direction === 'vertical'
       ? `

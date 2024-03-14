@@ -374,8 +374,7 @@ export const totalDummy = [
   {
     pics: nailA,
     detailPic: a0,
-    id: 'naila',
-
+    id: 23,
     review: 99,
     name: '프렌치 시럽 네일',
     price: 12000,
