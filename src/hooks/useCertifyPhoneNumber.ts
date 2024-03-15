@@ -1,9 +1,15 @@
 import { useState } from 'react';
+import useSmsCertificate from './api/useSmsCertificate';
 import useSmsRequestCertificate from './api/useSmsRequestCertificate';
 
-export const useCertifyPhoneNumber = (phoneNumber: string, startTimer: () => void) => {
+export const useCertifyPhoneNumber = (
+  phoneNumber: string,
+  startTimer: () => void,
+  onInvalid: () => void,
+) => {
   const [isSmsSent, setIsSmsSent] = useState(false);
-  const { mutate: smsCertificate } = useSmsRequestCertificate({
+  const [isCertified, setIsCertified] = useState(false);
+  const { mutate: smsRequestCertificate } = useSmsRequestCertificate({
     onSuccess: () => {
       startTimer();
       alert(
@@ -12,11 +18,25 @@ export const useCertifyPhoneNumber = (phoneNumber: string, startTimer: () => voi
       setIsSmsSent(true);
     },
   });
+  const { mutate: smsCertificate } = useSmsCertificate({
+    onSuccess: () => {
+      setIsCertified(true);
+    },
+    onInvalid,
+  });
 
   const handleGetCertifyNumber = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    smsCertificate({ phoneNumber });
+    smsRequestCertificate({ phoneNumber });
   };
 
-  return { isSmsSent, handleGetCertifyNumber };
+  const handleCertifyNumber = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    verificationCode: string,
+  ) => {
+    e.preventDefault();
+    smsCertificate({ phoneNumber, verificationCode });
+  };
+
+  return { isSmsSent, isCertified, handleGetCertifyNumber, handleCertifyNumber };
 };

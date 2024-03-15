@@ -28,7 +28,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     register,
     handleSubmit,
     trigger,
+    resetField,
     formState: { errors },
+    setError,
+    clearErrors,
     control,
   } = useForm<BasicInfoForm>();
 
@@ -46,9 +49,19 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     control,
     name: 'phoneNumber',
   });
+  const phoneNoConfirm = useWatch({
+    control,
+    name: 'phoneNoConfirm',
+  });
 
   const { remainSeconds, startTimer } = useTimer(CONSTANTS.CERTIFY_VALID_SECONDS);
-  const { isSmsSent, handleGetCertifyNumber } = useCertifyPhoneNumber(phoneNumber!, startTimer);
+  const { isSmsSent, isCertified, handleGetCertifyNumber, handleCertifyNumber } =
+    useCertifyPhoneNumber(phoneNumber!, startTimer, () => {
+      setError('phoneNoConfirm', {
+        type: 'notEqual',
+        message: '인증번호가 일치하지 않습니다.',
+      });
+    });
 
   const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -64,6 +77,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
   };
 
   const onSubmit: SubmitHandler<BasicInfoForm> = (data) => {
+    if (!isCertified) {
+      alert('휴대전화번호 인증이 필요합니다.');
+      return;
+    }
     const { birth, sex, ...restData } = data;
     onNext({ ...restData, birthSex: birth + sex });
   };
@@ -175,10 +192,13 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }}
               placeholder="- 없이 숫자만 입력"
               error={errors.phoneNumber}
+              message={isCertified ? '인증 성공 :)' : ''}
             />
             <ThemeButton
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleGetCertifyNumber(e);
+                clearErrors('phoneNoConfirm');
+                resetField('phoneNoConfirm');
               }}
               variant="reversed"
               width="15rem"
@@ -189,7 +209,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               {!isSmsSent ? '인증번호 발급' : '재전송'}
             </ThemeButton>
           </Row>
-          {isSmsSent && remainSeconds > 0 && (
+          {isSmsSent && !isCertified && remainSeconds > 0 && (
             <Row>
               <Input
                 id="phoneNoConfirm"
@@ -198,10 +218,24 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 }}
                 placeholder="인증번호 입력"
                 error={errors.phoneNoConfirm}
-                message={'문자를 받지 못했다면 재전송 버튼을 클릭해주세요.'}
+                message={
+                  '인증번호가 문자로 전송되었습니다.\n문자를 받지 못했다면 재전송 버튼을 클릭해주세요.'
+                }
               >
                 <Timer totalSeconds={remainSeconds} />
               </Input>
+              <ThemeButton
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  handleCertifyNumber(e, phoneNoConfirm);
+                }}
+                variant="reversed"
+                width="15rem"
+                height="100%"
+                fontSize={'smallmedium'}
+                style={{ marginLeft: '3px', padding: '1rem 0' }}
+              >
+                {'인증하기'}
+              </ThemeButton>
             </Row>
           )}
         </InputField>
