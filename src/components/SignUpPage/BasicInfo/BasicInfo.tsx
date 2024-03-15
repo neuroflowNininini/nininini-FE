@@ -42,10 +42,13 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     control,
     name: 'userPw',
   });
-
-  const { isSmsSent, handleGetCertifyNumber } = useCertifyPhoneNumber();
+  const phoneNumber = useWatch({
+    control,
+    name: 'phoneNumber',
+  });
 
   const { remainSeconds, startTimer } = useTimer(CONSTANTS.CERTIFY_VALID_SECONDS);
+  const { isSmsSent, handleGetCertifyNumber } = useCertifyPhoneNumber(phoneNumber!, startTimer);
 
   const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -176,7 +179,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             <ThemeButton
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 handleGetCertifyNumber(e);
-                startTimer();
               }}
               variant="reversed"
               width="15rem"
