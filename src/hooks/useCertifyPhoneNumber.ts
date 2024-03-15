@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import useSmsCertificate from './api/useSmsCertificate';
+import useSmsRequestCertificate from './api/useSmsRequestCertificate';
 
 export const useCertifyPhoneNumber = (phoneNumber: string, startTimer: () => void) => {
   const [isSmsSent, setIsSmsSent] = useState(false);
-  const { mutate: smsCertificate } = useSmsCertificate({
+  const { mutate: smsCertificate } = useSmsRequestCertificate({
     onSuccess: () => {
       startTimer();
       alert(
