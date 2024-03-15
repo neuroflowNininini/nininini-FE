@@ -3,7 +3,6 @@ import '~/styles/swiper.css';
 import { Route, RouterProvider, Routes, createBrowserRouter } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import Mypage from './view/pages/Mypage';
-import ProdDetail from './view/product/ProdDetail';
 import ProdBuy from './view/product/ProdBuy';
 import OrderEnd from './view/product/OrderEnd';
 import { SignUpPage } from './pages/SignUpPage';
@@ -17,19 +16,23 @@ import SwiperAd from './view/components/SwiperAd';
 import GlobalStyle from './styles/global';
 import theme from './styles/theme';
 import { paths } from './config/paths';
-import { DefaultLayout, FocusLayout, HomeLayout } from './components/layouts';
+import { DefaultLayout, FocusLayout } from './components/layouts';
 import { FixedButtonsGroup } from './components/common/FixedButtonsGroup';
 import { LoginPage } from './pages/LoginPage';
 import { OAuthRedirectPage } from './pages/OAuthRedirectPage';
 import { AuthProvider } from './lib/contexts/AuthProvider';
 import GuestRoute from './routes/GuestRoute';
 import { TermsDetailPage } from './pages/TermsDetailPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Suspense } from 'react';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: paths.home(),
-    element: <HomeLayout />,
-    children: [{ index: true, element: <HomePage /> }],
+    element: <HomePage />,
   },
   {
     element: <FocusLayout />,
@@ -49,18 +52,14 @@ const router = createBrowserRouter([
       { path: '/terms/privacy', element: <TermsDetailPage termsType={'privacy'} /> },
       { path: '/terms/usage', element: <TermsDetailPage termsType={'usage'} /> },
       {
-        path: paths.category(),
-        children: [
-          { path: 'new', element: <CategoryPage category={'new'} /> },
-          { path: 'best', element: <CategoryPage category={'best'} /> },
-          { path: 'seasonArt', element: <CategoryPage category={'seasonArt'} /> },
-          { path: 'sale', element: <CategoryPage category={'sale'} /> },
-          { path: 'nail', element: <CategoryPage category={'nail'} /> },
-          { path: 'pedi', element: <CategoryPage category={'pedi'} /> },
-          { path: 'etc', element: <CategoryPage category={'etc'} /> },
-        ],
+        path: '/category/:id',
+        element: <CategoryPage />,
       },
       { path: paths.oAuthRedirect(), element: <OAuthRedirectPage /> },
+      {
+        path: '/product/:id',
+        element: <ProductDetailPage />,
+      },
     ],
   },
   { path: '*', element: <Root /> },
@@ -68,13 +67,17 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <SwiperAd />
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </ThemeProvider>
+    <Suspense fallback={'로딩 중입니다.'}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <SwiperAd />
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </Suspense>
   );
 }
 
@@ -90,10 +93,6 @@ function Root() {
           <Route
             path="/cart"
             element={<CartPage />}
-          />
-          <Route
-            path="/product/:id"
-            element={<ProdDetail />}
           />
           <Route
             path="/checkout"

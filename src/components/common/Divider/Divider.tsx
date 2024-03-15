@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import theme from '~/styles/theme';
+import { Color } from '~/types/typography';
 
 interface DividerProps {
   direction?: 'horizontal' | 'vertical';
-  color?: string;
+  color?: Color;
   margin?: string;
   length?: string;
   style?: React.CSSProperties;
@@ -11,7 +11,7 @@ interface DividerProps {
 
 export default function Divider({
   direction = 'horizontal',
-  color = `${theme.colors.gray['300']}`,
+  color,
   margin = '1rem',
   length = `${direction === 'horizontal' ? '100%' : '2rem'}`,
   style,
@@ -33,7 +33,8 @@ export default function Divider({
 
 const Line = styled.hr<{ direction: DividerProps['direction']; color: string; length: string }>`
   border: none;
-  background-color: ${({ theme, color }) => color ?? theme.colors.gray[300]};
+  background-color: ${({ theme, color }) =>
+    color ? theme.colors[color.split('.')[0]][color.split('.')[1]] : theme.colors.gray['300']};
   ${({ direction, length }) =>
     direction === 'vertical'
       ? `

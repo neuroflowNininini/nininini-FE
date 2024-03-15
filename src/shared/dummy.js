@@ -106,7 +106,7 @@ export const dummy = [
     id: 'naila',
     review: 0,
     name: '프렌치 시럽 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailB,
@@ -115,7 +115,7 @@ export const dummy = [
 
     review: 0,
     name: '스윗 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailC,
@@ -124,7 +124,7 @@ export const dummy = [
 
     review: 0,
     name: '웜쿨매트 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailD,
@@ -132,7 +132,7 @@ export const dummy = [
     id: 'naild',
     review: 0,
     name: '봄소풍 네일',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 
@@ -143,7 +143,7 @@ export const nailDummy = [
     id: 'naila',
     review: 99,
     name: '프렌치 시럽 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailB,
@@ -152,7 +152,7 @@ export const nailDummy = [
 
     review: 99,
     name: '스윗 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailC,
@@ -161,7 +161,7 @@ export const nailDummy = [
 
     review: 99,
     name: '웜쿨매트',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailD,
@@ -170,7 +170,7 @@ export const nailDummy = [
 
     review: 99,
     name: '봄소풍 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailE,
@@ -179,7 +179,7 @@ export const nailDummy = [
 
     review: 99,
     name: '시럽 글리터 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailF,
@@ -188,7 +188,7 @@ export const nailDummy = [
 
     review: 99,
     name: '가을 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailG,
@@ -197,7 +197,7 @@ export const nailDummy = [
 
     review: 99,
     name: '그린 데이지 네일',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 export const pediDummy = [
@@ -207,7 +207,7 @@ export const pediDummy = [
     id: 'pedih',
     review: 0,
     name: '체크 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediI,
@@ -215,7 +215,7 @@ export const pediDummy = [
     id: 'pedii',
     review: 0,
     name: '알록달록 스마일 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediJ,
@@ -223,7 +223,7 @@ export const pediDummy = [
     id: 'pedij',
     review: 0,
     name: '스마일 화이트 라인 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediK,
@@ -231,7 +231,7 @@ export const pediDummy = [
     id: 'pedik',
     review: 0,
     name: '해맑은 스마일 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediL,
@@ -239,7 +239,7 @@ export const pediDummy = [
     id: 'pedil',
     review: 0,
     name: '발이 사는 블랙 페디',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 export const newDummy = [
@@ -250,7 +250,7 @@ export const newDummy = [
 
     review: 0,
     name: '시럽 글리터 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediI,
@@ -258,7 +258,7 @@ export const newDummy = [
     id: 'pedii',
     review: 0,
     name: '알록달록 스마일 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailF,
@@ -267,7 +267,7 @@ export const newDummy = [
 
     review: 0,
     name: '가을 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailD,
@@ -276,7 +276,7 @@ export const newDummy = [
 
     review: 99,
     name: '봄소풍 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailE,
@@ -285,7 +285,7 @@ export const newDummy = [
 
     review: 99,
     name: '시럽 글리터 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediJ,
@@ -293,7 +293,7 @@ export const newDummy = [
     id: 'pedij',
     review: 0,
     name: '스마일 화이트 라인 페디',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 export const bestDummy = [
@@ -303,7 +303,7 @@ export const bestDummy = [
     id: 'pedih',
     review: 0,
     name: '체크 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailG,
@@ -312,7 +312,7 @@ export const bestDummy = [
 
     review: 0,
     name: '그린 데이지 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailF,
@@ -321,7 +321,7 @@ export const bestDummy = [
 
     review: 0,
     name: '가을 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailE,
@@ -330,7 +330,7 @@ export const bestDummy = [
 
     review: 0,
     name: '시럽 글리터 프렌치 네일인데 말이죠 이게 길어지면요 어떻게 되냐면요',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailD,
@@ -339,7 +339,7 @@ export const bestDummy = [
 
     review: 99,
     name: '봄소풍 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailE,
@@ -348,7 +348,7 @@ export const bestDummy = [
 
     review: 99,
     name: '시럽 글리터 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 export const etcDummy = [
@@ -358,7 +358,7 @@ export const etcDummy = [
     id: 'pedih',
     review: 0,
     name: '체크 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailG,
@@ -367,18 +367,17 @@ export const etcDummy = [
 
     review: 0,
     name: '그린 데이지 네일',
-    cost: '12,900',
+    price: 12000,
   },
 ];
 export const totalDummy = [
   {
     pics: nailA,
     detailPic: a0,
-    id: 'naila',
-
+    id: 23,
     review: 99,
     name: '프렌치 시럽 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailB,
@@ -387,7 +386,7 @@ export const totalDummy = [
 
     review: 99,
     name: '스윗 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailC,
@@ -396,7 +395,7 @@ export const totalDummy = [
 
     review: 99,
     name: '웜쿨매트',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailD,
@@ -405,7 +404,7 @@ export const totalDummy = [
 
     review: 99,
     name: '봄소풍 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailE,
@@ -414,7 +413,7 @@ export const totalDummy = [
 
     review: 99,
     name: '시럽 글리터 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailF,
@@ -423,7 +422,7 @@ export const totalDummy = [
 
     review: 99,
     name: '가을 프렌치 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: nailG,
@@ -432,7 +431,7 @@ export const totalDummy = [
 
     review: 99,
     name: '그린 데이지 네일',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediH,
@@ -440,7 +439,7 @@ export const totalDummy = [
     id: 'pedih',
     review: 0,
     name: '체크 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediI,
@@ -448,7 +447,7 @@ export const totalDummy = [
     id: 'pedii',
     review: 0,
     name: '알록달록 스마일 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediJ,
@@ -456,7 +455,7 @@ export const totalDummy = [
     id: 'pedij',
     review: 0,
     name: '스마일 화이트 라인 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediK,
@@ -464,7 +463,7 @@ export const totalDummy = [
     id: 'pedik',
     review: 0,
     name: '해맑은 스마일 페디',
-    cost: '12,900',
+    price: 12000,
   },
   {
     pics: pediL,
@@ -472,6 +471,6 @@ export const totalDummy = [
     id: 'pedil',
     review: 0,
     name: '발이 사는 블랙 페디',
-    cost: '12,900',
+    price: 12000,
   },
 ];

@@ -9,13 +9,17 @@ interface TermsDetailProps {
 
 export default function TermsDetailPage({ termsType }: TermsDetailProps) {
   return (
-    <>
+    <Container>
       <Heading>{TERMS_DETAIL[termsType]['title']}</Heading>
       <Divider />
       <TextBox>{TERMS_DETAIL[termsType]['text']}</TextBox>
-    </>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin-top: 5rem;
+`;
 
 const TextBox = styled.div`
   font-size: 1.6rem;

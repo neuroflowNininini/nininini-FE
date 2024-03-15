@@ -18,8 +18,9 @@ export default function DefaultLayout() {
 
 const Layout = styled.div``;
 const Container = styled.div`
-  margin-top: 5rem;
   max-width: none;
+  padding: 0 1.5rem;
+  margin-top: 5rem;
   ${media.md`
     max-width: ${deviceSizes.xl}px;
     margin: 0 auto;

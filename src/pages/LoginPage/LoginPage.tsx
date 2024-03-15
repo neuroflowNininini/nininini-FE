@@ -60,7 +60,7 @@ export default function LoginPage() {
         />
         <TextButton>비밀번호 찾기</TextButton>
       </TextButtonsWrap>
-      <Divider color={theme.colors.gray[200]} />
+      <Divider color={'gray.200'} />
       <KakaoButton
         onClick={() => {
           window.location.href = CONSTANTS.KAKAO_SIGNIN_URL;

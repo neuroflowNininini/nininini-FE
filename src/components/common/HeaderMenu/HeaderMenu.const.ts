@@ -1,7 +1,5 @@
 import { paths } from '~/config/paths';
-import { Categories } from '~/constants/categories';
 
-export const MainItems = Object.values(Categories);
 export const OtherItems = [
   {
     label: 'EVENT',
