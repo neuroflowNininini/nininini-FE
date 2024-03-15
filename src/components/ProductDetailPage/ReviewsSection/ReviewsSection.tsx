@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import Divider from '~/components/common/Divider';
 import { Pagination } from '~/components/common/Pagination';
