@@ -1,3 +1,5 @@
+import howToImg from '~/shared/pics/how to.png';
+
 export default function HowToSection() {
-  return <></>;
+  return <img src={howToImg} />;
 }
