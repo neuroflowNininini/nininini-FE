@@ -18,7 +18,7 @@ import { formatNumberWithCommas } from '~/utils/formatNumber';
 
 export default function ProductDetail({ productData }: { productData: Product }) {
   const { count, onDecrease, onIncrease } = useNumberCounter();
-  const { selectedId, onChangeRadioButton } = useRadioButton(AI_SIZE_OPTIONS[0].tag_id);
+  const { selectedId, onChangeRadioButton } = useRadioButton(AI_SIZE_OPTIONS[0].tagId);
   return (
     <Container>
       <ThumbnailSection>

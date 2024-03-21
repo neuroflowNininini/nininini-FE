@@ -84,5 +84,9 @@ export const postOAuthLogin = async ({
 }) => {
   const { data } = await NinininiAxios.get(`/api/oauth/${platform}?code=${code}`);
   onSuccess(data.userId);
+  if (!data.userId) {
+    setCookie(CONSTANTS.ACCESS_TOKEN_KEY, data.accessToken);
+    setCookie(CONSTANTS.REFRESH_TOKEN_KEY, data.refreshToken);
+  }
   return data;
 };

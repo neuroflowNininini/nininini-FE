@@ -6,7 +6,7 @@ interface TagButtonsProps {
   boxPadding?: string;
   fontSize?: keyof typeof theme.fontSize;
   defaultTagId?: number;
-  onChange: (tag_id: number) => void;
+  onChange: (tagId: number) => void;
   selectedIds: number[];
   tagsData: Tag[];
 }
@@ -20,16 +20,16 @@ export default function TagButtons({
 }: TagButtonsProps) {
   return (
     <>
-      {tagsData.map(({ tag_id, tag }) => (
-        <Container key={tag_id}>
+      {tagsData.map(({ tagId, tag }) => (
+        <Container key={tagId}>
           <input
-            id={tag_id.toString()}
+            id={tagId.toString()}
             type="checkbox"
-            onChange={() => onChange(tag_id)}
+            onChange={() => onChange(tagId)}
           />
-          <CheckBox htmlFor={tag_id.toString()}>
+          <CheckBox htmlFor={tagId.toString()}>
             <TagBox
-              $ischecked={selectedIds.includes(tag_id)}
+              $ischecked={selectedIds.includes(tagId)}
               $boxPadding={boxPadding}
               $fontSize={fontSize}
             >

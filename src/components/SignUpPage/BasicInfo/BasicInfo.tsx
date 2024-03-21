@@ -5,6 +5,10 @@ import { postCheckDuplicateId } from '~/api/signUp';
 import Divider from '~/components/common/Divider';
 import { Input } from '~/components/common/Input';
 import { ThemeButton } from '~/components/common/ThemeButton';
+import { Timer } from '~/components/common/Timer';
+import { CONSTANTS } from '~/constants';
+import { useCertifyPhoneNumber } from '~/hooks/useCertifyPhoneNumber';
+import { useTimer } from '~/hooks/useTimer';
 import { SignUpBasicInfo } from '~/types/apis/signUp';
 import { SignUpHeader } from '../SignUpHeader';
 import { BASIC_INFO_VALIDATION } from './validation.const';
@@ -17,13 +21,17 @@ export type BasicInfoForm = Omit<SignUpBasicInfo, 'birthSex'> & {
   birth: string;
   sex: string;
   pwConfirm: string;
+  phoneNoConfirm: string;
 };
 export default function BasicInfo({ onNext }: BasicInfoProps) {
   const {
     register,
     handleSubmit,
     trigger,
+    resetField,
     formState: { errors },
+    setError,
+    clearErrors,
     control,
   } = useForm<BasicInfoForm>();
 
@@ -37,6 +45,23 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
     control,
     name: 'userPw',
   });
+  const phoneNumber = useWatch({
+    control,
+    name: 'phoneNumber',
+  });
+  const phoneNoConfirm = useWatch({
+    control,
+    name: 'phoneNoConfirm',
+  });
+
+  const { remainSeconds, startTimer } = useTimer(CONSTANTS.CERTIFY_VALID_SECONDS);
+  const { isSmsSent, isCertified, handleGetCertifyNumber, handleCertifyNumber } =
+    useCertifyPhoneNumber(phoneNumber!, startTimer, () => {
+      setError('phoneNoConfirm', {
+        type: 'notEqual',
+        message: '인증번호가 일치하지 않습니다.',
+      });
+    });
 
   const handleCheckDuplicateId = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -52,6 +77,10 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
   };
 
   const onSubmit: SubmitHandler<BasicInfoForm> = (data) => {
+    if (!isCertified) {
+      alert('휴대전화번호 인증이 필요합니다.');
+      return;
+    }
     const { birth, sex, ...restData } = data;
     onNext({ ...restData, birthSex: birth + sex });
   };
@@ -68,7 +97,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
         step={2}
       />
       <FormWrap onSubmit={handleSubmit(onSubmit)}>
-        <InputRow>
+        <InputField>
           <Label htmlFor="userId">
             아이디 <span>*</span>
           </Label>
@@ -90,7 +119,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }}
               placeholder="3자 ~ 10자의 영문, 특수문자 (-, _), 숫자"
               error={errors.userId}
-              showErrorMessage={false}
               message={idChecked ? '멋진 아이디네요. :)' : ''}
             />
             <ThemeButton
@@ -104,8 +132,8 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               중복확인
             </ThemeButton>
           </Row>
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="userPw">
             비밀번호 <span>*</span>
           </Label>
@@ -115,10 +143,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             register={{ ...register('userPw', BASIC_INFO_VALIDATION.userPw) }}
             placeholder="5자 ~ 20자의 영문, 특수문자, 숫자 (각 필수)"
             error={errors.userPw}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="pwConfirm">
             비밀번호 확인 <span>*</span>
           </Label>
@@ -133,9 +160,8 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
               }),
             }}
             error={errors.pwConfirm}
-            showErrorMessage={false}
           />
-        </InputRow>
+        </InputField>
         {(errors.userId || errors.userPw || errors.pwConfirm) && (
           <ErrorMessages>
             {errors.userId && <span>{errors.userId.message}</span>}
@@ -144,7 +170,7 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
           </ErrorMessages>
         )}
         <Spacer />
-        <InputRow>
+        <InputField>
           <Label htmlFor="name">
             이름 <span>*</span>
           </Label>
@@ -152,24 +178,68 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="name"
             register={{ ...register('name', BASIC_INFO_VALIDATION.name) }}
             error={errors.name}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label htmlFor="phoneNumber">
             연락처 <span>*</span>
           </Label>
-          <Input
-            id="phoneNumber"
-            register={{
-              ...register('phoneNumber', { required: '* 연락처: 연락처로 본인인증을 해주세요.' }),
-            }}
-            placeholder="- 없이 숫자만 입력"
-            error={errors.phoneNumber}
-            showErrorMessage={false}
-          />
-        </InputRow>
-        <InputRow>
+          <Row>
+            <Input
+              id="phoneNumber"
+              register={{
+                ...register('phoneNumber', BASIC_INFO_VALIDATION.phoneNumber),
+              }}
+              placeholder="- 없이 숫자만 입력"
+              error={errors.phoneNumber}
+              message={isCertified ? '인증 성공 :)' : ''}
+            />
+            <ThemeButton
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                handleGetCertifyNumber(e);
+                clearErrors('phoneNoConfirm');
+                resetField('phoneNoConfirm');
+              }}
+              variant="reversed"
+              width="15rem"
+              height="100%"
+              fontSize={'smallmedium'}
+              style={{ marginLeft: '3px', padding: '1rem 0' }}
+            >
+              {!isSmsSent ? '인증번호 발급' : '재전송'}
+            </ThemeButton>
+          </Row>
+          {isSmsSent && !isCertified && remainSeconds > 0 && (
+            <Row>
+              <Input
+                id="phoneNoConfirm"
+                register={{
+                  ...register('phoneNoConfirm', { required: true }),
+                }}
+                placeholder="인증번호 입력"
+                error={errors.phoneNoConfirm}
+                message={
+                  '인증번호가 문자로 전송되었습니다.\n문자를 받지 못했다면 재전송 버튼을 클릭해주세요.'
+                }
+              >
+                <Timer totalSeconds={remainSeconds} />
+              </Input>
+              <ThemeButton
+                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                  handleCertifyNumber(e, phoneNoConfirm);
+                }}
+                variant="reversed"
+                width="15rem"
+                height="100%"
+                fontSize={'smallmedium'}
+                style={{ marginLeft: '3px', padding: '1rem 0' }}
+              >
+                {'인증하기'}
+              </ThemeButton>
+            </Row>
+          )}
+        </InputField>
+        <InputField>
           <Label htmlFor="email">
             이메일 <span>*</span>
           </Label>
@@ -177,10 +247,9 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
             id="email"
             register={{ ...register('email', BASIC_INFO_VALIDATION.email) }}
             error={errors.email}
-            showErrorMessage={false}
           />
-        </InputRow>
-        <InputRow>
+        </InputField>
+        <InputField>
           <Label>
             생년월일 및 성별 <span>*</span>
           </Label>
@@ -190,7 +259,6 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 id="birth"
                 register={{ ...register('birth', BASIC_INFO_VALIDATION.birth) }}
                 error={errors.birth}
-                showErrorMessage={false}
                 placeholder="주민번호 앞 6자리"
                 style={{ width: '15rem' }}
               />
@@ -202,13 +270,12 @@ export default function BasicInfo({ onNext }: BasicInfoProps) {
                 id="sex"
                 register={{ ...register('sex', BASIC_INFO_VALIDATION.sex) }}
                 error={errors.sex}
-                showErrorMessage={false}
                 style={{ width: '5rem' }}
               />
             </BirthSexRow>
             <PwSymbol>••••••</PwSymbol>
           </Row>
-        </InputRow>
+        </InputField>
         {(errors.name || errors.phoneNumber || errors.email || errors.birth || errors.sex) && (
           <ErrorMessages>
             {errors.name && <span>{errors.name.message}</span>}
@@ -252,7 +319,7 @@ const FormWrap = styled.form`
   gap: 1.2rem;
 `;
 
-const InputRow = styled.div`
+const InputField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.7rem;

@@ -4,7 +4,8 @@ export type ErrorCode =
   | 'WRONG_ID'
   | 'WRONG_PW'
   | 'DUP_SIGNUP'
-  | 'ID_ALREADY_EXIST';
+  | 'ID_ALREADY_EXIST'
+  | 'NOT_FOUND';
 
 export interface NinininiResponse<T> extends Response {
   parsedBody: T | NinininiErrorResponse;

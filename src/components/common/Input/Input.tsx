@@ -11,6 +11,8 @@ interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: FieldError;
   showErrorMessage?: boolean;
   message?: string;
+  /* Input Container 내부, input 태그 옆에 배치할 요소 */
+  children?: React.ReactNode;
 }
 
 export default function Input({
@@ -20,8 +22,9 @@ export default function Input({
   style,
   register,
   error,
-  showErrorMessage = true,
+  showErrorMessage = false,
   message,
+  children,
   ...props
 }: InputProps) {
   return (
@@ -38,6 +41,7 @@ export default function Input({
           {...register}
           {...props}
         />
+        {children}
       </InputBox>
       {error && showErrorMessage && <ErrorMessage>{error.message}</ErrorMessage>}
       {!error && message && <NonErrorMessage>{message}</NonErrorMessage>}
